@@ -189,7 +189,7 @@ VIDEO_DIR = '.../videos'
 3. Run the following code to predict the contents of the images:
 
 ```python
-model = YOLO(MODEL_DIR)
+model = YOLO(MODEL_PATH)
 
 for image_path in glob.glob(f"{IMAGE_DIR}/*"):
 
