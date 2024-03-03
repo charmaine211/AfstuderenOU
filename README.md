@@ -102,7 +102,7 @@ Provide the following values to the model.train() function:
 - `imgsz`: Sets the input image size for training. Larger image sizes capture more details but require more resources, while smaller sizes may train faster but sacrifice detail.
 - `val`: Enables validation during training to periodically evaluate model performance on a separate dataset. Default value is True.
 - `project`: Name of the project directory where training outputs are saved. Allows for organized storage of different experiments. Default value is None.
-- `plots`: Generates and saves plots of training and validation metrics, as well as prediction examples, providing visual insights into model performance and learning progression. Default is False.
+- `plots`: Generates and saves plots of training and validation metrics, as well as prediction examples, providing visual insights into model performance and learning progression. Default value is False.
 
 5. Transfer trained model and analyses files from Google Colab to Drive for further analysis:
 
