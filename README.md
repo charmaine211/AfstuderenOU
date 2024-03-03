@@ -40,7 +40,7 @@ To start, we'll create a root file named driver_gaze_direction and add the follo
 ```
 .../driver_gaze_direction/dataset/train
 .../driver_gaze_direction/dataset/val
-.../driver_gaze_direction/training
+.../driver_gaze_direction/training_results
 ```
 
 #### Utilizing Shared Drive
@@ -68,7 +68,7 @@ drive.mount('/content/drive')
 
 ```python
 DATA_DIR = '.../driver_gaze_direction/dataset'
-RESULTS_DIR = '.../driver_gaze_direction/training'
+RESULTS_DIR = '.../driver_gaze_direction/training_results'
 EPOCHS_LIST = [25, 50, 100, 125, 150]
 BATCH_SIZES = [120, 180, 240, 300, 360]
 DATA_SIZE=64
@@ -78,7 +78,6 @@ DATA_SIZE=64
 
 ```python
 !pip install ultralytics
-
 
 from ultralytics import YOLO
 ```
@@ -101,7 +100,9 @@ Provide the following values to the model.train() function:
 - `batch`: Sets the batch size for training, indicating how many images are processed before updating the model's parameters.
 - `epochs`: Determines the number of training epochs, representing the number of times the entire training dataset is passed through the neural network.
 - `imgsz`: Sets the input image size for training. Larger image sizes capture more details but require more resources, while smaller sizes may train faster but sacrifice detail.
-- `val`: Enables validation during training to periodically evaluate model performance on a separate dataset. Default value is True
+- `val`: Enables validation during training to periodically evaluate model performance on a separate dataset. Default value is True.
+- `project`: Name of the project directory where training outputs are saved. Allows for organized storage of different experiments. Default value is None.
+- `plots`: Generates and saves plots of training and validation metrics, as well as prediction examples, providing visual insights into model performance and learning progression. Default is False.
 
 5. Transfer trained model and analyses files from Google Colab to Drive for further analysis:
 
@@ -115,7 +116,7 @@ By following these steps, you can effectively train your YOLOv8 model in Google 
 
 #### Metrics
 
-Once your models have been trained, all the results will be stored in the RESULTS_DIR. If you've followed our file naming convention, this directory will be located at '.../driver_gaze_direction/training' on your Google Drive.
+Once your models have been trained, all the results will be stored in the RESULTS_DIR. If you've followed our file naming convention, this directory will be located at '.../driver_gaze_direction/training_results' on your Google Drive.
 
 Depending on the number of models you've trained, navigate to the corresponding 'runs/train' directory for the desired training data.
 
