@@ -12,7 +12,7 @@ Efficient file management is essential for streamlining the training process wit
 
 ```
 root
-    - training
+    - training_results
     - dataset
         - train
             - class_1
@@ -29,7 +29,7 @@ root
 Here's what each directory contains:
 
 - `root`: This directory serves as the main folder for your project and can be named according to your preference.
-- `training`: Within this directory, you'll find any files or data related to training tasks. Its name can also be customised.
+- `training_results`: Within this directory, we'll place any files or data related to training results. Its name can also be customised.
 - `dataset`: Here, you'll organise your training and validation datasets. You can name this directory as you see fit.
   - `train`: This folder contains subdirectories for each class in your training dataset. The name "train" is mandatory for training purposes.
   - `val`: Similar to the train directory, this folder houses validation dataset subdirectories. The name "val" is required for validation purposes.
