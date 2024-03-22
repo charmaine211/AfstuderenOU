@@ -85,12 +85,13 @@ from ultralytics import YOLO
 4. Train your models with different batch sizes and epochs:
 
 ```python
-# Load a model
-model = YOLO('yolov8n-cls.pt')
-
-# Train model
 for batch_size in BATCH_SIZE:
     for epochs in EPOCHS_LIST:
+
+        # Load a model
+        model = YOLO('yolov8n-cls.pt')
+
+        # Train model
         results = model.train(data=DATA_DIR, epochs=epochs, imgsz=data_size, batch=batch_size)
 ```
 
