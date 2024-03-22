@@ -158,7 +158,6 @@ Choosing between the last and the best-trained model depends on your specific re
 python -m venv venv
 
 # Activate the virtual environment
-
 # Windows
 venv\Scripts\activate
 # macOS and Linux
