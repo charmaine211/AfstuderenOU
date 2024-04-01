@@ -33,7 +33,8 @@ Here's what each directory contains:
 - `dataset`: Here, you'll organise your training and validation datasets. You can name this directory as you see fit.
   - `train`: This folder contains subdirectories for each class in your training dataset. The name "train" is mandatory for training purposes.
   - `val`: Similar to the train directory, this folder houses validation dataset subdirectories. The name "val" is required for validation purposes.
-    - `class_...`: Each subdirectory corresponds to a specific classification class (e.g., class_1, class_2, etc.), containing the dataset related to that class.
+    - `class_...`: When training on image classification each subdirectory corresponds to a specific classification class (e.g., class_1, class_2, etc.), containing the dataset related to that class.
+      This file is not necessary when training on object detection.
 
 To start, we'll create a root file named driver_gaze_direction and add the following structures:
 
@@ -42,6 +43,34 @@ To start, we'll create a root file named driver_gaze_direction and add the follo
 .../driver_gaze_direction/dataset/val
 .../driver_gaze_direction/training_results
 ```
+
+#### Labeling
+
+##### Image classification
+
+##### Object detection
+
+To annotate images for object detection using YOLOv8 format, follow these steps:
+
+###### 1. Choose an Annotation Tool
+
+Select a suitable annotation tool that supports YOLOv8 label format. We recommend using [CVAT](https://www.cvat.ai/) due to its online accessibility, but you can opt for any labeling tool of your preference.
+
+###### 2. Annotate Objects
+
+Open the chosen annotation tool and import the images from your dataset. Manually annotate each object by drawing bounding boxes around them. Ensure to assign appropriate class labels to each object.
+
+###### 3. Export Annotations
+
+Once all images are annotated, export the annotations in YOLOv8 format. These exported files should be saved in the same directory as the corresponding images, with the same filename but a different extension (e.g., .txt).
+
+###### 4. Verify Annotations
+
+Double-check a few exported annotation files to confirm adherence to the YOLOv8 label format. Ensure that the class labels, coordinates, and sizes are accurately normalized.
+
+###### 5. Add dataset
+
+Arrange the annotated images and their respective annotation files (.txt) appropriately within your dataset directory (i.e. `train` or `validation`). Ensure that each image is paired with its corresponding label file in the same directory.
 
 #### Utilizing Shared Drive
 
@@ -86,13 +115,13 @@ from ultralytics import YOLO
 
 ```python
 for batch_size in BATCH_SIZE:
-    for epochs in EPOCHS_LIST:
+  for epochs in EPOCHS_LIST:
 
-        # Load a model
-        model = YOLO('yolov8n-cls.pt')
+    # Load a model
+    model = YOLO('yolov8n-cls.pt')
 
-        # Train model
-        results = model.train(data=DATA_DIR, epochs=epochs, imgsz=data_size, batch=batch_size)
+    # Train model
+    results = model.train(data=DATA_DIR, epochs=epochs, imgsz=data_size, batch=batch_size)
 ```
 
 Provide the following values to the model.train() function:
@@ -114,6 +143,8 @@ Provide the following values to the model.train() function:
 By following these steps, you can effectively train your YOLOv8 model in Google Colab and manage your training data and results efficiently.
 
 ### Analyse model
+
+Following the training and validation of the model using various parameters, the most effective model will be selected. This selected model will undergo testing on the designated testing set, where the resulting variables will be documented in the research paper.
 
 #### Metrics
 
