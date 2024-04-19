@@ -56,19 +56,72 @@ To annotate images for object detection using YOLOv8 format, follow these steps:
 
 Select a suitable annotation tool that supports YOLOv8 label format. We recommend using [CVAT](https://www.cvat.ai/) due to its online accessibility, but you can opt for any labeling tool of your preference.
 
+**Annotating with CVAT**
+
+_1. Create an Account (if necessary)_
+
+If you haven't already, create an account on CVAT.
+
+_2. Create a new project_
+
+- Navigate to `Projects` and click on `Create a new project`.
+- Provide a name for your project and define the desired labels.
+- Click on `Submit & Open`.
+
+![Create a new project](/assets/readme/CVAT%20-%20create%20project.png)
+
+_3. Create a new task_
+
+- Go to `Tasks` and select `Create a new task`
+- Assign a name to your task and choose the project you just created. The labels from your project will be available for annotation in this task.
+- Upload all the images related to this task. Note that images can only be uploaded from the same directory.
+- Click on `Submit & Open`. Once the files are uploaded, you can proceed to the task.
+
+![Create a new task](/assets/readme/CVAT%20-%20create%20task.png)
+
+_4. Annotate frames_
+
+- Open the task and select the job.
+
+![Open job](/assets/readme/CVAT%20-%20open%20job.png)
+
+- Begin annotating by choosing your preferred annotation method, such as drawing a bounding box around the driver's face. Remember to save your work periodically
+
+![Annotate 1](/assets/readme/CVAT%20-%20start%20annotation.png)
+
+![Annotate 2](/assets/readme/CVAT%20-%20start%20annotation%20-%202.png)
+
+![Annotate 3](/assets/readme/CVAT%20-%20start%20annotation%20-%203.png)
+
+_5. Export the labels_
+
+- After completing the annotation process, navigate to the `Tasks` section. Click on `Actions` and select `Export task dataset`.
+
+![Export labels](/assets/readme/CVAT%20-%20export%20labels.png)
+
+- Choose `YOLO 1.1` as the export format and confirm your selection. The export process will begin, and the file will be downloaded to your system
+
+![Export labels](/assets/readme/CVAT%20-%20export%20labels%20-%202.png)
+
+- Once the download is complete, unzip the downloaded folder. Within the extracted folder, locate the `obj_train_data` directory. Inside this directory, you will find .txt files corresponding to each annotated image.
+
+- Proceed to [step 5](##Add-Dataset) to continue with the next stage.
+
 ###### 2. Annotate Objects
 
 Open the chosen annotation tool and import the images from your dataset. Manually annotate each object by drawing bounding boxes around them. Ensure to assign appropriate class labels to each object.
 
 ###### 3. Export Annotations
 
-Once all images are annotated, export the annotations in YOLOv8 format. These exported files should be saved in the same directory as the corresponding images, with the same filename but a different extension (e.g., .txt).
+Once all images are annotated, export the annotations in YOLO format. These exported files should be saved in the same directory as the corresponding images, with the same filename but a different extension (e.g., .txt).
 
 ###### 4. Verify Annotations
 
 Double-check a few exported annotation files to confirm adherence to the YOLOv8 label format. Ensure that the class labels, coordinates, and sizes are accurately normalized.
 
-###### 5. Add dataset
+<a href="#Add-Dataset"> </a>
+
+###### 5. Add Dataset
 
 Arrange the annotated images and their respective annotation files (.txt) appropriately within your dataset directory (i.e. `train` or `validation`). Ensure that each image is paired with its corresponding label file in the same directory.
 
