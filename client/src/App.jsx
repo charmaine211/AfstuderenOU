@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import test from "./config";
+import './App.css';
 
 import SupportFormatText from "./components/atoms/SupportFormatText";
 
