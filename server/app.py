@@ -1,10 +1,12 @@
 from flask import Flask, jsonify
+from flask_cors import CORS
 
 from train import routes as train_routes
 from collectDataset import routes as collect_routes
 from predict import routes as predict_routes
 
 app = Flask(__name__)
+cors = CORS(app)
 
 app.register_blueprint(train_routes.bp, name="train")
 app.register_blueprint(collect_routes.bp, name="collectDataset")
