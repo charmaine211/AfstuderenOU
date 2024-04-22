@@ -7,7 +7,7 @@ function SupportFormatText ({ formats }) {
     const formatString = formats.join(", ");
     
     return (
-       <Typography>Supported formats: {formatString}</Typography>
+       <Typography>Supported formats: <strong>{formatString}</strong></Typography>
     );
 }
 
