@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import test from "./config";
 import './App.css';
 
-import SupportFormatText from "./components/atoms/SupportFormatText";
-
 function App() {
   const [data, setData] = useState("");
 
@@ -21,7 +19,6 @@ function App() {
   return (
     <div>
       {typeof data === "undefined" ? <p>LOADING...</p> : data}
-      <SupportFormatText formats = {[ "bmp", "dng", "jpeg"]}/>
     </div>
   );
 }
