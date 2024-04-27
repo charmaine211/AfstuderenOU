@@ -2,7 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { BarChart } from '@mui/x-charts/BarChart';
 
-export default function AnalyseVideoChart({ videotitle, classes, data }) {
+function AnalyseVideoChart({ videotitle, classes, data }) {
 
     // CONSTANTS
     // const seriesData = getSeriesData();
@@ -26,7 +26,7 @@ export default function AnalyseVideoChart({ videotitle, classes, data }) {
     function getDataKeys() {
         const ks = [];
         classes.map((className) => {
-            ks.push({ dataKey: className, 
+            return ks.push({ dataKey: className, 
                 label: className, 
                 valueFormatter });
         });
@@ -36,8 +36,8 @@ export default function AnalyseVideoChart({ videotitle, classes, data }) {
 
     function getLabels(){
         let labels = [];
-        data.map((d, index) =>{
-            labels.push(`${index++}s`)
+        data.map((d, index) => {
+            return labels.push(`${index++}s`);
         });
 
         return labels;
