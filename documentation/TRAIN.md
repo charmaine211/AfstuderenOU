@@ -221,6 +221,10 @@ for batch_size in BATCH_SIZES:
       project=project
       )
 
+    # Move the results
+    DIRECTORY = f"/content/image_classicification-model_{n}-epochs_{epochs}-batchsize_{batch_size}"
+
+    !scp -r DIRECTORY RESULTS_DIR
     n+=1
 ```
 
