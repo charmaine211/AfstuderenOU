@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 
 function BrowseButton () {
     return (
-        <Button variant="outlined" sx={ { borderRadius: 10 } }>Browse files</Button>
+        <Button variant="outlined" sx={ { borderRadius: 10 } }>Upload files</Button>
     );
 }
 
