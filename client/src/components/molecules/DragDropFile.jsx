@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import BrowseButton from "../atoms/BrowseButton";
 import SupportFormatText from "../atoms/SupportFormatText"
 
-function DragDropFiles({formats}) {
+function DragDropFiles({ formats }) {
 
   return (
     <form id="form-file-upload">
