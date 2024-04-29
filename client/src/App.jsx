@@ -1,12 +1,6 @@
-<<<<<<< HEAD
-import React, { useState, useEffect } from "react";
-import test from "./config";
-import './App.css';
-=======
 import React from "react";
 // import test from "./config";
 import Routes from "./Routes";
->>>>>>> 4871c8d76569e9f9bcac5eb5fe5498cdf6edf1f3
 
 function App() {
   // const [data, setData] = useState("");
