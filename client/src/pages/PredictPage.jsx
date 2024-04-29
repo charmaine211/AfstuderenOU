@@ -6,4 +6,4 @@ function PredictPage () {
     );
 }
 
-export default TrainPage;
+export default PredictPage;

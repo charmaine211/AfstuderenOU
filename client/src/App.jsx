@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import test from "./config";
+import React from "react";
+// import test from "./config";
 import Routes from "./Routes";
 
 function App() {
