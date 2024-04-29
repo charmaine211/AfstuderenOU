@@ -216,7 +216,7 @@ for batch_size in BATCH_SIZES:
     results = model.train(
       data=DATA_DIR,
       epochs=epochs,
-      imgsz=data_size,
+      imgsz=DATA_SIZE,
       batch=batch_size
       project=project
       )
