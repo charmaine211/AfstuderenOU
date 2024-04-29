@@ -1,27 +1,15 @@
-import * as React from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { BarChart } from '@mui/x-charts/BarChart';
+import { BarChart } from '@mui/x-charts';
 
-function AnalyseVideoChart({ videotitle, classes, data }) {
+function AnalyseVideoChart({ 
+    videotitle, 
+    classes, 
+    data 
+}) {
 
-    // CONSTANTS
-    // const seriesData = getSeriesData();
-    const xLabels = getLabels();        /* Shows the seconds on xAxis */
-    const dataKeys = getDataKeys();     /* Per second the percentage of each class will be shown */
-
-    // // FUNCTIONS
-    // function getSeriesData(){
-    //     let sd = [];
-    //     data.map((d) => {
-    //         sd.push({
-    //             data: d.values()
-    //         });
-    //     });
-
-    //     return sd;
-    // }
-
-    const valueFormatter = (value) => `${value} %`;
+    // FUNCTIONS
+    const valueFormatter = (value) => `${value*100} %`;
 
     function getDataKeys() {
         const ks = [];
@@ -43,6 +31,11 @@ function AnalyseVideoChart({ videotitle, classes, data }) {
         return labels;
     }
 
+    // CONSTANTS
+    // const seriesData = getSeriesData();
+    const xLabels = getLabels();        /* Shows the seconds on xAxis */
+    const dataKeys = getDataKeys();     /* Per second the percentage of each class will be shown */
+
     return (
         <BarChart
         dataset={data}
@@ -51,8 +44,22 @@ function AnalyseVideoChart({ videotitle, classes, data }) {
             data: xLabels,
             label: videotitle }]}
         series={ dataKeys }
-        width={500}
+        width={1000}
         height={300}
+        margin={{ 
+            top: 100, 
+            bottom: 10, 
+            left: 150, 
+            right:150 }}
+        slotProps={{
+            legend: {
+              direction: 'column',
+              position: { 
+                vertical: 'middle', horizontal: 'left' },
+              padding: 0,
+              margin: 100,
+            },
+        }}
         />
     );
 }

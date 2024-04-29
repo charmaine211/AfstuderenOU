@@ -4,8 +4,10 @@ import FooterButton from '../atoms/FooterButton';
 function Footer () {
     return (
         <footer>
-            <FooterButton text="Privacy Policy" onClick={()=>{ alert("TODO Privacy policy")}}/>
-            <FooterButton text="Contact us" onClick={()=>{ alert("TODO Contact form")}}/>
+            <FooterButton 
+                text="Privacy Policy" onClick={()=>{ alert("TODO Privacy policy")}}/>
+            <FooterButton 
+                text="Contact us" onClick={()=>{ alert("TODO Contact form")}}/>
         </footer>
     );
 };
