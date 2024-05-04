@@ -5,7 +5,7 @@ import AnalysesResults from '../components/organisms/AnalysesResults';
 
 
 function PredictPage () {
-    const [modelIsUploaded, setModelIsUploaded] = useState(true);
+    const [modelIsUploaded, setModelIsUploaded] = useState(false);
     const [avIsUploaded, setAvIsUploaded] = useState(false);
 
     // HANDLERS
