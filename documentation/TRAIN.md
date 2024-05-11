@@ -62,9 +62,11 @@ Each of these directories should contain one subdirectory for each class in the 
 
 #### Object detection
 
-To annotate images for object detection using YOLOv8 format, follow these steps:
+##### Manual annotation
 
-##### 1. Choose an Annotation Tool
+To manually annotate images for object detection using YOLOv8 format, follow these steps:
+
+###### 1. Choose an Annotation Tool
 
 Select a suitable annotation tool that supports YOLOv8 label format. We recommend using [CVAT](https://www.cvat.ai/) due to its online accessibility, but you can opt for any labeling tool of your preference.
 
@@ -119,21 +121,40 @@ _5. Export the labels_
 
 - Proceed to [step 5](##Add-Dataset) to continue with the next stage.
 
-###### 2. Annotate Objects
+##### Automatic annotation
+
+1. Use trained Yolov8_face.pt
+
+We used the `yolov8n-face.pt` model, but you can substitute this for any other model.:
+
+```
+@software{
+  Jocher_YOLO_by_Ultralytics_2023,
+  author = {Jocher, Glenn and Chaurasia, Ayush and Qiu, Jing},
+  license = {GPL-3.0},
+  month = jan,
+  title = {{YOLO by Ultralytics}},
+  url = {https://github.com/ultralytics/ultralytics},
+  version = {8.0.0}
+  year = {2023}
+}
+```
+
+####### 2. Annotate Objects
 
 Open the chosen annotation tool and import the images from your dataset. Manually annotate each object by drawing bounding boxes around them. Ensure to assign appropriate class labels to each object.
 
-###### 3. Export Annotations
+####### 3. Export Annotations
 
 Once all images are annotated, export the annotations in YOLO format. These exported files should be saved in the same directory as the corresponding images, with the same filename but a different extension (e.g., .txt).
 
-###### 4. Verify Annotations
+####### 4. Verify Annotations
 
 Double-check a few exported annotation files to confirm adherence to the YOLOv8 label format. Ensure that the class labels, coordinates, and sizes are accurately normalized.
 
 <a href="#Add-Dataset"> </a>
 
-###### 5. Add Dataset
+####### 5. Add Dataset
 
 Arrange the annotated images and their respective annotation files (.txt) appropriately within your dataset directory (i.e. `train` or `validation`). Ensure that each image is paired with its corresponding label file in the same directory.
 
