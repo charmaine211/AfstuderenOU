@@ -5,7 +5,14 @@ import csv
 from pathlib import Path
 from ultralytics import YOLO
 
-from constants import CLASSES
+import sys
+
+sys.path.insert(
+    0,
+    "C:/Users/charm/Documents/Informatica/Postpropodeuse/Voorbereiden Afstuderen/Code/AfstuderenOU/server",
+)
+
+from globals import CLASSES
 
 MODEL_PATH = "../server/models/yolov8n-face.pt"
 FACE_MODEL_PATH = "../server/models/yolov8n-face.pt"
@@ -108,8 +115,8 @@ def label_frame(image_file, label_id, result_dir):
 
 def label_dataset():
     for image_dir in IMAGE_DIRS:
-        label_id = CLASSES.index(os.path.basename(image_dir))
-        print(label_id)
+        label_id = CLASSES().get(os.path.basename(image_dir))
+        print(f" {os.path.basename(image_dir)}: label_id: {label_id}")
         break
 
 
