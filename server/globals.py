@@ -13,3 +13,35 @@ def CLASSES():
         "dashboard_straight_down": 10,
         "dashboard_down_right": 11,
     }
+
+
+def YOLO_IMAGE_EXTENTIONS():
+    return [
+        ".bmp",
+        ".dng",
+        ".jpeg",
+        ".jpg",
+        ".mpo",
+        ".png",
+        ".tif",
+        ".tiff",
+        ".webp",
+        ".pfm",
+    ]
+
+
+def YOLO_VIDEO_EXTENTIONS():
+    return [
+        ".asf",
+        ".avi",
+        ".gif",
+        ".m4v",
+        ".mkv",
+        ".mov",
+        ".mp4",
+        ".mpeg",
+        ".mpg",
+        ".ts",
+        ".wmv",
+        ".webm",
+    ]
