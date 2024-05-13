@@ -147,24 +147,24 @@ def label_frame(image_file, label_id, result_dir):
     int:Returning value
 
     """
-    model = YOLO(FACE_MODEL_PATH)
     txt_file = os.path.basename(image_file).split(".")[0]
-    results = model(image_file)
     results_path = os.path.join(result_dir, f"{txt_file}.txt")
 
-    if os.path.exists(results_path):
-        print("File already exists, will be removed")
-        os.remove(results_path)
+    if not os.path.exists(results_path):
+        model = YOLO(FACE_MODEL_PATH)
+        results = model(image_file)
 
-    for result in results:
-        result.save_txt(results_path)
+        for result in results:
+            result.save_txt(results_path)
 
-    with open(results_path, "r+") as file:
-        first_line = file.readline().strip().split()
-        first_line[0] = str(label_id)
-        file.seek(0)
-        file.write(" ".join(first_line))
-        file.truncate()
+        with open(results_path, "r+") as file:
+            first_line = file.readline().strip().split()
+            first_line[0] = str(label_id)
+            file.seek(0)
+            file.write(" ".join(first_line))
+            file.truncate()
+    else:
+        print("Skip file")
 
 
 def label_dataset():
@@ -192,6 +192,7 @@ def label_dataset():
                     if valid_ultralytics_image_type(image_path):
                         # Copy file
                         shutil.copy(image_path, images_result_dir)
+                        # Label file
                         label_frame(image_path, label_id, labels_result_dir)
 
 
