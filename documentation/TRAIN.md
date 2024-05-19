@@ -6,6 +6,8 @@ Efficient file management is essential for streamlining the training process wit
 
 ### Structure file system YoloV8
 
+#### Image classification
+
 ```
 root
     - training_results
@@ -31,17 +33,17 @@ Here's what each directory contains:
 
 - `root`: This directory serves as the main folder for your project and can be named according to your preference.
 - `training_results`: Within this directory, we'll place any files or data related to training results. Its name can also be customised.
-- `dataset`: Here, you'll organise your training and validation datasets. You can name this directory as you see fit.
+- `dataset`: Here, you'll organise your training, testing and validation datasets. You can name this directory as you see fit.
   - `train`: This folder contains subdirectories for each class in your training dataset. The name "train" is mandatory for training purposes.
   - `val`: Similar to the train directory, this folder houses validation dataset subdirectories. The name "val" is required for validation purposes.
   - `test`: This directory is added to document the final model results. It follows the same structure as the training and validation sets.
-    - `class_...`: In image classification tasks, each subdirectory corresponds to a specific class (e.g., class_1, class_2, etc.), containing the related dataset. Note: This is not required for object detection tasks.
+    - `class_...`: In image classification tasks, each subdirectory corresponds to a specific class (e.g., class_1, class_2, etc.), containing the related dataset.
 
 _Additional Notes:_
 
 - The dataset distribution follows an 80:10:10 ratio for training, validation, and test sets respectively.
 - The structure provided includes a "test" directory for comprehensive testing of the trained YoloV8 model.
-- The "class\_..." directories within "train" and "val" represent individual classes for classification tasks. However, for object detection tasks, these directories are not necessary and can be omitted.
+- The "class\_..." directories within "train" and "val" represent individual classes for classification tasks.
 
 To start, we'll create a root file named driver_gaze_direction and add the following structures:
 
@@ -51,6 +53,58 @@ To start, we'll create a root file named driver_gaze_direction and add the follo
 .../driver_gaze_direction/dataset/test
 .../driver_gaze_direction/training_results
 ```
+
+#### Object detection
+
+```
+root
+  - training_results
+  - dataset
+    - images
+        - train
+          - img_1.jpg
+          - img_2.jpg
+          ...
+          - img_n.jpg
+        - val
+          - img_n+1.jpg
+          - img_n+2.jpg
+          ...
+          - img_m.jpg
+        - test
+          - img_m+1.jpg
+          - img_m+2.jpg
+          ...
+          - img_l.jpg
+    - labels
+      - train
+        - img_1.txt
+        - img_2.txt
+        ...
+        - img_n.txt
+      - val
+        - img_n+1.txt
+        - img_n+2.txt
+        ...
+        - img_m.txt
+      - test
+        - img_m+1.txt
+        - img_m+2.txt
+        ...
+        - img_l.txt
+```
+
+Here's what each directory contains:
+
+- `root`: This directory serves as the main folder for your project and can be named according to your preference.
+- `training_results`: Within this directory, we'll place any files or data related to training results. Its name can also be customised.
+- `images`: Here, you'll organise your training, testing and validation images. The name "images" is mandatory.
+  - `train`: This folder contains the training images. Each image should have a corresponding label file in the "labels/train" directory.
+  - `val`: Similarly, this folder contains the validation images, each with its corresponding label file in the "labels/val" directory.
+  - `test`: This directory holds the test images, which are used for final model evaluation.
+- `labels`: Here, you organize your training, testing, and validation label files corresponding to the images. This directory must be named "labels".
+  - `train`: This folder contains the label files for the training images. Each label file should have the same name as its corresponding image file, but with a ".txt" extension.
+  - `val`: Similarly, this folder contains the label files for the validation images, following the same naming convention.
 
 ### Labeling
 
@@ -62,9 +116,15 @@ Each of these directories should contain one subdirectory for each class in the 
 
 #### Object detection
 
-To annotate images for object detection using YOLOv8 format, follow these steps:
+Each label file should be formatted with one row per object in the image, using the YOLO format. This format includes the object's class index, along with the normalized coordinates of the bounding box (x_center, y_center, width, height).
 
-##### 1. Choose an Annotation Tool
+This structure ensures that your data is organized and ready for training, validation, and testing using the Ultralytics YOLO framework.
+
+##### Manual annotation
+
+To manually annotate images for object detection using YOLOv8 format, follow these steps:
+
+###### 1. Choose an Annotation Tool
 
 Select a suitable annotation tool that supports YOLOv8 label format. We recommend using [CVAT](https://www.cvat.ai/) due to its online accessibility, but you can opt for any labeling tool of your preference.
 
@@ -119,21 +179,39 @@ _5. Export the labels_
 
 - Proceed to [step 5](##Add-Dataset) to continue with the next stage.
 
-###### 2. Annotate Objects
+##### Automatic annotation
+
+We used the `yolov8n-face.pt` model, but you can substitute this for any other model. By detecting the face in the frame and relabeling
+
+```
+@software{
+Jocher_YOLO_by_Ultralytics_2023,
+author = {Jocher, Glenn and Chaurasia, Ayush and Qiu, Jing},
+license = {GPL-3.0},
+month = jan,
+title = {{YOLO by Ultralytics}},
+url = {https://github.com/ultralytics/ultralytics},
+version = {8.0.0}
+year = {2023}
+}
+
+```
+
+####### 2. Annotate Objects
 
 Open the chosen annotation tool and import the images from your dataset. Manually annotate each object by drawing bounding boxes around them. Ensure to assign appropriate class labels to each object.
 
-###### 3. Export Annotations
+####### 3. Export Annotations
 
 Once all images are annotated, export the annotations in YOLO format. These exported files should be saved in the same directory as the corresponding images, with the same filename but a different extension (e.g., .txt).
 
-###### 4. Verify Annotations
+####### 4. Verify Annotations
 
 Double-check a few exported annotation files to confirm adherence to the YOLOv8 label format. Ensure that the class labels, coordinates, and sizes are accurately normalized.
 
 <a href="#Add-Dataset"> </a>
 
-###### 5. Add Dataset
+####### 5. Add Dataset
 
 Arrange the annotated images and their respective annotation files (.txt) appropriately within your dataset directory (i.e. `train` or `validation`). Ensure that each image is paired with its corresponding label file in the same directory.
 
