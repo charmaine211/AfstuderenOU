@@ -46,6 +46,7 @@ IMAGES_VAL_DIR = "C:/Users/charm/Documents/Informatica/Postpropodeuse/Voorbereid
 
 IMAGES_DIR = "C:/Users/charm/Documents/Informatica/Postpropodeuse/Voorbereiden Afstuderen/Dataset/recording_10042024_Wim_v1/dataset/object_detection/images"
 LABELS_DIR = "C:/Users/charm/Documents/Informatica/Postpropodeuse/Voorbereiden Afstuderen/Dataset/recording_10042024_Wim_v1/dataset/object_detection/labels"
+VIDEO_DIR = "C:/Users/charm/Documents/Informatica/Postpropodeuse/Voorbereiden Afstuderen/Dataset/recording_10042024_Wim_v1/videos"
 
 LABELS_TRAIN_DIR = "C:/Users/charm/Documents/Informatica/Postpropodeuse/Voorbereiden Afstuderen/Dataset/recording_10042024_Wim_v1/dataset/object_detection/labels/train"
 LABELS_TEST_DIR = "C:/Users/charm/Documents/Informatica/Postpropodeuse/Voorbereiden Afstuderen/Dataset/recording_10042024_Wim_v1/dataset/object_detection/labels/test"
@@ -103,6 +104,11 @@ def predict_object_detection(path_model, image_file):
     return predictions
 
 
+def predict_object_detection_video(video_path, model_path):
+    model = YOLO(model_path)
+    model.predict(video_path, show=True)
+
+
 def create_csv(data, title):
     """Summary or Description of the Function
 
@@ -137,7 +143,7 @@ def valid_ultralytics_image_type(image_path):
     return YOLO_IMAGE_EXTENTIONS().count(ext) > 0
 
 
-def label_frame(image_file, label_id, result_dir):
+def label_frame(image_path, label_id, label_result_dir, images_result_dir):
     """Summary or Description of the Function
 
     Parameters:
@@ -147,12 +153,16 @@ def label_frame(image_file, label_id, result_dir):
     int:Returning value
 
     """
-    txt_file = os.path.basename(image_file).split(".")[0]
-    results_path = os.path.join(result_dir, f"{txt_file}.txt")
+    txt_file = os.path.basename(image_path).split(".")[0]
+    results_path = os.path.join(label_result_dir, f"{txt_file}.txt")
 
     if not os.path.exists(results_path):
+        # Copy file
+        shutil.copy(image_path, images_result_dir)
+
+        # Create label
         model = YOLO(FACE_MODEL_PATH)
-        results = model(image_file)
+        results = model(image_path)
 
         for result in results:
             result.save_txt(results_path)
@@ -190,16 +200,20 @@ def label_dataset():
 
                 for image_path in glob.glob(f"{image_dir}/*"):
                     if valid_ultralytics_image_type(image_path):
-                        # Copy file
-                        shutil.copy(image_path, images_result_dir)
                         # Label file
-                        label_frame(image_path, label_id, labels_result_dir)
+                        label_frame(
+                            image_path, label_id, labels_result_dir, images_result_dir
+                        )
 
 
 def main():
 
     print("***PREDICTION***")
-    label_dataset()
+
+    for video_path in glob.glob(f"{VIDEO_DIR}/*"):
+        predict_object_detection_video(video_path, FACE_MODEL_PATH)
+
+    # label_dataset()
     # for image_dir in IMAGE_DIRS:
 
     #     for image_path in glob.glob(f"{image_dir}/*"):
