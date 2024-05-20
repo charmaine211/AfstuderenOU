@@ -10,7 +10,7 @@ function AnalysesResults(){
     return (
         <AnalyseVideoChart 
         videotitle="Test data"
-        classes= { CLASSES }
+        classes= { Object.keys(CLASSES) }
         data = { MOCK_RESULTS_IMAGE_CLASSIFICATION }/>
     );
 }

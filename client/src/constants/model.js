@@ -1,11 +1,17 @@
-export const CLASSES = [
-    "shoulder_right", "shoulder_left",
-    "right", "mirror_right",
-    "mirror_left", "mirror_interior",
-    "left", "forward_right",
-    "forward_left", "forward",
-    "dashboard_straight_down", "dashboard_straight_right"
-];
+export const CLASSES = {
+    "shoulder_right": 0,
+    "shoulder_left": 1,
+    "right": 2,
+    "mirror_right": 3,
+    "mirror_left": 4,
+    "mirror_interior": 5,
+    "left": 6,
+    "forward_right": 7,
+    "forward_left": 8,
+    "forward": 9,
+    "dashboard_straight_down": 10,
+    "dashboard_down_right": 11,
+};
 
 export const MOCK_RESULTS_IMAGE_CLASSIFICATION = [{  
     "shoulder_right": 0.82, 
