@@ -15,4 +15,9 @@ export const THEME  = createTheme({
             main: "#48A3C0",
           },
       },
+      typography: {
+        fontFamily: [
+          'Montserrat'
+        ],
+      },
   });

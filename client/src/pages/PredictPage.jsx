@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+
+import PageWrapper from '../components/organisms/PageWrapper';
+
 import InputModel from '../components/organisms/InputModel';
 import InputAV from '../components/organisms/InputAV';
 import AnalysesResults from '../components/organisms/AnalysesResults';
@@ -18,7 +21,7 @@ function PredictPage () {
     }
 
     return (
-        <>
+        <PageWrapper>
             <h1>Predict</h1>
             {!modelIsUploaded && 
             <InputModel
@@ -27,7 +30,7 @@ function PredictPage () {
             <InputAV  
                 onUploaded={ handleAvUpload } />} 
             {modelIsUploaded && avIsUploaded && <AnalysesResults />}
-        </>
+        </PageWrapper>
     
     );
 }
