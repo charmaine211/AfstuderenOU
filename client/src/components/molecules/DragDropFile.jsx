@@ -3,19 +3,25 @@ import PropTypes from 'prop-types';
 import BrowseButton from "../atoms/BrowseButton";
 import SupportFormatText from "../atoms/SupportFormatText"
 
-import { formatFormats } from '../../common/formatters';
-import "../../App.css"
+import { formatFileFormats } from '../../common/formatters';
 
-function DragDropFiles({ formats, onUploaded }) {
+function DragDropFiles({ 
+  type, 
+  formats, 
+  onUploaded }) {
 
   // CONSTANTS
-  const formatString = formatFormats( formats );
+  const fileFormatString = formatFileFormats( formats );
 
   // STATES
   const [dragActive, setDragActive] = useState(false);
   
   // HANDLERS
-  const handleDrag = function(e) {
+const handleFiles = (e) => {
+  alert('Do something');
+}
+
+  const handleDrag = (e) => {
     e.preventDefault();
     e.stopPropagation();
     if (e.type === "dragenter" || e.type === "dragover") {
@@ -25,13 +31,13 @@ function DragDropFiles({ formats, onUploaded }) {
     }
   };
 
-  const handleDrop = function(e) {
+  const handleDrop = (e) => {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       // at least one file has been dropped so do something
-      // handleFiles(e.dataTransfer.files);
+      handleFiles(e.dataTransfer.files);
     }
   };
 
@@ -39,7 +45,7 @@ function DragDropFiles({ formats, onUploaded }) {
     e.preventDefault();
     if (e.target.files && e.target.files[0]) {
       // at least one file has been selected so do something
-      // handleFiles(e.target.files);
+      handleFiles(e.target.files);
     }
   };
 
@@ -55,27 +61,36 @@ function DragDropFiles({ formats, onUploaded }) {
         type="file" 
         id="input-file-upload" 
         multiple={true} 
-        accept={ formatString }/>
+        accept={ fileFormatString }/>
       <label 
         id="label-file-upload" 
         htmlFor="input-file-upload"
         className={dragActive ? "drag-active" : "" }>
-        <div>
-          <p>Drag and drop your file here or</p>
-          < BrowseButton />
+        <div className="form-content">
+          <p>Drag and drop your { type } here or</p>
+          <div className="buttons">
+            <BrowseButton 
+              formats={ fileFormatString } />
+          </div>
           <SupportFormatText 
-            formats={ formats }/>
+            formats={ formats } className="support-text"/>
         </div>
       </label>
     </form>
+
   );
 };
 
 DragDropFiles.propTypes = {
     formats: PropTypes.arrayOf(PropTypes.string).isRequired,
     onUploaded: PropTypes.func.isRequired,
+    type: PropTypes.string
 }
 
-  export default DragDropFiles;
+DragDropFiles.defaultProps = {
+  type: "file(s)"
+};
+
+export default DragDropFiles;
 
 // Source: https://www.codemzy.com/blog/react-drag-drop-file-upload

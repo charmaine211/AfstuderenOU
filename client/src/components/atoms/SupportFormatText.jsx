@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@mui/material/Typography';
 
-import { formatFormats } from '../../common/formatters';
+import { formatFileFormats } from '../../common/formatters';
 
 function SupportFormatText ({ formats }) {
     
-    const formatString = formatFormats( formats );
+    const formatString = formatFileFormats( formats );
     
     return (
-       <Typography>Supported formats: <strong>{formatString}</strong></Typography>
+       <Typography style={{ fontSize: 12, }}>Supported formats:   <strong>{formatString}</strong></Typography>
     );
 }
 

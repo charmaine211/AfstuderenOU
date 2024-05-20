@@ -9,6 +9,7 @@ function InputModel({ onUploaded }) {
 
     return (
         < DragDropFiles 
+            type="model"
             formats={ formats } 
             onUploaded={ onUploaded } />
     );
