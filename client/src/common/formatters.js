@@ -1,3 +1,3 @@
-export function formatFormats(formats) { 
+export function formatFileFormats(formats) { 
     return formats.join(", ");
  }
