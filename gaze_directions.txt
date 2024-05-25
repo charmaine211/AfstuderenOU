@@ -1,0 +1,60 @@
+ 1. Rechter Buitenspiegel     Kijk in de rechter zijspiegel.
+ 2. Vooruit                   Kijk vooruit.
+ 3. Dashboard                 Kijk recht naar beneden naar het dashboard.
+ 4. Middenconsole             Kijk naar beneden naar de middenconsole.
+ 5. Dashboard                 Kijk recht naar beneden naar het dashboard.
+ 6. Rechter Buitenspiegel     Kijk in de rechter zijspiegel.
+ 7. Dashboard                 Kijk recht naar beneden naar het dashboard.
+ 8. Linker Buitenspiegel      Kijk in de linker zijspiegel.
+ 9. Linkerschouder            Kijk over je linker schouder.
+10. Rechts vooruit            Kijk vooruit en naar rechts.
+11. Rechter Buitenspiegel     Kijk in de rechter zijspiegel.
+12. Rechts vooruit            Kijk vooruit en naar rechts.
+13. Middenconsole             Kijk naar beneden naar de middenconsole.
+14. Rechts                    Kijk naar rechts.
+15. Links                     Kijk naar links.
+16. Linker Buitenspiegel      Kijk in de linker zijspiegel.
+17. Rechterschouder           Kijk over je rechter schouder.
+18. Binnenspiegel             Kijk in de binnenspiegel.
+19. Rechts                    Kijk naar rechts.
+20. Linkerschouder            Kijk over je linker schouder.
+21. Middenconsole             Kijk naar beneden naar de middenconsole.
+22. Vooruit                   Kijk vooruit.
+23. Vooruit                   Kijk vooruit.
+24. Linkerschouder            Kijk over je linker schouder.
+25. Links vooruit             Kijk vooruit en naar links.
+26. Linkerschouder            Kijk over je linker schouder.
+27. Linkerschouder            Kijk over je linker schouder.
+28. Links                     Kijk naar links.
+29. Rechts                    Kijk naar rechts.
+30. Binnenspiegel             Kijk in de binnenspiegel.
+31. Links vooruit             Kijk vooruit en naar links.
+32. Rechterschouder           Kijk over je rechter schouder.
+33. Links vooruit             Kijk vooruit en naar links.
+34. Dashboard                 Kijk recht naar beneden naar het dashboard.
+35. Rechts                    Kijk naar rechts.
+36. Vooruit                   Kijk vooruit.
+37. Rechterschouder           Kijk over je rechter schouder.
+38. Rechts vooruit            Kijk vooruit en naar rechts.
+39. Rechter Buitenspiegel     Kijk in de rechter zijspiegel.
+40. Middenconsole             Kijk naar beneden naar de middenconsole.
+41. Links                     Kijk naar links.
+42. Links vooruit             Kijk vooruit en naar links.
+43. Dashboard                 Kijk recht naar beneden naar het dashboard.
+44. Rechts                    Kijk naar rechts.
+45. Linker Buitenspiegel      Kijk in de linker zijspiegel.
+46. Links vooruit             Kijk vooruit en naar links.
+47. Rechterschouder           Kijk over je rechter schouder.
+48. Linker Buitenspiegel      Kijk in de linker zijspiegel.
+49. Binnenspiegel             Kijk in de binnenspiegel.
+50. Rechts vooruit            Kijk vooruit en naar rechts.
+51. Vooruit                   Kijk vooruit.
+52. Rechts vooruit            Kijk vooruit en naar rechts.
+53. Middenconsole             Kijk naar beneden naar de middenconsole.
+54. Rechter Buitenspiegel     Kijk in de rechter zijspiegel.
+55. Linker Buitenspiegel      Kijk in de linker zijspiegel.
+56. Rechterschouder           Kijk over je rechter schouder.
+57. Binnenspiegel             Kijk in de binnenspiegel.
+58. Links                     Kijk naar links.
+59. Binnenspiegel             Kijk in de binnenspiegel.
+60. Links                     Kijk naar links.
