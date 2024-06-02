@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+import { predictAnalysis } from '../common/api/predict';
 
 import PageWrapper from '../components/organisms/PageWrapper';
-
-import TitleTextBlock from '../components/molecules/TitleTextBlock'
-
 import InputModel from '../components/organisms/InputModel';
 import InputAV from '../components/organisms/InputAV';
 import AnalysesResults from '../components/organisms/AnalysesResults';
+import TitleTextBlock from '../components/molecules/TitleTextBlock'
 
 
 function PredictPage () {
     const [modelIsUploaded, setModelIsUploaded] = useState(false);
     const [avIsUploaded, setAvIsUploaded] = useState(false);
-    // eslint-disable-next-line no-unused-vars
-    const [avFiles, setAvFiles] = useState([]);
-    // eslint-disable-next-line no-unused-vars
-    const [modelFile, setModelFile] = useState("");
+    const [avFiles, setAvFiles] = useState(null);
+    const [modelFile, setModelFile] = useState(null);
+    const [analysisResult, setAnalysisResult] = useState(null);
 
     // HANDLERS
     function handleModelUpload(files){
@@ -27,6 +26,18 @@ function PredictPage () {
         setAvFiles(files);
         setAvIsUploaded(true);
     }
+
+
+    async function predict() {
+        const response = await predictAnalysis(modelFile, avFiles);
+        setAnalysisResult(response);
+    }
+
+    useEffect(() => {
+        if (modelFile && avFiles) {
+            predict();
+        }
+    }, [modelFile, avFiles]);
 
     return (
         <PageWrapper>
