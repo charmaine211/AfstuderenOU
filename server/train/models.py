@@ -16,6 +16,9 @@ sys.path.insert(
 from globals import CLASSES, YOLO_IMAGE_EXTENTIONS
 
 MODEL_PATH = "../server/models/yolov8n-face.pt"
+IC_MODEL_PATH = (
+    "../server/models/image_classicification--epochs_25-batchsize_all_last.pt"
+)
 FACE_MODEL_PATH = "../server/models/yolov8n-face.pt"
 IMAGE_DIRS = [
     "C:/Users/charm/Documents/Informatica/Postpropodeuse/Voorbereiden Afstuderen/Dataset/recording_10042024_Wim_v1/dataset/image_classification/test/dashboard_down_right",
@@ -46,7 +49,7 @@ IMAGES_VAL_DIR = "C:/Users/charm/Documents/Informatica/Postpropodeuse/Voorbereid
 
 IMAGES_DIR = "C:/Users/charm/Documents/Informatica/Postpropodeuse/Voorbereiden Afstuderen/Dataset/recording_10042024_Wim_v1/dataset/object_detection/images"
 LABELS_DIR = "C:/Users/charm/Documents/Informatica/Postpropodeuse/Voorbereiden Afstuderen/Dataset/recording_10042024_Wim_v1/dataset/object_detection/labels"
-VIDEO_DIR = "C:/Users/charm/Documents/Informatica/Postpropodeuse/Voorbereiden Afstuderen/Dataset/recording_10042024_Wim_v1/videos"
+VIDEO_DIR = "C:/Users/charm/Documents/Informatica/Postpropodeuse/Voorbereiden Afstuderen/Dataset/live_12052024_Wim_v1"
 
 LABELS_TRAIN_DIR = "C:/Users/charm/Documents/Informatica/Postpropodeuse/Voorbereiden Afstuderen/Dataset/recording_10042024_Wim_v1/dataset/object_detection/labels/train"
 LABELS_TEST_DIR = "C:/Users/charm/Documents/Informatica/Postpropodeuse/Voorbereiden Afstuderen/Dataset/recording_10042024_Wim_v1/dataset/object_detection/labels/test"
@@ -54,7 +57,7 @@ LABELS_VAL_DIR = "C:/Users/charm/Documents/Informatica/Postpropodeuse/Voorbereid
 
 
 def predict_image_classification(path_model, image_file):
-    model = YOLO(path_model)
+    model = YOLO(IC_MODEL_PATH)
     predictions = {}
     predictions["filename"] = image_file
     print("Model successfully uploaded")
@@ -70,6 +73,11 @@ def predict_image_classification(path_model, image_file):
         predictions["prediction"] = prediction
 
     return predictions
+
+
+def predict_image_classification_save(path_model, av_file):
+    model = YOLO(path_model)
+    results = model.predict(source=av_file, show=True, save=True)
 
 
 def predict_object_detection(path_model, image_file):
@@ -209,9 +217,8 @@ def label_dataset():
 def main():
 
     print("***PREDICTION***")
-
     for video_path in glob.glob(f"{VIDEO_DIR}/*"):
-        predict_object_detection_video(video_path, FACE_MODEL_PATH)
+        predict_image_classification_save(IC_MODEL_PATH, video_path)
 
     # label_dataset()
     # for image_dir in IMAGE_DIRS:
