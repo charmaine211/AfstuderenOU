@@ -40,6 +40,7 @@ function Routes () {
                 element={<Predictpage/>}/>
 
             <Route 
+                path="*"
                 element={<NotFoundPage/>}/>
             
         </BrowserRouters>
