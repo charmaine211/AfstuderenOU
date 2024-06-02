@@ -8,7 +8,9 @@ import { formatFileFormats } from '../../common/formatters';
 function DragDropFiles({ 
   type, 
   formats, 
-  onUploaded }) {
+  onUploaded,
+  uploadMultiple, 
+}) {
 
   // CONSTANTS
   const fileFormatString = formatFileFormats( formats );
@@ -17,8 +19,14 @@ function DragDropFiles({
   const [dragActive, setDragActive] = useState(false);
   
   // HANDLERS
-const handleFiles = (e) => {
-  alert('Do something');
+const handleFiles = (files) => {
+  let filePaths = [];
+
+  for (var i = 0; i < files.length; i++) {
+    filePaths.push(files[i].name);
+  }
+  alert(JSON.stringify(filePaths));
+  onUploaded(filePaths);
 }
 
   const handleDrag = (e) => {
@@ -60,7 +68,7 @@ const handleFiles = (e) => {
       <input 
         type="file" 
         id="input-file-upload" 
-        multiple={true} 
+        multiple={ uploadMultiple } 
         accept={ fileFormatString }/>
       <label 
         id="label-file-upload" 
@@ -84,7 +92,8 @@ const handleFiles = (e) => {
 DragDropFiles.propTypes = {
     formats: PropTypes.arrayOf(PropTypes.string).isRequired,
     onUploaded: PropTypes.func.isRequired,
-    type: PropTypes.string
+    type: PropTypes.string,
+    uploadMultiple: PropTypes.bool.isRequired,
 }
 
 DragDropFiles.defaultProps = {
