@@ -109,3 +109,15 @@ You will find the response from the Flask server in your app log. You can perfor
 When the frontend is ready, you can build the installable electron application efficiently by using an electron-builder. Go to the docs in the given link, make the necessary changes in your package.json file and run the build command in your terminal to build your application.
 Avoid Route Directory Mistake
 Note that since the Flask app executable is going to be opened in the Electron app environment, the paths inside the flask app code need to be referenced in accordance with the Electron app root directory. The mistake of mentioning file paths relative to the Flask environment, which will be alien to the Electron environment, can be made. So if your Flask app loads a file, you need to specify the path according to Electron and not according to your Flask environment.
+
+
+source: https://medium.com/@yagoubi.aek.2/build-you-app-using-electron-js-python-electron-builder-dcdd9c2d9ba0
+
+Packaging the app
+go to package.json inside the build tag add this :
+ "files": ["main.exe" , "index.js" , "preload.js" , "index.html"],
+
+Electron-python
+Know we need just to run this command :
+npm run build
+and you will find your setup installer in the ‘dist’ folder
