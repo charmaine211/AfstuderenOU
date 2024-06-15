@@ -121,3 +121,103 @@ Electron-python
 Know we need just to run this command :
 npm run build
 and you will find your setup installer in the ‘dist’ folder
+
+source: https://medium.com/red-buffer/electron-builder-packaging-electron-nodejs-application-along-with-flask-app-for-windows-fc26f5a29870
+
+In the previous article, we discussed how to integrate an electron app frontend with a Flask backend but it did not cover how to package the Electron app. So this piece elucidates how an Electron app can be packaged for Windows using Electron Builder. There are a few other libraries that are used to package the Electron app as well, like electron-packager, but electron builder is a more preferred choice here for building the Electron app because it has a wide range of options, which is very useful for a complex application.
+If you are here, there’s a high chance you already have your project ready to be packaged. If this isn’t the case, you need to first create the Electron app. The basic guide to creating a simple quickstart Electron application is given in the Electronjs docs. You can also go to my previous article which covers the pre-requisites for this article.
+We know that the project structure for a basic Electron app is as:
+my-electron-app/ 
+├── package.json 
+├── main.js 
+├── renderer.js 
+└── index.html
+For building an installable electron app with electron builder, your main concern is with package.json.
+Installing Electron Builder
+To install electron builder, the docs recommend using yarn instead of npm. The package can be installed using the following command:
+yarn add electron-builder — dev
+Adding Build Configurations in package.json
+The electron builder docs cover all aspects and features, so I’ll be more specific to our use case.
+You need to specify the standard fields for the app like name, description, product name, version, author in package.json. This gets covered when the project is initiated with package.json.
+App ID, Directories, and Specifications for Windows
+This is the most important step and needs to be implemented properly. In package.json, you need to specify the app ID, the output and build resource directories and, most importantly, the OS you are going for. In our case, it’s Windows, and let’s say we want the NSIS file as our build file. We will add the following in the file:
+"build": {
+    "appId": "electron-test-app",    
+    "directories": {
+                    "buildResources": "resources",
+                    "output": "release"
+                   },
+    "win": {
+            "publisherName": "xyz.net",
+            "target": [
+                       {
+                         "target": "nsis",
+                         "arch": [
+                           "x64"
+                          ]
+                       }
+                      ]
+           },
+You can change these specifications according to your requirements by going through the docs. You can go for an MSI file as well or go for both.
+Specifying Files and Resources
+The build needs to be told which files or source codes will be required by the app to run smoothly. All the required resources need to be specified within the build as:
+"build": {     
+     ...
+     "files": [
+           "./resources/icon.*",
+           "./src/",
+           "./css/",
+           "./contents/",
+           "./node_modules/**/*",
+           "./package.json"
+      ],
+For Static Files That Need to be Directly Used from the App Directory
+Some of the resource files are required to be copied as app resources for usage. It could be an excel sheet for instance. Electron builder has great options for this. You can use:
+extraResources: copies the files (keeping their exact name) to the app’s resource directory
+extraFiles: copies the files directly into the app’s content directory
+The files can be specified in the build as shown below:
+"build": {     
+     ...
+     "extraFiles": [
+      {
+        "from": "./cache/",
+        "to": "cache/",
+        "filter": [
+          "**/*"
+         ]
+      },
+extraResources is also very similar to extraFiles. It’s just a matter of what the requirement is for the app.
+Notes Worth Mentioning Regarding Directories
+While using electron builder, I encountered some issues that I feel needed to be mentioned. There might be better solutions but I’ll specify what I did or preferred particularly.
+Empty directories will not get copied to the required locations. You could add a keep.txt file in the directory to copy the folders without any issues.
+You might want to avoid creating folders programmatically from the app since that causes errors and problems. The best thing in my experience was to just copy such folders to the required place using extraFiles or extraResources.
+Running the Application After Installation
+It’s the developers choice whether to run the application right after installation or not. In my experience, the application has a lot of components and libraries installed and will have some issues when it will run the first time, but no issues when it runs again. So I went on to avoid running the application right after installation. For setting this option, you need to add the following line in the build-in package.json:
+"build": {     
+   ...
+   "nsis": {
+      "runAfterFinish": false
+   },
+Packaging the App Alongwith the Flask App
+The flask app use case is in relation to my previous article about Integrating Python Flask Backend with Electron (Nodejs) Frontend. This part will cover packaging another executable app with your main application. We have a simple flask executable for this. You can just skip the next step if you are not working with another executable app within your main app.
+Specifying Flask App Resource
+We need to set the resource directory for our flask app right where the app would access it from its route directory. This is just the same step we discussed before. We need to use extraFiles or extraResources for our task here. It can be done as below:
+"extraFiles": [
+      {
+        "from": "./backend/dist/app",
+        "to": "backend/dist/app/",
+        "filter": [
+          "**/*"
+         ]
+      },
+Flask app created by Pyinstaller is in the dist folder and backend is just the directory of the backend python code.
+The important thing is to maintain the project structure for the application by specifying the resources in their exact locations w.r.t. the app’s route directory. Make sure the path to the new directory, copied with extraFiles or extraResources, is being correctly accessed in the app code, to avoid issues.
+Creating the Build
+You can either directly run the command from your terminal or set a specific key for your command in the script. The command to build the app for Windows 64-bit is:
+electron-builder build --win --x64
+You can add the following in scripts to just set the key for this command and run it when you want to package the app:
+"scripts": {
+      "package": "electron-builder build --win --x64"
+},
+Run yarn package in your terminal and the app will get built. For just the unpacked version, run yarn package --dir.
+There are many options to go for with electron builder for different use cases. The package documentation can be consulted for that. Electron builder also has Auto Update options that can be explored as well so that the user keeps getting the updated version.
