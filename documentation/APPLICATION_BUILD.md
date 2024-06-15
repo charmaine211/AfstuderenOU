@@ -221,3 +221,6 @@ You can add the following in scripts to just set the key for this command and ru
 },
 Run yarn package in your terminal and the app will get built. For just the unpacked version, run yarn package --dir.
 There are many options to go for with electron builder for different use cases. The package documentation can be consulted for that. Electron builder also has Auto Update options that can be explored as well so that the user keeps getting the updated version.
+
+
+source: https://blog.devgenius.io/how-to-build-and-publish-an-electron-app-with-react-tutorial-971e1d9d27ce?gi=6c8bed11dc4b
