@@ -1,3 +1,5 @@
+# Initialises model and imports necessary components
+
 from flask import Blueprint
 
 bp = Blueprint("collectDataset", __name__)
