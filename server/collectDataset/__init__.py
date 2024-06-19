@@ -1,4 +1,4 @@
-# Initialises model and imports necessary components
+# Initialises module and imports necessary components
 
 from flask import Blueprint
 
