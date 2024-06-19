@@ -1,1 +1,1 @@
-# Utility functions specific shared between functions
+# Utility functions shared between modules
