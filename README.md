@@ -40,7 +40,9 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-#### Running the Backend
+#### Running the Flask Backend
+
+In the backend directory:
 
 ```
 python app.py
@@ -64,9 +66,15 @@ npm
 
 #### Running the Frontend
 
+In the frontend directory:
+
 ```
 npm start
 ```
+
+### Run Tkinter gui
+
+*TODO*
 
 ## Instructions
 
