@@ -1,3 +1,5 @@
+# Defines route endpoints and their view functions
+
 from flask import Blueprint
 
 bp = Blueprint("train", __name__)
