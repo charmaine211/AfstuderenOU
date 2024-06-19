@@ -81,4 +81,5 @@ npm start
 - [Collect dataset](./documentation/COLLECTDATASET.md)
 - [Train with YOLOv8](./documentation/TRAIN.md)
 - [Predict with trained model](./documentation/PREDICT.md)
+- [How to test the application](./documentation/TESTING.md)
 - [How to build application for publishing](./documentation/APPLICATION_BUILD.md)
