@@ -83,3 +83,4 @@ npm start
 - [Predict with trained model](./documentation/PREDICT.md)
 - [How to test the application](./documentation/TESTING.md)
 - [How to build application for publishing](./documentation/APPLICATION_BUILD.md)
+- [Instructions of packaged app for the end user](./documentation/USER_INSTRUCTIONS.md)
