@@ -1,5 +1,65 @@
 # Testing
 
+## Running Tests 
+
+The following scripts allow you to conveniently run tests for both your React frontend and Python backend from their respective directories using a unified command, adjusted for different operating systems.
+
+### Setting Up Scripts
+
+#### For Windows
+
+Download or create a file named `run-tests.cmd` in the root directory of your project with the following content:
+
+```batch 
+REM Script to run both Python tests and React tests on Windows 
+
+REM Run Python tests 
+
+echo === Running Python tests === 
+cd server 
+pytest 
+cd .. 
+
+REM Run React tests 
+echo === Running React tests === 
+cd client 
+npm run test 
+cd ..
+
+Ensure the file is placed in the root directory. Adjust the `cd commands` if your `server` and `client` directories are located elsewhere.
+
+#### For Linux and macOS
+
+Download or create a file named `run-tests.sh` in the root directory of your project with the following content:
+
+```bash
+#!/bin/bash
+# Script to run both Python tests and React tests on Linux and macOS
+
+# Run Python tests
+echo === Running Python tests ===
+cd server
+pytest
+cd ..
+
+# Run React tests
+echo === Running React tests ===
+cd client
+npm run test
+cd ..
+
+Ensure the file is executable with `chmod +x run-tests.sh` before executing it with `./run-tests.sh` in your terminal.
+
+### Executing Combined Tests
+
+#### Windows
+
+Double-click `run-tests.cmd `to execute the script.
+
+#### Linux and macOS
+
+Execute `./run-tests.sh` in your terminal to run the script.
+
 ## Test React
 
 We will be testing our React application using Jest and React Testing Library.
