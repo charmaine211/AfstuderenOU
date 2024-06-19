@@ -25,6 +25,7 @@ echo === Running React tests ===
 cd client 
 npm run test 
 cd ..
+```
 
 Ensure the file is placed in the root directory. Adjust the `cd commands` if your `server` and `client` directories are located elsewhere.
 
@@ -47,6 +48,7 @@ echo === Running React tests ===
 cd client
 npm run test
 cd ..
+```
 
 Ensure the file is executable with `chmod +x run-tests.sh` before executing it with `./run-tests.sh` in your terminal.
 
