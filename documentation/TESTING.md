@@ -139,5 +139,44 @@ For more detailed information on Jest, such as mocking HTTP calls and other adva
 
 ## Test Python
 
+### Add pytest to requirements.txt
+
+Make sure pytest is listed in your `requirements.txt` file. If it's not already listed, add it:
+
+### Create a Test Module
+
+Create a test module, for example `test_your_module.py`, where `your_module` is the name of the module you want to test Ensure that the module name starts with `test_​ `​, as this naming convention is mandatory for pytest to recognize it as a test module.::
+
+```python
+# test_your_module.py
+
+from your_module import your_function_or_class and ensure your test function names also start with `test_`
+
+def test_first_test():
+    assert False, "This test intentionally fails to demonstrate pytest"
+```
+
+Replace `your_module` and `your_function_or_class` with the actual module, function, or class you want to test.
+
+### Running Pytest
+
+1. **Navigate to your project directory** where `test_your_module.py` and `requirements.txt` are located.
+
+2. **Install dependencies** (if not already installed):
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Run pytest** to execute your tests:
+
+   ```bash
+   pytest
+   ```
+
+### Additional Resources
+
+For more information on using pytest, refer to the [PyTest documentation](https://docs.pytest.org/en/latest/).
+
 ## Test Flask
 
