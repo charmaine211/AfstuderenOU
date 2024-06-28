@@ -10,9 +10,12 @@ import {
 } from '@mui/material';
 import HelpIcon from '@mui/icons-material/Help';
 
-function MultiSelect({ title, options, selectedOptions, setSelected, hasInfo, ariaLabel }) {
+function MultiSelect({ title, options, setSelected, hasInfo, ariaLabel }) {
+  
   const handleSelect = (event) => {
+    
     const value = event.target.name;
+
     setSelected((prevSelected) => {
       if (prevSelected.includes(value)) {
         return prevSelected.filter((item) => item !== value);
@@ -23,7 +26,7 @@ function MultiSelect({ title, options, selectedOptions, setSelected, hasInfo, ar
   };
 
   return (
-    <FormControl required error={false} component="fieldset" sx={{ m: 3 }} variant="standard">
+    <FormControl component="fieldset" sx={{ m: 3 }} variant="standard">
       <FormLabel component="legend">
         {title}
         {hasInfo && <HelpIcon />}
@@ -31,7 +34,7 @@ function MultiSelect({ title, options, selectedOptions, setSelected, hasInfo, ar
       <FormGroup>
         <Grid container spacing={2}>
           {options.map((option) => (
-            <Grid item xs={6} key={option}>
+            <Grid item xs={6} key={option} sx={{ display: 'flex', alignItems: 'center' }}>
               <FormControlLabel
                 control={
                   <Checkbox

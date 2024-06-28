@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 function Title ({ title }) {
     
     return (
-       <Typography>{ title }</Typography>
+       <Typography variant="h4">{ title }</Typography>
     );
 }
 

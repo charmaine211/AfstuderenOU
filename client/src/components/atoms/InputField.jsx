@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { TextField, Box, Stack } from '@mui/material';
 import HelpIcon from '@mui/icons-material/Help';
 
-function InputField({ hasInfo, onChange, value, defaultValue, label, ariaLabel }) {
+function InputField({ hasInfo, onChange, value, defaultValue, label, type, ariaLabel }) {
     return (
         <Box
             component="form"
@@ -25,6 +25,7 @@ function InputField({ hasInfo, onChange, value, defaultValue, label, ariaLabel }
                     onChange={onChange}
                     aria-label={ariaLabel}
                     sx={{ flex: 1 }}
+                    type={type}
                 />
                 {hasInfo && <HelpIcon />}
             </Stack>
@@ -36,6 +37,7 @@ InputField.propTypes = {
     hasInfo: PropTypes.bool.isRequired,
     onChange: PropTypes.func.isRequired, 
     value: PropTypes.string.isRequired, 
+    type: PropTypes.string, 
     defaultValue: PropTypes.string,
     label: PropTypes.string.isRequired,
     ariaLabel: PropTypes.string.isRequired,
@@ -43,6 +45,7 @@ InputField.propTypes = {
 
 InputField.defaultProps = {
     defaultValue: "",
+    type: "text"
 };
 
 export default InputField;
