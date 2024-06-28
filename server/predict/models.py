@@ -1,3 +1,4 @@
+# Contains database models
 from ultralytics import YOLO
 
 

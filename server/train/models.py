@@ -1,3 +1,4 @@
+# Contains database models
 import numpy as np
 import os
 import glob

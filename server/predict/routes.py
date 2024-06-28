@@ -1,3 +1,5 @@
+# Defines route endpoints and their view functions
+
 from flask import Blueprint, request, jsonify
 import os
 from werkzeug.utils import secure_filename
