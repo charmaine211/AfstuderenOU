@@ -1,14 +1,13 @@
 import React from 'react';
 
-import { Paper } from "@mui/material"
-
 import PageWrapper from '../components/organisms/PageWrapper';
+import ParameterWindow from '../components/organisms/ParameterWindow';
 
 function TrainPage () {
     return (
     <PageWrapper>
         <h1>Train</h1> 
-
+        <ParameterWindow/>
 
     </PageWrapper>
     
