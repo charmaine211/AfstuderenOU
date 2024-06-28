@@ -1,8 +1,11 @@
 import React from 'react';
+import PageWrapper from '../components/organisms/PageWrapper';
 
 function TestPage () {
     return (
-    <h1>Test</h1>    
+        <PageWrapper>
+            <h1>Test</h1>  
+        </PageWrapper>  
     );
 }
 

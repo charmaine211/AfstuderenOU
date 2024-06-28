@@ -17,7 +17,8 @@ function App() {
   // }, []);
 
   return (
-    <Routes />
+
+      <Routes />
     // <div>
     //   {typeof data === "undefined" ? <p>LOADING...</p> : data}
     // </div>
