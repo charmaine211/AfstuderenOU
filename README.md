@@ -59,7 +59,7 @@ cd AfstuderenOU/client/
 2. Install packages
 
 ```
-npm
+npm install
 ```
 
 #### Running the Frontend
