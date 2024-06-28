@@ -40,7 +40,9 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-#### Running the Backend
+#### Running the Flask Backend
+
+In the backend directory:
 
 ```
 python app.py
@@ -64,12 +66,21 @@ npm install
 
 #### Running the Frontend
 
+In the frontend directory:
+
 ```
 npm start
 ```
+
+### Run Tkinter gui
+
+*TODO*
 
 ## Instructions
 
 - [Collect dataset](./documentation/COLLECTDATASET.md)
 - [Train with YOLOv8](./documentation/TRAIN.md)
 - [Predict with trained model](./documentation/PREDICT.md)
+- [How to test the application](./documentation/TESTING.md)
+- [How to build application for publishing](./documentation/APPLICATION_BUILD.md)
+- [Instructions of packaged app for the end user](./documentation/USER_INSTRUCTIONS.md)
