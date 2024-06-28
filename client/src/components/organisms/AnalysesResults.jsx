@@ -5,7 +5,7 @@ import {
 
 import AnalyseVideoChart from '../molecules/AnalyseVideoChart';
 
-function AnalysesResults(){
+function AnalysesResults( { results } ){
 
     return (
         <AnalyseVideoChart 

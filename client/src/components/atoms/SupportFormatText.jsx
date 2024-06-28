@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@mui/material/Typography';
 
-import { formatFileFormats } from '../../common/formatters';
+import { formatFileFormats } from '../../common/utils/formatters';
 
 function SupportFormatText ({ formats }) {
     
