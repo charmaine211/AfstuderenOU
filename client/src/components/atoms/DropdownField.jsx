@@ -5,9 +5,10 @@ import {
     TextField, 
     MenuItem, 
 } from '@mui/material';
-import HelpIcon from '@mui/icons-material/Help';
 
-function DropdownField({ menuItems, hasInfo, helperText, id, ariaLabel }){
+import InfoButton from './InfoButton';
+
+function DropdownField({ menuItems, helperText, id, hasInfo, info, ariaLabel }){
     return(
         <>
         <TextField
@@ -23,17 +24,22 @@ function DropdownField({ menuItems, hasInfo, helperText, id, ariaLabel }){
                 </MenuItem>
                 ))}
         </TextField>
-        {hasInfo && < HelpIcon />}
+        {hasInfo && <InfoButton text={info}/>}
       </>
     );
 }
 
 DropdownField.propTypes = {
     menuItems: PropTypes.arrayOf(PropTypes.string),
-    hasInfo: PropTypes.bool.isRequired, 
     helperText: PropTypes.string.isRequired, 
     id: PropTypes.string.isRequired, 
+    hasInfo: PropTypes.bool.isRequired, 
+    info: PropTypes.string, 
     ariaLabel: PropTypes.string.isRequired,
 }
 
+DropdownField.defaultProps = {
+    info: ""
+  };
+  
 export default DropdownField;

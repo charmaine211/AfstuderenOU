@@ -16,6 +16,7 @@ function ParameterWindow() {
 
     // STATES
     const [dataDirectory, setDataDirectory] = useState("");
+    const [projectTitle, setProjectTitle] = useState("image_classicification--epochs_{epochs}-batchsize_{batch_size}");
     const [selectedDataSize, setSelectedDataSize] = useState(dataSize);
     const [selectedEpochs, setSelectedEpochs] = useState([]);
     const [selectedBatchSizes, setSelectedBatchSizes] = useState([]);
@@ -40,7 +41,7 @@ for batch_size in BATCH_SIZES:
     for epochs in EPOCHS_LIST:
 
     # Name project
-    project = f"image_classicification--epochs_{epochs}-batchsize_{batch_size}"
+    project = f"${projectTitle}"
 
     # Load a model
     model = YOLO('yolov8n-cls.pt')
@@ -59,6 +60,10 @@ for batch_size in BATCH_SIZES:
     // HANDLERS
     const handleDataDirectoryChange = (event) => {
         setDataDirectory(event.target.value)
+    }
+
+    const handleProjectTitleChange = (event) => {
+        setProjectTitle(event.target.value)
     }
 
     const handleSelectedDataSizeChange = (event) => {
@@ -100,17 +105,28 @@ for batch_size in BATCH_SIZES:
                         marginTop: 5,
                     }}>
                     <InputField 
-                        hasInfo 
                         onChange={handleDataDirectoryChange}
                         defaultValue={`/content/drive/MyDrive`}
                         value={dataDirectory} 
                         label="Data Directory" 
+                        hasInfo 
+                        info="Specifies the directory where your training data is located."
                         ariaLabel="Data Directory" 
+                    />
+                    <InputField 
+                        onChange={handleProjectTitleChange} 
+                        defaultValue={projectTitle} 
+                        value={projectTitle} 
+                        label="Project Title" 
+                        ariaLabel="Project Title" 
+                        hasInfo 
+                        info="The title of the file containing the training results"
                     />
                     <MultiSelect 
                         title="Epochs" 
                         options={epochs} 
                         hasInfo 
+                        info="Determines the number of training epochs, representing the number of times the entire training dataset is passed through the neural network."
                         setSelected={setSelectedEpochs} 
                         ariaLabel="Epochs" 
                     />
@@ -118,16 +134,18 @@ for batch_size in BATCH_SIZES:
                         title="Batch size" 
                         options={batchSizes} 
                         hasInfo 
+                        info=" Sets the batch size for training, indicating how many images are processed before updating the model's parameters."
                         setSelected={setSelectedBatchSizes} 
                         ariaLabel="Batch size" 
                     />
                     <InputField 
-                        hasInfo 
                         onChange={handleSelectedDataSizeChange} 
                         defaultValue={dataSize} 
                         value={selectedDataSize} 
                         label="Data Size" 
                         ariaLabel="Data Size" 
+                        hasInfo 
+                        info="Size of the image used during profiling. Default is 640."
                         type="number"
                     />
                     <DownloadButton onClick={handleDownloadCode}/>
