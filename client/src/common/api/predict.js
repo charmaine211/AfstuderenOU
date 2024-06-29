@@ -25,15 +25,15 @@ async function uploadFiles(files) {
   }
 }
 
-export async function predictAnalysis(modelFile, avFiles) {
+export async function predictAnalysis(modelFilePath, avFilesPath) {
   try {
-      const modelResponse = await uploadFiles([modelFile]);
+      const modelResponse = await uploadFiles([modelFilePath]);
       if (!modelResponse.success) {
           throw new Error('Error uploading model file');
       }
       const modelPath = modelResponse.filePaths[0];
 
-      const avResponse = await uploadFiles(avFiles);
+      const avResponse = await uploadFiles(avFilesPath);
       if (!avResponse.success) {
           throw new Error('Error uploading AV files');
       }

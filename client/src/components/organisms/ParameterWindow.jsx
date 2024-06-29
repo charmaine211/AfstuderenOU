@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Paper, Box, Stack, Typography } from '@mui/material';
 
-import { createNotebook } from "../../common/utils"
+import { createNotebook } from "../../common/utils/utils"
 
 import InputField from '../atoms/InputField';
 import MultiSelect from '../atoms/MultiSelect';
@@ -54,7 +54,7 @@ for batch_size in BATCH_SIZES:
         # batch=batch_size,
         project=project,
         )`);
-    }, [dataDirectory, selectedEpochs, selectedBatchSizes]);
+    }, [dataDirectory, selectedEpochs, selectedBatchSizes, projectTitle, selectedDataSize]);
 
     
     // HANDLERS
