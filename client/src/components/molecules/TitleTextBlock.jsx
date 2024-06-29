@@ -11,7 +11,9 @@ function TitleTextBlock ({ title, text }) {
     return (
         <Box style={{ margin: 50, }}>
             <Title title={title}/>
-            <Text text={text}/>
+            <Box style={{ width: "50%", marginTop: "1em"}}>
+                <Text text={text}/>
+            </Box>
         </Box>
     );
 }

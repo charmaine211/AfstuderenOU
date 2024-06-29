@@ -1,22 +1,32 @@
-const { app, BrowserWindow, ipcMain, dialog } = require('electron')
-// const path = require('path');
-// const url = require('url');
+const { app, BrowserWindow } = require('electron')
+const path = require('path')
 
 function createWindow () {
+
   // Create the browser window.
   const win = new BrowserWindow({
-    width: 800,
+    width: 1200,
     height: 600,
+    icon: __dirname + '/client/assets/brain-background.png',
     webPreferences: {
-      nodeIntegration: true
-    }
+      nodeIntegration: false,
+      contextIsolation: true,
+      preload: path.join(__dirname, "/public/preload.js"),
+    }  
   });
 
-  //load the index.html from a url
-  win.loadURL('http://localhost:3000');
+  const appURL = app.isPackaged
+  ? url.format({
+      pathname: path.join(`${__dirname}/public/index.html`),
+      protocol: "file:",
+      slashes: true,
+    })
+  : "http://localhost:3000";
+
+  win.loadURL(appURL);
 
   // Open the DevTools.
-  win.webContents.openDevTools()
+  // win.webContents.openDevTools()
 };
 
 // This method will be called when Electron has finished

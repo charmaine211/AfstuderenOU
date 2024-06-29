@@ -27,7 +27,7 @@ function DragDropFiles({
   
     Array.from(files).forEach(element => {
       const ext = element.name.split('.').pop().toLowerCase();
-      if (acceptedFormats.includes(`.${ext}`)) {
+      if (acceptedFormats.includes(ext)) {
         filePaths.push(element.path);
       }
     });

@@ -8,10 +8,11 @@ import AnalyseVideoChart from '../molecules/AnalyseVideoChart';
 function AnalysesResults( { results } ){
 
     return (
-        <AnalyseVideoChart 
-        videotitle="Test data"
-        classes= { Object.keys(CLASSES) }
-        data = { MOCK_RESULTS_IMAGE_CLASSIFICATION }/>
+        // <AnalyseVideoChart 
+        // videotitle="Test data"
+        // classes= { Object.keys(CLASSES) }
+        // data = { results }/>
+        JSON.stringify(results)
     );
 }
 

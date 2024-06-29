@@ -4,20 +4,23 @@ from flask import Blueprint, request, jsonify
 import os
 from werkzeug.utils import secure_filename
 
-from models import predict
+from .utils import predict as utils_predict
 
 bp = Blueprint("predict", __name__)
 
-
-@bp.route("/predict")
+@bp.route("/predict", methods=['GET', 'POST'])
 def predict():
 
-    data = request.get_json()
-    model_path = data.get("model")
-    av_files = data.get("av_files")
+    print("PREDICT")
+    # data = request.get_json()
+    # print(f"Datareceived: {data}")
+    # model_path = data.get("model")
+    # av_files = data.get("av_files")
 
-    if not model_path or not av_files:
-        return jsonify({"error": "Model path or AV files are missing"}), 400
+    # if not model_path or not av_files:
+    #     return jsonify({"error": "Model path or AV files are missing"}), 400
 
-    result = predict(model_path, av_files)
+    # print("Let's predict")
+    # result = utils_predict(model_path, av_files)
+    result={}
     return jsonify(result)

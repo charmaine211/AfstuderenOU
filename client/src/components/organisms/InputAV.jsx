@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-import DragDropFiles from "../molecules/DragDropFile";
+import DragDropFiles from "../molecules/DragDropFiles";
 
 function InputAV({ 
     onUploaded,

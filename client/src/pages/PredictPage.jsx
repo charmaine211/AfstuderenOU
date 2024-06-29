@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { Container } from '@mui/material';
+import { Container, CircularProgress } from '@mui/material';
 
 import { predictAnalysis } from '../common/api/predict';
 
@@ -9,7 +9,6 @@ import InputModel from '../components/organisms/InputModel';
 import InputAV from '../components/organisms/InputAV';
 import AnalysesResults from '../components/organisms/AnalysesResults';
 import TitleTextBlock from '../components/molecules/TitleTextBlock'
-
 
 function PredictPage () {
 
@@ -26,6 +25,7 @@ function PredictPage () {
     const [avFiles, setAvFiles] = useState(null);
     const [modelFile, setModelFile] = useState(null);
     const [analysisResult, setAnalysisResult] = useState(null);
+    const [predicting, setPredicting] = useState(false);
 
     // HANDLERS
     function handleModelUpload(files){
@@ -33,7 +33,7 @@ function PredictPage () {
             setModelFile(files[0]);
             setModelIsUploaded(true);
         } else {
-            alert(`ERROR: Upload the right format`);
+            alert(`ERROR: Upload the right format`);//TODO error
         }
     }
 
@@ -42,18 +42,20 @@ function PredictPage () {
             setAvFiles(files);
             setAvIsUploaded(true);
         } else {
-            alert(`ERROR: Upload the right format`);
+            alert(`ERROR: Upload the right format`);// TODO error
         }
     }
 
     async function predict() {
-        const response = await predictAnalysis(modelFile, avFiles);
+        const response = await predictAnalysis(modelFile, avFiles);    
         setAnalysisResult(response);
     }
 
     useEffect(() => {
-        if (modelFile && avFiles) {
+        if (modelIsUploaded && avIsUploaded) {
+            setPredicting(true);
             predict();
+            setPredicting(false);
         }
     }, [modelFile, avFiles]);
 
@@ -84,7 +86,8 @@ function PredictPage () {
                         onUploaded={ handleAvUpload } />
                 </Container>
             </>} 
-            {modelIsUploaded && avIsUploaded && 
+            {predicting && <CircularProgress />}
+            {modelIsUploaded && avIsUploaded && !predicting &&
             <>
                 <TitleTextBlock
                 title='Analysis'
@@ -92,7 +95,7 @@ function PredictPage () {
                 <Container
                 maxWidth="sm" 
                 style={ containerStyle }>
-                    <AnalysesResults />
+                    <AnalysesResults results= { analysisResult } />
                 </Container>
             </>}
         </PageWrapper>
