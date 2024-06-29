@@ -1,5 +1,7 @@
 import React from 'react';
 
+import {Stack} from "@mui/material"
+
 import TitleTextBlock from "../components/molecules/TitleTextBlock"
 import PageWrapper from '../components/organisms/PageWrapper';
 
@@ -18,7 +20,7 @@ function HomePage() {
     // require('./client/assets/predict.svg')
 
 
-    const title = "Automatic driver’s gaze annotation";
+    const title = "Automatic driver gaze annotation";
     const text = "Welcome to our application. Our platform provides researchers and safety professionals with a streamlined solution for annotating driver images and videos using AI. With a user-friendly interface and clear instructions, we aim to simplify the annotation process and ensure accurate results."
     const features = [
         { icon: collectDatasetIcon, title: 'Collect dataset', path: '/collect-dataset' },
@@ -29,9 +31,15 @@ function HomePage() {
     return (
         <PageWrapper>
             <TitleTextBlock title={title} text={text}/>
+            <Stack style={{                 
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                textAlign: 'center',}}>
             {features.map((feature) => {
-                return <a href={feature.path}>{feature.title}</a>
+                return <a href={feature.path} key={feature.title}>{feature.title}</a>
             })}
+            </Stack>
         </PageWrapper>
     );
 }
