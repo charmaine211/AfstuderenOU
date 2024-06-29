@@ -1,14 +1,14 @@
 import React from 'react';
 
-import { Paper } from "@mui/material"
-
+import TitleTextBlock from '../components/molecules/TitleTextBlock';
 import PageWrapper from '../components/organisms/PageWrapper';
+import ParameterWindow from '../components/organisms/ParameterWindow';
 
 function TrainPage () {
     return (
     <PageWrapper>
-        <h1>Train</h1> 
-
+        <TitleTextBlock title="Train model" text="" /> 
+        <ParameterWindow/>
 
     </PageWrapper>
     

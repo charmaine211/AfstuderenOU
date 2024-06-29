@@ -1,51 +1,69 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-
-
-import {FormLabel,
-    FormControl,
-    FormGroup,
-    FormControlLabel ,
-    FormHelperText,
-    Checkbox,
+import {
+  FormLabel,
+  FormControl,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+  Typography,
+  Grid,
 } from '@mui/material';
-import HelpIcon from '@mui/icons-material/Help';
 
-function MultiSelect({ title, options, hasInfo, ariaLabel }){
-    return(
-        <FormControl
-        required
-        error={"error"}
-        component="fieldset"
-        sx={{ m: 3 }}
-        variant="standard"
-      >
-        <FormLabel component="legend">
-            { title }
-            {hasInfo && < HelpIcon />}
-        </FormLabel>
-        <FormGroup>
+import InfoButton from './InfoButton';
 
-        {options.map((option) => (
-          <FormControlLabel
-            control={
-                <Checkbox checked={option.value} onChange={()=>{}} name={option.value} />
-            }
-            label={option.value}
-        />
+function MultiSelect({ title, options, setSelected, hasInfo, info, ariaLabel }) {
+  
+  const handleSelect = (event) => {
+    const value = event.target.name;
 
-        ))}
-        </FormGroup>
-        <FormHelperText>You can display an error</FormHelperText>
-      </FormControl>
-    );
+    setSelected((prevSelected) => {
+      if (prevSelected.includes(value)) {
+        return prevSelected.filter((item) => item !== value);
+      } else {
+        return [...prevSelected, value];
+      }
+    });
+  };
+
+  return (
+    <FormControl component="fieldset" sx={{ m: 3 }} variant="standard">
+      <Typography variant="h6">
+      {title}  {hasInfo && <InfoButton text={info} style={{margin: "1em"}}/>}
+      </Typography>
+      <FormGroup sx={{display: 'flex', alignItems: 'center', }}>
+        <Grid container spacing={2} style={{margin:"0.1em", minWidth:"20em", maxWidth: "20em",padding: "1em"}}>
+          {options.map((option) => (
+            <Grid item xs={6} key={option} sx={{ display: 'flex', alignItems: 'center' }}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    onChange={handleSelect}
+                    name={option}
+                  />
+                }
+                label={option}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </FormGroup>
+    </FormControl>
+  );
 }
 
 MultiSelect.propTypes = {
-    options: PropTypes.arrayOf(PropTypes.string),
-    hasInfo: PropTypes.bool.isRequired, 
-    ariaLabel: PropTypes.string.isRequired,
-}
+  title: PropTypes.string.isRequired,
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selectedOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  setSelected: PropTypes.func.isRequired,
+  hasInfo: PropTypes.bool.isRequired,
+  info: PropTypes.string, 
+  ariaLabel: PropTypes.string.isRequired,
+};
+
+MultiSelect.defaultProps = {
+  info: ""
+};
 
 export default MultiSelect;
