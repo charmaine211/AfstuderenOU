@@ -13,7 +13,6 @@ function PageWrapper({ children }) {
     
     return (
         <ThemeProvider theme={THEME}>
-                <HomeButton/>
                 {children}
                 <Footer />
         </ThemeProvider>

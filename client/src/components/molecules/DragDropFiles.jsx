@@ -3,6 +3,12 @@ import PropTypes from 'prop-types';
 import BrowseButton from "../atoms/BrowseButton";
 import SupportFormatText from "../atoms/SupportFormatText";
 
+import brainImage from "../../assets/brain-background.png";
+import avImage from "../../assets/photo-film-background.png"
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFire } from '@fortawesome/free-solid-svg-icons';
+
 import { formatFileFormats } from '../../common/utils/formatters';
 
 function DragDropFiles({
@@ -13,9 +19,8 @@ function DragDropFiles({
 }) {
   // CONSTANTS
   const fileFormatString = formatFileFormats(formats);
-  const backgroundImage = formats.includes(".pt") ?
-    "../../../assets/brain-background.png" :
-    "../../../assets/photo-film-background.png";
+  const backgroundImage = formats.includes("pt") ?
+  brainImage : avImage;
 
   // STATES
   const [dragActive, setDragActive] = useState(false);
@@ -72,6 +77,7 @@ function DragDropFiles({
       style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
       }}
     >
       <input
@@ -87,9 +93,16 @@ function DragDropFiles({
         className={dragActive ? "drag-active" : ""}
       >
         <div className="form-content">
-          {dragActive ? <p>Ready to drop?</p> : <p> Drag and drop your {type} here or </p>}
-          <div className="buttons">
-            <BrowseButton formats={ fileFormatString } onFileSelect={ handleFiles }/>
+          <div style={{
+            textAlign: "center",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: "25%",
+            }}>
+            {dragActive ? <p>Drop it like it's hot</p> : <p> Drag and drop your {type} here <br/> or </p>}
+            <div className="buttons">
+              {dragActive ? <FontAwesomeIcon icon={faFire} style={{fontSize: "5em", color: "#48A3C0" }}/>: <BrowseButton formats={ fileFormatString } onFileSelect={ handleFiles }/>}
+            </div>
           </div>
           <SupportFormatText formats={formats} className="support-text" />
         </div>

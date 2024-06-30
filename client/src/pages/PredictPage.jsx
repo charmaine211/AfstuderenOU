@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { Container, CircularProgress } from '@mui/material';
+import { Container, CircularProgress, Grid } from '@mui/material';
 
 import { predictAnalysis } from '../common/api/predict';
 
@@ -9,6 +9,7 @@ import InputModel from '../components/organisms/InputModel';
 import InputAV from '../components/organisms/InputAV';
 import AnalysesResults from '../components/organisms/AnalysesResults';
 import TitleTextBlock from '../components/molecules/TitleTextBlock'
+import UploadedFiles from "../components/atoms/UploadedFiles";
 
 function PredictPage () {
 
@@ -46,6 +47,22 @@ function PredictPage () {
         }
     }
 
+    const handleRemoveModel = () => {
+        setModelFile("");
+        setModelIsUploaded(false);
+    }
+
+    const handleRemoveFile = (file) => {
+        setAvFiles((prevValue) => {
+            const updatedFiles = prevValue.filter((value) => value !== file);
+            if (updatedFiles.length === 0) {
+                setAvIsUploaded(false);
+            }
+            return updatedFiles;
+        });
+    }
+
+    // FUNCTIONS
     async function predict() {
         setPredicting(true);
         const response = await predictAnalysis(modelFile, avFiles);    
@@ -61,42 +78,27 @@ function PredictPage () {
 
     return (
         <PageWrapper>
-            {!modelIsUploaded && 
+            <TitleTextBlock
+                    title={modelIsUploaded && avIsUploaded ? "Analysis" : "Upload model and audiovisual files"}
+                    text={modelIsUploaded && avIsUploaded ? 'Results of the analysis of your files' : "Upload a trained Ultralytics YOLO model and video and/or image files of drivers for analysis by the model. If you don't have a trained model, download the instructions here."}/>
+
+            {(modelIsUploaded && avIsUploaded) ?
             <>
-                <TitleTextBlock
-                    title="Upload model"
-                    text="Upload a trained Ultralytics YOLO model.
-                    If you don't have a trained model, download the instructions here."/>
-                <Container 
-                maxWidth="sm" 
-                style={ containerStyle }>
-                    <InputModel
-                        onUploaded={ handleModelUpload} />
-                </Container>
-            </>}
-            {modelIsUploaded && !avIsUploaded && 
-            <>
-                <TitleTextBlock
-                title='Upload  images and/or videos'
-                text='Upload video and/or image files of drivers for analysis by the model.'/>
-                <Container
-                maxWidth="sm" 
-                style={ containerStyle }>
-                    <InputAV  
-                        onUploaded={ handleAvUpload } />
-                </Container>
-            </>} 
-            {modelIsUploaded && avIsUploaded &&
-            <>
-                <TitleTextBlock
-                title='Analysis'
-                text='Results of the analysis of your files'/>
                 <Container
                 maxWidth="sm" 
                 style={ containerStyle }>
                     {predicting ? < CircularProgress /> : <AnalysesResults results= { analysisResults } />}
                 </Container>
-            </>}
+            </> :
+            <Grid container style={ containerStyle } spacing={10}>
+                <Grid item>
+                    {modelIsUploaded ? <UploadedFiles files={[modelFile]} removeFiles={handleRemoveModel} /> : <InputModel onUploaded={ handleModelUpload} />}
+                </Grid>
+                <Grid item>
+                    { avIsUploaded ? <UploadedFiles files={avFiles} removeFiles={handleRemoveFile} />: <InputAV onUploaded={ handleAvUpload } />}
+                </Grid>
+
+            </Grid>}
         </PageWrapper>
     
     );
