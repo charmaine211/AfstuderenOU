@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 
 import DragDropFiles from "../molecules/DragDropFiles";
 
+import { MODEL_FORMATS } from "../../config";
+
 function InputModel({ 
     onUploaded,
 }) {
 
-    const formats = ["pt"];
-
     return (
         < DragDropFiles 
             type="model"
-            formats={ formats } 
+            formats={ MODEL_FORMATS } 
             onUploaded={ onUploaded } 
             uploadMultiple={ false }/>
     );

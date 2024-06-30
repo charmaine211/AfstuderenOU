@@ -87,9 +87,16 @@ function DragDropFiles({
         className={dragActive ? "drag-active" : ""}
       >
         <div className="form-content">
-          {dragActive ? <p>Ready to drop?</p> : <p> Drag and drop your {type} here or </p>}
-          <div className="buttons">
-            <BrowseButton formats={ fileFormatString } onFileSelect={ handleFiles }/>
+          <div style={{
+            textAlign: "center",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: "25%",
+            }}>
+            {dragActive ? <p>Ready to drop?</p> : <p> Drag and drop your {type} here or </p>}
+            <div className="buttons">
+              <BrowseButton formats={ fileFormatString } onFileSelect={ handleFiles }/>
+            </div>
           </div>
           <SupportFormatText formats={formats} className="support-text" />
         </div>

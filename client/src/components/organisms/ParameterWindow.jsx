@@ -16,7 +16,7 @@ function ParameterWindow() {
 
     // STATES
     const [dataDirectory, setDataDirectory] = useState("");
-    const [projectTitle, setProjectTitle] = useState("image_classicification--epochs_{epochs}-batchsize_{batch_size}");
+    const [projectTitle, setProjectTitle] = useState("image_classicification-epochs_{epochs}-batchsize_{batch_size}");
     const [selectedDataSize, setSelectedDataSize] = useState(dataSize);
     const [selectedEpochs, setSelectedEpochs] = useState([]);
     const [selectedBatchSizes, setSelectedBatchSizes] = useState([]);
