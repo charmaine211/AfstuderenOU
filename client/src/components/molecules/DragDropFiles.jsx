@@ -66,6 +66,7 @@ function DragDropFiles({
       id="form-file-upload"
       onDragEnter={handleDrag}
       onDragOver={handleDrag}
+      onDragLeave={handleDrag}
       onDrop={handleDrop}
       onSubmit={(e) => e.preventDefault()}
       style={{

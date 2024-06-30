@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { Container, CircularProgress, Typography } from '@mui/material';
+import { Container, CircularProgress } from '@mui/material';
 
 import { predictAnalysis } from '../common/api/predict';
 
@@ -24,7 +24,7 @@ function PredictPage () {
     const [avIsUploaded, setAvIsUploaded] = useState(false);
     const [avFiles, setAvFiles] = useState(null);
     const [modelFile, setModelFile] = useState(null);
-    const [analysisResult, setAnalysisResult] = useState(null);
+    const [analysisResults, setAnalysisResults] = useState([]);
     const [predicting, setPredicting] = useState(false);
 
     // HANDLERS
@@ -50,7 +50,7 @@ function PredictPage () {
         setPredicting(true);
         const response = await predictAnalysis(modelFile, avFiles);    
         setPredicting(false);
-        setAnalysisResult(response);
+        setAnalysisResults(response);
     }
 
     useEffect(() => {
@@ -94,7 +94,7 @@ function PredictPage () {
                 <Container
                 maxWidth="sm" 
                 style={ containerStyle }>
-                    {predicting ? < CircularProgress /> : <AnalysesResults results= { analysisResult } />}
+                    {predicting ? < CircularProgress /> : <AnalysesResults results= { analysisResults } />}
                 </Container>
             </>}
         </PageWrapper>

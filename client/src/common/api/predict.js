@@ -25,14 +25,15 @@ export async function predictAnalysis(modelPath, avFilesPath) {
         });
 
         if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+            throw new Error(`HTTP error. Status: ${response.status}`);
         }
 
         const result = await response.json();
-        console.log("Response data:", result);
+
         return result;
+        
     } catch (error) {
-        console.error('Er is een fout opgetreden bij het maken van het verzoek:', error);
+        console.error('Something went wrong while fetching prediction:', error);
         throw error;
     }
 }

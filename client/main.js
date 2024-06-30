@@ -9,7 +9,7 @@ function createWindow () {
     height: 600,
     icon: __dirname + '/client/assets/brain-background.png',
     webPreferences: {
-      nodeIntegration: false,
+      nodeIntegration: true,
       contextIsolation: true,
       preload: path.join(__dirname, "/public/preload.js"),
     }  

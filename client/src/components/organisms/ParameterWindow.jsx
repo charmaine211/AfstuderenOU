@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Paper, Box, Stack, Typography } from '@mui/material';
 
-import { createNotebook } from "../../common/utils/utils"
+import { downloadNotebook } from '../../common/utils/download';
 
 import InputField from '../atoms/InputField';
 import MultiSelect from '../atoms/MultiSelect';
@@ -71,7 +71,7 @@ for batch_size in BATCH_SIZES:
     }
 
     const handleDownloadCode = () => {
-        createNotebook(code, "image_classification")
+        downloadNotebook(code, "image_classification")
     } 
 
     return (

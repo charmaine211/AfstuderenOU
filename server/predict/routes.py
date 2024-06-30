@@ -20,7 +20,6 @@ def predict():
 
     print("Received data to predict")
     data = request.get_json()
-    # print(f"Datareceived: {data}")
     model_path = data.get("model")
     av_files = data.get("av_files")
 
