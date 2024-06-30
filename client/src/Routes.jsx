@@ -22,9 +22,11 @@ function Routes () {
                 path="/" 
                 exact 
                 element={<HomePage />}/>
+            
             <Route 
                 path="/collect-dataset" 
                 element={ <CollectDatasetPage/>}/>
+            
             <Route 
                 path="/test"
                 element={<TestPage/>}/>
@@ -32,11 +34,13 @@ function Routes () {
             <Route 
                 path="/train"
                 element={<TrainPage/>}/>
+            
             <Route 
                 path="/predict"
                 element={<Predictpage/>}/>
 
             <Route 
+                path="*"
                 element={<NotFoundPage/>}/>
             
         </BrowserRouters>

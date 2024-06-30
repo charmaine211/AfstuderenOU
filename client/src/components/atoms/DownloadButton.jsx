@@ -1,0 +1,20 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import Button from '@mui/material/Button';
+
+function DownloadButton ({ text, onClick }) {
+    return (
+        <Button variant="contained" style={{ color: "white", padding: 20, }} onClick={onClick}>Download {text}</Button>
+    );
+}
+
+DownloadButton.propTypes = {
+    onClick: PropTypes.func.isRequired,
+    text: PropTypes.string,
+}
+
+DownloadButton.defaultProps = {
+    text: "",
+}
+
+export default DownloadButton;

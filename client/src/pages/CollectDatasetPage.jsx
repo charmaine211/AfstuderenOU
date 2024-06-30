@@ -1,8 +1,11 @@
 import React from 'react';
+import PageWrapper from '../components/organisms/PageWrapper';
 
 function CollectDatasetPage () {
     return (
-    <h1>collect dataset</h1>    
+        <PageWrapper>
+            <h1>collect dataset</h1>    
+        </PageWrapper>
     );
 }
 
