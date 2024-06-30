@@ -16,6 +16,10 @@ footer {
   width: 100%;
 }
 
+.fa-icon {
+  color: "#48A3C0";
+}
+
 #form-file-upload {
   height: 20em;
   width: 20em;

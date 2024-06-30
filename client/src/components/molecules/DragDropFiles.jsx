@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import BrowseButton from "../atoms/BrowseButton";
 import SupportFormatText from "../atoms/SupportFormatText";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFire, faBrain, faPhotoFilm} from '@fortawesome/free-solid-svg-icons';
+
 import { formatFileFormats } from '../../common/utils/formatters';
 
 function DragDropFiles({
@@ -14,8 +17,8 @@ function DragDropFiles({
   // CONSTANTS
   const fileFormatString = formatFileFormats(formats);
   const backgroundImage = formats.includes(".pt") ?
-    "../../../assets/brain-background.png" :
-    "../../../assets/photo-film-background.png";
+  <FontAwesomeIcon icon={faBrain} class="fa-icon"/> :
+  <FontAwesomeIcon icon={faPhotoFilm} class="fa-icon"/>;
 
   // STATES
   const [dragActive, setDragActive] = useState(false);
@@ -70,7 +73,7 @@ function DragDropFiles({
       onDrop={handleDrop}
       onSubmit={(e) => e.preventDefault()}
       style={{
-        backgroundImage: `url(${backgroundImage})`,
+        backgroundImage: {backgroundImage},
         backgroundRepeat: 'no-repeat',
       }}
     >
@@ -93,9 +96,9 @@ function DragDropFiles({
             alignItems: "center",
             marginTop: "25%",
             }}>
-            {dragActive ? <p>Ready to drop?</p> : <p> Drag and drop your {type} here or </p>}
+            {dragActive ? <p>Drop it like it's hot</p> : <p> Drag and drop your {type} here <br/> or </p>}
             <div className="buttons">
-              <BrowseButton formats={ fileFormatString } onFileSelect={ handleFiles }/>
+              {dragActive ? <FontAwesomeIcon icon={faFire} style={{fontSize: "5em", color: "#48A3C0" }}/>: <BrowseButton formats={ fileFormatString } onFileSelect={ handleFiles }/>}
             </div>
           </div>
           <SupportFormatText formats={formats} className="support-text" />

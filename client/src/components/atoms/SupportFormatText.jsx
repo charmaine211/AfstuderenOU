@@ -9,7 +9,7 @@ function SupportFormatText ({ formats }) {
     const formatString = formatFileFormats( formats );
     
     return (
-       <Typography style={{ fontSize: 12, }}>Supported formats:   <strong>{formatString}</strong></Typography>
+       <Typography style={{ fontSize: 12, }}>Supported formats:   <strong>{`.${formatString}`}</strong></Typography>
     );
 }
 

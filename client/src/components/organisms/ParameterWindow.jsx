@@ -51,7 +51,7 @@ for batch_size in BATCH_SIZES:
         data=DATA_DIR,
         epochs=epochs,
         imgsz=DATA_SIZE,
-        # batch=batch_size,
+        batch=batch_size,
         project=project,
         )`);
     }, [dataDirectory, selectedEpochs, selectedBatchSizes, projectTitle, selectedDataSize]);

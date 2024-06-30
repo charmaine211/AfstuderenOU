@@ -21,7 +21,7 @@ function UploadedFiles ({ files, removeFiles }) {
             return <PhotoCameraRoundedIcon color="accent"/>;
         }
             
-        return <SettingsSuggestRoundedIcon/>
+        return <SettingsSuggestRoundedIcon color="accent"/>
 
     }
 
@@ -47,7 +47,7 @@ function UploadedFiles ({ files, removeFiles }) {
                 <ListItemIcon>
                     {getIcon(file)}
                 </ListItemIcon>
-                <ListItemText style={{width: "20em"}}primary={`...${file.slice(-30)}`} />
+                <ListItemText style={{width: "20em"}} primary={`... ${file.slice(-30)}`} />
             </ListItem>);
             })}
         

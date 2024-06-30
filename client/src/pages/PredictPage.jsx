@@ -90,7 +90,7 @@ function PredictPage () {
                     {predicting ? < CircularProgress /> : <AnalysesResults results= { analysisResults } />}
                 </Container>
             </> :
-            <Grid container style={ containerStyle } spacing={8}>
+            <Grid container style={ containerStyle } spacing={10}>
                 <Grid item>
                     {modelIsUploaded ? <UploadedFiles files={[modelFile]} removeFiles={handleRemoveModel} /> : <InputModel onUploaded={ handleModelUpload} />}
                 </Grid>
