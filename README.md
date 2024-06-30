@@ -72,6 +72,12 @@ In the frontend directory:
 npm start
 ```
 
+To run the app locally in Electron:
+
+```
+npm run electron
+```
+
 ## Problems
 
 ### CORS
