@@ -57,7 +57,6 @@ function DragDropFiles({
   const handleChange = (e) => {
     e.preventDefault();
     if (e.target.files && e.target.files.length > 0) {
-      alert(e.target.files);
       handleFiles(e.target.files);
     }
   };

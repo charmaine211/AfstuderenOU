@@ -26,14 +26,14 @@ def predict_image_classification(path_model, image_file):
     return predictions
 
 
-def predict(path_model, path_av_files):
+def predict(model_path, av_paths):
 
-    print(f"Predict ontvangen: {path_model} \n Files: {path_av_files}")
+    print(f"Prediction received: {model_path} \n Files: {av_paths}")
 
     results = []
 
-    if valid_ultralytics_image_type(path_av_files):
-        for av_file in path_av_files:
-            results.append(predict_image_classification(path_model, av_file))
+    for av_path in av_paths:
+        if valid_ultralytics_image_type(av_path):
+            results.append(predict_image_classification(model_path, av_path))
     
     return results
