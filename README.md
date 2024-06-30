@@ -72,9 +72,11 @@ In the frontend directory:
 npm start
 ```
 
-### Run Tkinter gui
+## Problems
 
-*TODO*
+### CORS
+
+When encountering CORS errors, please check the backend url in [config.js](client/src/config.js). 
 
 ## Instructions
 

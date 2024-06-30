@@ -9,7 +9,6 @@ function TrainPage () {
     <PageWrapper>
         <TitleTextBlock title="Train model" text="" /> 
         <ParameterWindow/>
-
     </PageWrapper>
     
     );
