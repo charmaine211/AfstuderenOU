@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import BrowseButton from "../atoms/BrowseButton";
 import SupportFormatText from "../atoms/SupportFormatText";
 
+import brainImage from "../../assets/brain-background.png";
+import avImage from "../../assets/photo-film-background.png"
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFire, faBrain, faPhotoFilm} from '@fortawesome/free-solid-svg-icons';
+import { faFire } from '@fortawesome/free-solid-svg-icons';
 
 import { formatFileFormats } from '../../common/utils/formatters';
 
@@ -16,9 +19,8 @@ function DragDropFiles({
 }) {
   // CONSTANTS
   const fileFormatString = formatFileFormats(formats);
-  const backgroundImage = formats.includes(".pt") ?
-  <FontAwesomeIcon icon={faBrain} class="fa-icon"/> :
-  <FontAwesomeIcon icon={faPhotoFilm} class="fa-icon"/>;
+  const backgroundImage = formats.includes("pt") ?
+  brainImage : avImage;
 
   // STATES
   const [dragActive, setDragActive] = useState(false);
@@ -73,8 +75,9 @@ function DragDropFiles({
       onDrop={handleDrop}
       onSubmit={(e) => e.preventDefault()}
       style={{
-        backgroundImage: {backgroundImage},
+        backgroundImage: `url(${backgroundImage})`,
         backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
       }}
     >
       <input
