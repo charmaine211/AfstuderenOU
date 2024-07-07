@@ -1,5 +1,11 @@
-# Automatic Driver's Gaze Annotation
+# Automatic Driver Gaze Annotation
 
-## Collect Dataset
+## Label dataset
 
-## Automatic detection
+## Train model
+
+### Image Classification
+
+### Object detection
+
+## Predict with trained model
