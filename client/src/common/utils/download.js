@@ -11,25 +11,39 @@ const downloadFile = (data, filename, type) => {
 
 
 export const downloadPredictionCSV = (predictions) => {
-
     // CONSTANTS
-    const rows = ["file, frame, class, probability"];
+    let rows = [];
 
-    // create rows with data
+    // Determine the type of predictions (OD or IC)
+    const isOD = typeof Object.values(predictions)[0][0] === "object" && Array.isArray(Object.values(predictions)[0][0][Object.keys(Object.values(predictions)[0][0])[0]]);
+
+    // Set the correct header based on the type
+    if (isOD) {
+        rows.push("file, frame, class, normalized x, normalized y, normalized w, normalized h");
+    } else {
+        rows.push("file, frame, class, probability");
+    }
+
+    // Create rows with data
     for (const file in predictions) {
-      const frames = predictions[file];
-      for (const frame in frames) {
-        const classes = frames[frame];
-        for (const className in classes) {
-          const probability = classes[className];
-          rows.push(`${file},${frame},${className},${probability}`);
+        const frames = predictions[file];
+        for (const frame in frames) {
+            const classes = frames[frame];
+            for (const className in classes) {
+                const value = classes[className];
+                if (isOD) {
+                    rows.push(`${file},${frame},${className},${value.join(' ')}`);
+                } else {
+                    rows.push(`${file},${frame},${className},${value}`);
+                }
+            }
         }
-      }
-    };
+    }
 
     // Download file
     downloadFile(rows.join('\n'), `prediction.csv`, "text/csv;charset=utf-8");
-  }
+}
+
 
 
 export const downloadNotebook = (code, filename) => {

@@ -8,6 +8,8 @@ function Footer () {
                 text="Privacy Policy" onClick={()=>{ alert("TODO Privacy policy")}}/>
             <FooterButton 
                 text="Contact us" onClick={()=>{ alert("TODO Contact form")}}/>
+                        <FooterButton 
+                text="Documentation" onClick={()=>{ alert("TODO download documentation")}}/>
         </footer>
     );
 };
