@@ -45,7 +45,7 @@ def predict_object_detection(model_path, av_path):
     av_path (string): Path to an audiovisual file
 
     Returns:
-    dict: In the following form: {0: {class_0: probability, ..., class_n: probability}, ..., n: {class_0: probability, ..., class_n: probability}}
+    dict: In the following form: {0: {class_0: xywhn, ..., class_n: xywhn}, ..., n: {class_0: xywhn, ..., class_n: xywhn}}
 
     """
     model = YOLO(model_path)
