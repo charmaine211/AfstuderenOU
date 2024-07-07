@@ -8,9 +8,10 @@ from "react-router-dom";
 import CollectDatasetPage from "../src/pages/CollectDatasetPage";
 import HomePage from "../src/pages/HomePage";
 import NotFoundPage from "../src/pages/NotFoundPage";
-import Predictpage from "../src/pages/PredictPage";
+import PredictPage from "../src/pages/PredictPage";
 import TestPage from "../src/pages/TestPage";
 import TrainPage from "../src/pages/TrainPage";
+import LabelPage from "../src/pages/LabelPage";
 
 
 function Routes () {
@@ -34,10 +35,12 @@ function Routes () {
             <Route 
                 path="/train"
                 element={<TrainPage/>}/>
-            
+            <Route 
+                path="/label"
+                element={<LabelPage/>}/>
             <Route 
                 path="/predict"
-                element={<Predictpage/>}/>
+                element={<PredictPage/>}/>
 
             <Route 
                 path="*"

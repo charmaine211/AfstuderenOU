@@ -2,7 +2,7 @@ import React from 'react';
 import isElectron from 'is-electron';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGear, faChartSimple } from '@fortawesome/free-solid-svg-icons';
+import { faGear, faChartSimple, faUserTag } from '@fortawesome/free-solid-svg-icons';
 
 import { Grid, Link, Typography, Paper } from "@mui/material"
 
@@ -10,8 +10,14 @@ import TitleTextBlock from "../components/molecules/TitleTextBlock"
 import PageWrapper from '../components/organisms/PageWrapper';
 
 function HomePage() {
-    const trainingIcon = <FontAwesomeIcon icon={faGear} style={{ fontSize: "5em", color: "#48A3C0" }} />;
-    const predictIcon = <FontAwesomeIcon icon={faChartSimple} style={{ fontSize: "5em", color: "#48A3C0" }} />;
+    const iconStyle = {
+        fontSize: "5em", color: "#48A3C0" 
+    }
+
+    const trainingIcon = <FontAwesomeIcon icon={faGear} style={iconStyle} />;
+    const predictIcon = <FontAwesomeIcon icon={faChartSimple} style={iconStyle} />;
+    const labelIcon = <FontAwesomeIcon icon={faUserTag} style={iconStyle} />
+
     const containerStyle = {
         display: "flex",
         justifyContent: "center",
@@ -49,6 +55,7 @@ function HomePage() {
     const text = "Our platform provides researchers and safety professionals with a streamlined solution for annotating driver images and videos using AI. With a user-friendly interface and clear instructions, we aim to simplify the annotation process and ensure accurate results.";
 
     const features = [
+        { icon: labelIcon, title: 'Label data', path: '/label' },
         { icon: trainingIcon, title: 'Train', path: '/train' },
         { icon: predictIcon, title: 'Predict', path: '/predict' },
     ];
