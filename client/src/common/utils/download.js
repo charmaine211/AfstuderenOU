@@ -1,11 +1,7 @@
 import { saveAs } from 'file-saver';
 
 const downloadFile = (data, filename, type) => {
-    const file = new Blob([data], {
-            type: type,
-    });
-
-
+    const file = new Blob([data], { type: type });
     saveAs(file, filename);
 }
 
@@ -83,3 +79,7 @@ export const downloadNotebook = (code, filename) => {
     
         downloadFile([JSON.stringify(notebookContent, null, 2)], `${filename}.ipynb`, "application/json");
   }
+
+  export const downloadYAML = (content, filename) => {
+    downloadFile([content], `${filename}.yaml`, "text/yaml");
+}
