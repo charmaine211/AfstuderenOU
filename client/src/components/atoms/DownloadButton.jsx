@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 
 function DownloadButton ({ text, onClick }) {
     return (
-        <Button variant="contained" style={{ color: "white", padding: 20, }} onClick={onClick}>Download {text}</Button>
+        <Button variant="contained" style={{ color: "white", width: "10em", padding: "1em" }} onClick={onClick}>Download {text}</Button>
     );
 }
 
