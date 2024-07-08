@@ -2,6 +2,6 @@
 
 from flask import Blueprint
 
-bp = Blueprint("collectDataset", __name__)
+bp = Blueprint("collect-data", __name__)
 
-from train import routes
+from collectDataset import routes
