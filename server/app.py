@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_cors import CORS  # Zorg ervoor dat flask_cors is geïnstalleerd
+from flask_cors import CORS 
 
 from train import routes as train_routes
 from collectDataset import routes as collect_routes
@@ -9,8 +9,8 @@ app = Flask(__name__)
 
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
+app.register_blueprint(collect_routes.bp, name="collect-data")
 app.register_blueprint(train_routes.bp, name="train")
-app.register_blueprint(collect_routes.bp, name="collectDataset")
 app.register_blueprint(predict_routes.bp, name="predict")
 
 @app.route("/")

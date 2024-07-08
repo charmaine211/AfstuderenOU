@@ -1,10 +1,9 @@
 import React from 'react';
-import isElectron from 'is-electron';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear, faChartSimple, faUserTag } from '@fortawesome/free-solid-svg-icons';
 
-import { Grid, Link, Typography, Paper } from "@mui/material"
+import { Grid, Link, Typography, Paper } from "@mui/material";
 
 import TitleTextBlock from "../components/molecules/TitleTextBlock"
 import PageWrapper from '../components/organisms/PageWrapper';

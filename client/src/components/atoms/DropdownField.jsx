@@ -4,19 +4,22 @@ import PropTypes from 'prop-types';
 import {
     TextField, 
     MenuItem, 
+    Stack,
 } from '@mui/material';
 
 import InfoButton from './InfoButton';
 
-function DropdownField({ menuItems, helperText, id, hasInfo, info, ariaLabel }){
+function DropdownField({ title, onSelect, menuItems, helperText, id, hasInfo, info, ariaLabel }){
     return(
         <>
+        <Stack direction="row" spacing={1} alignItems="center">
         <TextField
             id={id}
             select
-            label="Select"
+            label={title}
             helperText={helperText}
             variant="standard"
+            onChange={onSelect}
             >
             {menuItems.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
@@ -25,13 +28,16 @@ function DropdownField({ menuItems, helperText, id, hasInfo, info, ariaLabel }){
                 ))}
         </TextField>
         {hasInfo && <InfoButton text={info}/>}
+        </Stack>
       </>
     );
 }
 
 DropdownField.propTypes = {
     menuItems: PropTypes.arrayOf(PropTypes.string),
+    title: PropTypes.string.isRequired, 
     helperText: PropTypes.string.isRequired, 
+    onSelect: PropTypes.func.isRequired, 
     id: PropTypes.string.isRequired, 
     hasInfo: PropTypes.bool.isRequired, 
     info: PropTypes.string, 

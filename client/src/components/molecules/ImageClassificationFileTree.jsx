@@ -4,7 +4,7 @@ import fileTreeImage from "../../assets/ImageClassificationFileTree.png";
 function ImageClassificationFileTree( ){
 
     return (
-      <img src={fileTreeImage} alt="File Tree Structure" />
+      <img src={fileTreeImage} style={{height: "30em"}} alt="File Tree Structure" />
     );
 }
 
