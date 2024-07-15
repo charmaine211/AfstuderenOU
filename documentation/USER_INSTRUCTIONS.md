@@ -35,7 +35,7 @@ You can label an image by placing it in a folder with the right classname. The f
 - class_...: Each subdirectory corresponds to a specific class (e.g., class_1, class_2, etc.), containing the related dataset purposes.
 
 <!-- ![Image Classification file structure](/assets/user_instructions/ImageClassificationFileTree.png){:style="height:200px;"} -->
-<img src="/assets/user_instructions/ImageClassificationFileTree.png" alt="Image Classification file structure" height="200">
+<img src="/assets/user_instructions/ImageClassificationFileTree.png" alt="Image Classification file structure" height="350">
 
 ### Object detection<a name="od-filestructure"></a>
 
@@ -54,11 +54,12 @@ Images need to have corresponding label files with the normalize xywh (x-coordin
 - <span style="color:#EE577E">test</span>: This directory is added to document the final model results, following the same naming convention.
 
 <!-- ![Object Detection file structure](/assets/user_instructions/ObjectDetectionFileTree.png){:height="200px"} -->
-<img src="/assets/user_instructions/ObjectDetectionFileTree.png" alt="Object Detection file structure" height="200">
+<img src="/assets/user_instructions/ObjectDetectionFileTree.png" alt="Object Detection file structure" height="350">
 
 Manually labelling the images will take a lot of work. In the application you can automatically relabel your images. Make sure that you images are in the same filestructure as the Image Classification filestructure. Which means that every image is placed into a file with the corresponding classname. 
 
-![Label window](/assets/user_instructions/Label%20window.png){:height="200px"}
+<!-- ![Label window](/assets/user_instructions/Label%20window.png){:height="200px"} -->
+<img src="/assets/user_instructions/Label%20window.png" alt="Label window" height="200">
 
 1. Make sure your original data follows the same file structure as the [image classification](#ic-filestructure) standard. Add the path to the `Data path` field; in our example, the added path would be `root/dataset`.
 2. Create the file structure to place the labels and images as shown in [object detection](#od-filestructure). Add the path for the labels and images in the `Labels path` field and `Images path` field; in our example, this would be `root/dataset/labels` and `root/dataset/images`.
