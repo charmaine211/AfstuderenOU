@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { TextField, Box, Stack, InputAdornment, IconButton } from '@mui/material';
 import FolderRoundedIcon from '@mui/icons-material/FolderRounded';
-
 import InfoButton from './InfoButton';
 
-function DirectoryInputField({ hasInfo, isRequired, info, onChange, value, defaultValue, label, type, ariaLabel }) {
+function DirectoryInputField({ hasInfo, isRequired, info, onChange, value, defaultValue, label, type, ariaLabel, setPath }) {
+    const fileInputRef = useRef(null);
 
     const handleSelectDirectory = () => {
+        fileInputRef.current.click();
+    };
 
-    }
+    const handleFileChange = (event) => {
+        const filePath = event.target.files[0]?.path;
+        if (filePath) {
+            setPath(filePath);
+        }
+    };
 
     return (
         <Box
@@ -47,6 +54,13 @@ function DirectoryInputField({ hasInfo, isRequired, info, onChange, value, defau
                 />
                 {hasInfo && <InfoButton text={info} />}
             </Stack>
+            <input
+                type="file"
+                webkitdirectory="true"
+                ref={fileInputRef}
+                style={{ display: 'none' }}
+                onChange={handleFileChange}
+            />
         </Box>
     );
 }
@@ -56,6 +70,7 @@ DirectoryInputField.propTypes = {
     isRequired: PropTypes.bool,
     info: PropTypes.string,
     onChange: PropTypes.func.isRequired, 
+    setPath: PropTypes.func.isRequired, 
     value: PropTypes.string.isRequired, 
     type: PropTypes.string, 
     defaultValue: PropTypes.string,

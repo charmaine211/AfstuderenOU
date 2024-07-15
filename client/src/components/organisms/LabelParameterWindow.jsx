@@ -72,6 +72,7 @@ function LabelParameterWindow() {
             )}
             < DirectoryInputField 
                 onChange={handleDataDirectoryChange}
+                setPath={setDataDirectory}
                 value={dataDirectory} 
                 label="Data path" 
                 hasInfo 
@@ -81,6 +82,7 @@ function LabelParameterWindow() {
             />
             < DirectoryInputField 
                 onChange={handleLabelsDirectoryChange} 
+                setPath={setLabelsDirectory}
                 value={labelsDirectory} 
                 label="Labels path"
                 ariaLabel="Labels path"
@@ -90,6 +92,7 @@ function LabelParameterWindow() {
             />
             < DirectoryInputField 
                 onChange={handleImagesDirectoryChange} 
+                setPath={setImagesDirectory}
                 value={imagesDirectory}
                 label="Images path" 
                 ariaLabel="Images path"
