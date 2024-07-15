@@ -110,15 +110,17 @@ Here's what each directory contains:
 
 #### Image classification
 
-For Ultralytics YOLO classification tasks, the dataset must be organized in a specific split-direcotry structure under the root directory to facilitate proper training, testing, and optional validation processes. This structure includes separate directories for training (train) and testing (test) phases, with an optional directory for validation (val).
+For Ultralytics YOLO classification tasks, the dataset must be organized in a specific split-directory structure under the root directory to facilitate proper training, testing, and optional validation processes. This structure includes separate directories for training (train) and testing (test) phases, with an optional directory for validation (val).
 
 Each of these directories should contain one subdirectory for each class in the dataset. The subdirectories are named after the corresponding class and contain all the images for that class. Ensure that each image file is named uniquely and stored in a common format such as JPEG or PNG.
 
 #### Object detection
 
-Each label file should be formatted with one row per object in the image, using the YOLO format. This format includes the object's class index, along with the normalized coordinates of the bounding box (x_center, y_center, width, height).
+For Ultralytics YOLO object detection tasks, the dataset must be organized in a specific split-directory structure under the root directory to facilitate proper training, testing, and optional validation processes. This structure includes separate directories for training (train) and testing (test) phases, with an optional directory for validation (val).
 
-This structure ensures that your data is organized and ready for training, validation, and testing using the Ultralytics YOLO framework.
+Each of these directories should contain corresponding images and label files. Ensure that each image file is named uniquely and stored in a common format such as JPEG or PNG. Each image should have an associated label file with the same name but with a .txt extension.
+
+Each label file should be formatted with one row per object in the image, using the YOLO format. This format includes the object's class index, along with the normalized coordinates of the bounding box (x_center, y_center, width, height).
 
 ##### Manual annotation
 
