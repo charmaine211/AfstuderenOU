@@ -34,7 +34,8 @@ You can label an image by placing it in a folder with the right classname. The f
 - <span style="color:#EE577E">test</span>: This directory is added to document the final model results. It follows the same structure as the training and validation sets.
 - class_...: Each subdirectory corresponds to a specific class (e.g., class_1, class_2, etc.), containing the related dataset purposes.
 
-![Image Classification file structure](/assets/user_instructions/ImageClassificationFileTree.png){:style="height:200px;"}
+<!-- ![Image Classification file structure](/assets/user_instructions/ImageClassificationFileTree.png){:style="height:200px;"} -->
+<img src="/assets/user_instructions/ImageClassificationFileTree.png" alt="Image Classification file structure" height="200">
 
 ### Object detection<a name="od-filestructure"></a>
 
@@ -52,7 +53,8 @@ Images need to have corresponding label files with the normalize xywh (x-coordin
 - <span style="color:#EE577E">val</span>: Similarly, this folder contains the label files for the validation images, following the same naming convention.
 - <span style="color:#EE577E">test</span>: This directory is added to document the final model results, following the same naming convention.
 
-![Object Detection file structure](/assets/user_instructions/ObjectDetectionFileTree.png){:height="200px"}
+<!-- ![Object Detection file structure](/assets/user_instructions/ObjectDetectionFileTree.png){:height="200px"} -->
+<img src="/assets/user_instructions/ObjectDetectionFileTree.png" alt="Object Detection file structure" height="200">
 
 Manually labelling the images will take a lot of work. In the application you can automatically relabel your images. Make sure that you images are in the same filestructure as the Image Classification filestructure. Which means that every image is placed into a file with the corresponding classname. 
 
