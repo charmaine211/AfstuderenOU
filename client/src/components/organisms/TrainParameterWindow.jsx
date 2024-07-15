@@ -46,7 +46,7 @@ function TrainParameterWindow({ isImageClassification, isObjectDetection }) {
     useEffect(() => {
         setIcCode(
 `# CONSTANTS
-DATA_DIR = ${dataDirectory}
+DATA_DIR = '${dataDirectory}'
 EPOCHS_LIST = ${JSON.stringify(selectedEpochs)}
 BATCH_SIZES = ${JSON.stringify(selectedBatchSizes)}
 DATA_SIZE= ${selectedDataSize}
@@ -74,12 +74,12 @@ for batch_size in BATCH_SIZES:
         batch=batch_size,
         project=project,
         )`);
-    }, [dataDirectory, selectedEpochs, selectedBatchSizes, projectICTitle, selectedDataSize]);
+    }, [dataDirectory, selectedEpochs, selectedBatchSizes, projectICTitle, selectedDataSize, selectedProjectTitle]);
 
     useEffect(() => {
         setOdCode(
 `# CONSTANTS
-DATASET = ${dataDirectory}
+DATASET = '${dataDirectory}'
 EPOCHS_LIST = ${JSON.stringify(selectedEpochs)}
 BATCH_SIZES = ${JSON.stringify(selectedBatchSizes)}
 DATA_SIZE= ${selectedDataSize}
@@ -89,17 +89,20 @@ DATA_SIZE= ${selectedDataSize}
 
 from ultralytics import YOLO
 
+# LOAD MODEL
+model = YOLO(${selectedOdModel})
+
 # TRAIN MODEL
 for batch_size in BATCH_SIZES:
     for epochs in EPOCHS_LIST:
-        project = f"${selectedProjectTitle}_${selectedOdModel}"
+        project = f"${selectedProjectTitle}_${selectedOdModel.slice(0, -3)}"
         results = model.train(
             data=DATASET,
             epochs=epochs,
             imgsz=DATA_SIZE,
             project=project)    
         `);
-                }, [dataDirectory, selectedEpochs, selectedBatchSizes, projectICTitle, selectedDataSize, selectedOdModel]);    
+                }, [dataDirectory, selectedEpochs, selectedBatchSizes, projectODTitle, selectedDataSize, selectedOdModel, selectedProjectTitle]);    
 
     useEffect(() => {
         setYamlContent(
@@ -151,11 +154,9 @@ names:
             downloadNotebook(icCode, "image_classification");
         }
         else if (isObjectDetection ){
-            downloadNotebook(yamlContent, "object_detection");
-
-            setTimeout(() => {
-                downloadYAML(yamlContent, "object_detection");
-            }, 500);
+            downloadNotebook(odCode, "object_detection");
+            await new Promise(r => setTimeout(r, 5000)); // Otherwise only first file will be downloaded
+            downloadYAML(yamlContent, "object_detection");
         }
     };
 
@@ -185,7 +186,7 @@ names:
                 />}
                 <InputField 
                     onChange={handleProjectTitleChange} 
-                    defaultValue={isImageClassification ? projectICTitle : projectODTitle} 
+                    defaultValue={selectedProjectTitle} 
                     value={selectedProjectTitle} 
                     label="Project Title" 
                     ariaLabel="Project Title" 

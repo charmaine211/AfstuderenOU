@@ -32,8 +32,8 @@ function BrowseButton ({ formats, onFileSelect }) {
                 id="input-file-upload-browse"
                 multiple={true} 
                 accept={formats}
-                onChange={handleFileChange} // onChange handler toegevoegd
-                style={{ display: 'none' }} // Verberg het input element
+                onChange={handleFileChange} 
+                style={{ display: 'none' }}
             />
         </>
     );

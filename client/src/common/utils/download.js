@@ -76,7 +76,6 @@ export const downloadNotebook = (code, filename) => {
         nbformat: 4,
         nbformat_minor: 4,
         };
-    
         downloadFile([JSON.stringify(notebookContent, null, 2)], `${filename}.ipynb`, "application/json");
   }
 
