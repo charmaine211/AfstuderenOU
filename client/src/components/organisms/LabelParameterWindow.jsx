@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Typography } from '@mui/material';
-import PropTypes from 'prop-types';
+import { Typography, CircularProgress, Stack } from '@mui/material';
 
 import { labelDatasetOD } from '../../common/api/collectDataset';
 
@@ -15,6 +14,7 @@ function LabelParameterWindow() {
     const [labelsDirectory, setLabelsDirectory] = useState("");
     const [imagesDirectory, setImagesDirectory] = useState("");
     const [error, setError] = useState("");
+    const [labelling, setLabelling] = useState(false);
 
     // FUNCTIONS
     const validateLabelDirectory = (labelDir) => {
@@ -46,14 +46,17 @@ function LabelParameterWindow() {
         setImagesDirectory(event.target.value);
     };
 
-    const handleLabelData = () => {
+    const handleLabelData =  async () => {
         if (dataDirectory && labelsDirectory && imagesDirectory){
             if(!validateODDirectory(imagesDirectory, labelsDirectory)) {
                 setError("The 'images' and 'labels' directories must be in the same parent directory, with the images in the '/images' map and the labels in the '/labels' map.");
 
             } else {
-                labelDatasetOD(dataDirectory, labelsDirectory, imagesDirectory);
+                setLabelling(true);
+                const result = await labelDatasetOD(dataDirectory, labelsDirectory, imagesDirectory);
                 setError("");
+                console.log(result);
+                setLabelling(false);
             }
         } else {
             setError("Please fill in all directories");
@@ -100,7 +103,12 @@ function LabelParameterWindow() {
                 info="Directory to save the copied images."
                 isRequired
             />
-            <LabelButton onClick={handleLabelData}/>
+            {labelling ? 
+                <Stack>
+                    <Typography>Labelling images. This may take a while. Please don't close the window...</Typography>
+                    <CircularProgress />
+                </Stack> : 
+                <LabelButton onClick={handleLabelData}/>}
         </ParameterWindow>
     );
 }
