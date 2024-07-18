@@ -11,25 +11,24 @@ import InfoButton from './InfoButton';
 
 function DropdownField({ title, onSelect, menuItems, helperText, id, hasInfo, info, ariaLabel }){
     return(
-        <>
-        <Stack direction="row" spacing={1} alignItems="center">
-        <TextField
-            id={id}
-            select
-            label={title}
-            helperText={helperText}
-            variant="standard"
-            onChange={onSelect}
-            >
-            {menuItems.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                </MenuItem>
-                ))}
-        </TextField>
-        {hasInfo && <InfoButton text={info}/>}
+        <Stack direction="row" spacing={1} alignItems="center" style={{  }}>
+            <TextField
+                id={id}
+                select
+                label={title}
+                helperText={helperText}
+                variant="outlined"
+                onChange={onSelect}
+                style={{minWidth:"10em"}}
+                >
+                {menuItems.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                    </MenuItem>
+                    ))}
+            </TextField>
+            {hasInfo && <InfoButton text={info}/>}
         </Stack>
-      </>
     );
 }
 

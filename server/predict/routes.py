@@ -17,7 +17,7 @@ def add_headers(response):
 
 @bp.route("/predict", methods=['GET', 'POST'])
 def predict():
-
+ 
     print("Received data to predict")
     data = request.get_json()
     model_path = data.get("model")

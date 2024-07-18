@@ -59,17 +59,21 @@ def label_dataset(dataset_dir, labels_dir, images_dir):
     images_dir (str): Directory to save the copied images.
 
     Returns:
-    bool: True if the dataset was successfully processed and labeled, False otherwise.
+    bool: Succes if the dataset was successfully processed and labeled, False otherwise.
     """
-    for dataset_dir in glob.glob(f"{dataset_dir}/*"):
-        success = False
-        type = os.path.basename(dataset_dir)
+    for type_dir in glob.glob(f"{dataset_dir}/*"):
+        success = "Failed"
+        print(f"Type: {type_dir}")
+        type = os.path.basename(type_dir)
         labels_result_dir = f"{labels_dir}/{type}"
         images_result_dir = f"{images_dir}/{type}"
 
-        if os.path.isdir(dataset_dir) and os.path.exists(labels_result_dir):
+        if os.path.isdir(images_result_dir) and os.path.exists(labels_result_dir):
 
-            for image_dir in glob.glob(f"{dataset_dir}/*"):
+            print("Labels and images directories exist")
+
+            for image_dir in glob.glob(f"{type_dir}/*"):
+                print(f"Classname: {image_dir}")
                 class_name = os.path.basename(image_dir)
                 label_id = CLASSES().get(class_name)
 
@@ -79,6 +83,6 @@ def label_dataset(dataset_dir, labels_dir, images_dir):
                         __label_frame(
                             image_path, label_id, labels_result_dir, images_result_dir
                         )
-            success = True
+            success = "Success"
 
         return success 

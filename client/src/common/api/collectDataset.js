@@ -7,7 +7,7 @@ export async function labelDatasetOD(ds_dir, lbls_dir, imgs_dir) {
         labels_dir: lbls_dir, 
         images_dir: imgs_dir,
     };
-
+ 
     try {
         console.log("Sending request to:", url);
         console.log("Request data:", data);

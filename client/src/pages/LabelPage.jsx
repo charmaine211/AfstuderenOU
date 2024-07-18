@@ -61,9 +61,9 @@ Each label file should be formatted with one row per object in the image, using 
                 wordWrap: "break-word"
             }}>{isImageClassification ? introTextIC : introTextOD }</Typography>
             <Grid container spacing={10} style={containerStyle}>
-                <Grid item style={itemStyle}>
-                    {isObjectDetection && <LabelParameterWindow />}
-                </Grid>
+                {isObjectDetection && <Grid item style={itemStyle}>
+                    <LabelParameterWindow />
+                </Grid>}
                 <Grid item style={itemStyle}>
                     {isImageClassification ? <ImageClassificationFileTree/> : <ObjectDetectionFileTree/>}
                 </Grid>

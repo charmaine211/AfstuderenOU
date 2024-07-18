@@ -32,11 +32,12 @@ function MultiSelect({ title, options, setSelected, hasInfo, info, ariaLabel }) 
       </Typography>
       <FormGroup sx={{display: 'flex', alignItems: 'center', }}>
         <Grid container spacing={2} style={{margin:"0.1em", minWidth:"20em", maxWidth: "20em",padding: "1em"}}>
-          {options.map((option) => (
+          {options.map((option, id) => (
             <Grid item xs={6} key={option} sx={{ display: 'flex', alignItems: 'center' }}>
               <FormControlLabel
                 control={
                   <Checkbox
+                    defaultChecked={id===0}
                     onChange={handleSelect}
                     name={option}
                     checkedIcon= {<SquareRoundedIcon />}

@@ -3,7 +3,7 @@ from flask import Blueprint, request, jsonify
 from .utils import label_dataset
 
 bp = Blueprint("collect-data", __name__)
-
+ 
 @bp.after_request
 def add_headers(response):
     response.headers.add('Content-Type', 'application/json')
@@ -14,6 +14,8 @@ def add_headers(response):
 
 @bp.route("/collect-data", methods=['GET', 'POST'])
 def collect_data():
+     
+    print("Received data to collect")
     data = request.get_json()
     dataset_dir = data.get("dataset_dir")
     labels_dir = data.get("labels_dir")
