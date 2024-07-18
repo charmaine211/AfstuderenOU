@@ -29,13 +29,10 @@ function TrainPage () {
             justifyContent: "center",
             alignItems: "center",
             textAlign: "center",
+            marginBottom: "5em",
         }}>
             <TaskSelector setIsImageClassification={setIsImageClassification} setIsObjectDetection={setIsObjectDetection}/>
-        <Grid container spacing={10} style={containerStyle}>
-            <Grid item  style={{margin: 0, padding: 0}}>
             <TrainParameterWindow isImageClassification={isImageClassification} isObjectDetection={isObjectDetection}/>
-            </Grid>
-        </Grid>
         </Stack>
     </PageWrapper>
     
