@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography } from '@mui/material';
+import { Typography, Stack, Link } from '@mui/material';
 
 import { downloadPredictionCSV } from "../../common/utils/download"
 
@@ -16,7 +16,13 @@ function AnalysesResults( { results } ){
 
     // CONSTANTS
     const fileNames = Object.keys(results);
-
+    const stackStyle = {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+        marginTop: "5em",    
+    };
 
     // HANDLERS
     const handleDownload = () => {
@@ -24,17 +30,19 @@ function AnalysesResults( { results } ){
     }
 
     // RENDERER
-    return (
-    <>        
-        <DownloadButton onClick={ handleDownload } />
+    return (     
+        <Stack style={stackStyle} spacing={2}>
+            <Typography>
+                Your annotated files have been uploaded to your system. Please download the additional CSV file here.
+            </Typography>
+            <DownloadButton onClick={ handleDownload } />
+            <Link href="/predict">
+                <Typography>
+                    Analyse more files
+                </Typography>
+            </Link>
 
-        {/* <RandomImageResult avFile={path} result={"highestPrediction[JSON.stringify(result.filename)]"}/> */}
-        {/* // <AnalyseVideoChart  */}
-        {/* // videotitle="Test data"
-        // classes= { Object.keys(CLASSES) }
-        // data = { results }/> */}
-        {/* {JSON.stringify(result)} */}
-    </>
+        </Stack>
         
     );
 }

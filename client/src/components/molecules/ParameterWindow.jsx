@@ -8,17 +8,19 @@ function ParameterWindow({ children }) {
         <Paper 
             variant="outlined" 
             sx={{
-                padding: "5em",
+                padding: "2em 5em 2em 5em",
                 border: '0.5px solid black',
                 borderRadius: 5,
                 boxShadow: 4,
                 display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
+                justifyContent: 'normal',
+                alignItems: 'normal',
                 textAlign: 'center',
-                width: '18em',
-                height: '25em', 
-                overflow: 'auto',
+                minWidth: '18em',
+                minHeight: '30em',
+                maxWidth: '18em',
+                maxHeight: '30em', 
+                overflow: 'scroll',
             }}
         >
             <Stack 

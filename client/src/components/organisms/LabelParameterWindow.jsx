@@ -66,7 +66,7 @@ function LabelParameterWindow() {
     return (
         <ParameterWindow>
             <Typography variant="h6">
-                Please, provide the following parameters.
+                Please, provide the following parameters to automatically relabelled your dataset.
             </Typography>
             {error && (
                 <Typography variant="body1" style={{ color: "red", padding: 0, margin: 0 }}>

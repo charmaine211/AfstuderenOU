@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { Container, CircularProgress, Grid } from '@mui/material';
+import { Container, CircularProgress, Grid, Stack, Typography } from '@mui/material';
 
 import { predictAnalysis } from '../common/api/predict';
 
@@ -18,7 +18,14 @@ function PredictPage () {
         justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
-        marginTop: "5em",
+    };
+
+    const stackStyle = {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+        marginTop: "5em",    
     };
 
     const [modelIsUploaded, setModelIsUploaded] = useState(false);
@@ -27,14 +34,16 @@ function PredictPage () {
     const [modelFile, setModelFile] = useState(null);
     const [analysisResults, setAnalysisResults] = useState([]);
     const [predicting, setPredicting] = useState(false);
+    const [error, setError] = useState("");
 
     // HANDLERS
     function handleModelUpload(files){
         if (files.length > 0){
             setModelFile(files[0]);
             setModelIsUploaded(true);
+            setError("");
         } else {
-            alert(`ERROR: Upload the right format`);//TODO error
+            setError("Wrong file type");
         }
     }
 
@@ -42,8 +51,9 @@ function PredictPage () {
         if (files.length > 0){
             setAvFiles(files);
             setAvIsUploaded(true);
+            setError("");
         } else {
-            alert(`ERROR: Upload the right format`);// TODO error
+            setError("Wrong file type");
         }
     }
 
@@ -65,9 +75,14 @@ function PredictPage () {
     // FUNCTIONS
     async function predict() {
         setPredicting(true);
-        const response = await predictAnalysis(modelFile, avFiles);    
-        setPredicting(false);
-        setAnalysisResults(response);
+
+        try{
+            const response = await predictAnalysis(modelFile, avFiles);  
+            setAnalysisResults(response);
+            setPredicting(false);
+        } catch (error){
+            setError(`Couldn't connect to server: ${error}`);
+        }
     }
 
     useEffect(() => {
@@ -87,18 +102,38 @@ function PredictPage () {
                 <Container
                 maxWidth="sm" 
                 style={ containerStyle }>
-                    {predicting ? < CircularProgress /> : <AnalysesResults results= { analysisResults } />}
+                    {predicting ? 
+                    <Stack style={ stackStyle } spacing={5}>
+                        <Typography>
+                            {error ? `Oops, it appears that something went wrong. Please try again\n${error}` : "Please keep this window opened while your model is analysing the results. This may take a while depending on the file size..." }
+                        </Typography>
+                        < CircularProgress /> 
+                    </Stack>
+                    : 
+                    <AnalysesResults results= { analysisResults } />}
                 </Container>
             </> :
+            <Stack style={ stackStyle } spacing={5}>
+            <Typography>
+                {error && `Oops, it appears that something went wrong. Please try again: ${error}`  }
+            </Typography>
             <Grid container style={ containerStyle } spacing={10}>
                 <Grid item>
-                    {modelIsUploaded ? <UploadedFiles files={[modelFile]} removeFiles={handleRemoveModel} /> : <InputModel onUploaded={ handleModelUpload} />}
+                    {modelIsUploaded ? 
+                        <UploadedFiles files={[modelFile]} removeFiles={handleRemoveModel} /> 
+                    : 
+                    <InputModel onUploaded={ handleModelUpload} />}
                 </Grid>
                 <Grid item>
-                    { avIsUploaded ? <UploadedFiles files={avFiles} removeFiles={handleRemoveFile} />: <InputAV onUploaded={ handleAvUpload } />}
+                    { avIsUploaded ? 
+                        <UploadedFiles files={avFiles} removeFiles={handleRemoveFile} />
+                        : 
+
+                            <InputAV onUploaded={ handleAvUpload } />}
                 </Grid>
 
-            </Grid>}
+            </Grid>
+            </Stack>}
         </PageWrapper>
     
     );
