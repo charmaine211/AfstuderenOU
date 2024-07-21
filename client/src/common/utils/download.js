@@ -15,7 +15,7 @@ export const downloadPredictionCSV = (predictions) => {
 
     // Set the correct header based on the type
     if (isOD) {
-        rows.push("file, frame, class, normalized x, normalized y, normalized w, normalized h");
+        rows.push("file, frame, class, normalized x, normalized y, normalized w, normalized h, confidence");
     } else {
         rows.push("file, frame, class, probability");
     }
