@@ -74,16 +74,26 @@ Lightning AI is a platform and framework for building and deploying AI products 
 If you don't have an account, first create an account. After your account has been verified, proceed with the following steps:
 
 1. Create a new studio.
+
+![Lightning AI - 1](/assets/user_instructions/Lightning%20AI%20-%201.png)
+
+![Lightning AI - 2](/assets/user_instructions/Lightning%20AI%20-%202.png)
+
 2. Upload your dataset.
+
+
+![Lightning AI - 2](/assets/user_instructions/Lightning%20AI%20-%203.png)
 
 ### Download code
 
 After you've uploaded your dataset to the location where you want to train your model, follow these steps depending on the task.
 
+![Lightning AI - 2](/assets/user_instructions/Lightning%20AI%20-%204.png)
+
 #### Image Classification
 
 1. Navigate to the `Train` page and select `Image Classification`.
-2. Add the following parameters:
+2. Adjust the following parameters:
    - Data Directory: The path to your dataset
    - Project Title: The name under which you want to save your training results
    - Epochs: The number of epochs for training
@@ -96,7 +106,7 @@ After you've uploaded your dataset to the location where you want to train your 
 #### Object Detection
 
 1. Navigate to the `Train` page and select `Object Detection`.
-2. Add the following parameters:
+2. Adjust the following parameters:
    - Select Model: Choose the YOLO model to use
    - Data Directory: The path to your dataset
    - Yaml Directory: The path to your YAML configuration file
@@ -108,13 +118,13 @@ After you've uploaded your dataset to the location where you want to train your 
 3. Download the Notebook and YAML files and upload them to your editor. We're using lightning.ai.
 4. Run your application.
 
-## Analyze model
+## Analyse model
 
 Following the training and validation of the model using various parameters, the most effective model will be selected. This selected model will undergo testing on the designated testing set, where the resulting variables will be documented in the research paper.
 
 ### Metrics
 
-Once your models have been trained, all the results will be stored in the `RESULTS_DIR`. If you've followed our file naming convention, this directory will be located at `.../driver_gaze_direction/training_results` on your Google Drive.
+Once your models have been trained, you can store your results in the `RESULTS_DIR`. If you've followed our file naming convention, this directory will be located at `.../driver_gaze_direction/training_results` on your drive.
 
 Depending on the number of models you've trained, navigate to the corresponding `runs/train` directory for the desired training data.
 
@@ -138,5 +148,16 @@ Choosing between the last and the best-trained model depends on your specific re
 
 ## Predict <a name="predict"></a>
 
+### Predict
+
+Predicting is a very simple task. Upload your model, which can be an object detection or image classification model, along with files containing images of the driver you trained your model on. After uploading all the files, the application will automatically run the analyses.
+
+![Predict](/assets/user_instructions/Predict.png)
+
+### Analyse results
+
+After analyzing, a copy of your files with your annotations will be uploaded to your system. You can also download a CSV file containing the filename, the frame, the class that has been detected, the probability, and, in the case of object detection, the bounding box. The application detects the task based on the model, so you don't need to explicitly mention it.
+
+![Analyse](/assets/user_instructions/Analyse.png)
 
 
