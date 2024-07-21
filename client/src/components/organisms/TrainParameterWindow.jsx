@@ -99,6 +99,7 @@ for batch_size in BATCH_SIZES:
         results = model.train(
             data=DATASET,
             epochs=epochs,
+            batch=batch_size,
             imgsz=DATA_SIZE,
             project=project)    
         `);
