@@ -1,0 +1,33 @@
+name: Build and Publish
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'  # Pas de Node.js versie aan indien nodig
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build the app
+      run: npm run build  # Zorg ervoor dat je een build script hebt in je package.json
+
+    - name: Package the app
+      run: npm run package  # Zorg ervoor dat je een package script hebt in je package.json
+
+    - name: Publish the app
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      run: npm run publish  # Zorg ervoor dat je een publish script hebt in je package.json

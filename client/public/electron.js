@@ -1,18 +1,21 @@
-const { app, BrowserWindow } = require('electron')
-const path = require('path')
+const { app, BrowserWindow } = require('electron');
+const path = require('path');
+const { execFile } = require('child_process');
+const url = require('url');
 
-function createWindow () {
+let flaskProcess;
 
+function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
     width: 1200,
     height: 600,
-    icon: __dirname + '/client/assets/brain-background.png',
+    icon: path.join(__dirname, 'client/assets/brain-background.png'),
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: true,
-      preload: path.join(__dirname, "/public/preload.js"),
-    }  
+      preload: path.join(__dirname, 'public/preload.js'),
+    }
   });
 
   const appURL = app.isPackaged
@@ -62,29 +65,16 @@ function killPython() {
 
 // Quit when all windows are closed, except on macOS.
 app.on('window-all-closed', () => {
+  if (flaskProcess) {
+    killPython()
+  }
   if (process.platform !== 'darwin') {
-    app.quit()
+    app.quit();
   }
 });
 
-app.on('activate', () => {
-  // On macOS it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow()
+app.on('will-quit', () => {
+  if (flaskProcess) {
+    killPython();
   }
 });
-
-// ipcMain.handle('select-file', async (event) => {
-//   const mainWindow = BrowserWindow.fromWebContents(event.sender);
-//   const result = await dialog.showOpenDialog(mainWindow, {
-//     properties: ['openFile'],
-//   });
-
-//   if (!result.canceled) {
-//     return result.filePaths[0];
-//   } else {
-//     return null;
-//   }
-// });
