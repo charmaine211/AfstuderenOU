@@ -23,11 +23,21 @@ function createWindow () {
     })
   : "http://localhost:3000";
 
-  win.loadURL(appURL);
+  console.log(`Loading app: ${appUrl}`);
 
+  win.loadURL(appURL).catch((err) => {
+    console.error('Failed to load app:', err);
+  });
+
+<<<<<<< HEAD
   // Open the DevTools.
   // win.webContents.openDevTools()
 };
+=======
+  // Open the DevTools if needed
+  win.webContents.openDevTools();
+}
+>>>>>>> d6b8d40 (Try to build and packe app. main.js does not seem to come with build)
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
