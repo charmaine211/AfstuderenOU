@@ -51,7 +51,7 @@ function HomePage() {
     };
 
     const title = "Automatic driver gaze annotation";
-    const text = "Our platform provides researchers and safety professionals with a streamlined solution for annotating driver images and videos using AI. With a user-friendly interface and clear instructions, we aim to simplify the annotation process and ensure accurate results.";
+    const text = "Our platform provides researchers and safety professionals with a solution for automatic annotating driver images and videos using AI.";
 
     const features = [
         { icon: labelIcon, title: 'Label data', path: '/label' },
