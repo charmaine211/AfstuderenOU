@@ -1,4 +1,193 @@
-# Electron
+# Build App
+
+These instructions are for building the app on a macOS environment. Different operating systems may require different steps. Unfortunately, I am unable to test other environments.
+
+## Flask
+
+To build our Flask backend for Electron purposes we need to create an executable file in our virtual environment:
+
+1. **Install PyInstaller**  
+
+Install PyInstaller using pip (or pip3, depending on your system) if it is not already installed:
+
+```bash
+pip install pyinstaller
+```
+
+2. **Create Required Directories**
+Set up the necessary directories:
+
+`server/ultralytics`: Install the Ultralytics library here to avoid potential issues.
+`client/resources`: Place the executable file here for use with Electron.
+
+3. **Create the `server/app.spec` file**
+
+Add the following content to `server/app.spec`:
+
+```python
+# -*- mode: python ; coding: utf-8 -*-
+
+block_cipher = None
+
+a = Analysis(
+    ['app.py'],
+    binaries=[],
+    datas=[
+        ('common', 'common'),
+        ('collectDataset', 'collectDataset'),
+        ('models', 'models'),
+        ('predict', 'predict'),
+        ('tests', 'tests'),
+        ('train', 'train'),
+        ('venv', 'venv'),
+        ('ultralytics', 'ultralytics'),
+        ('globals.py', '.'),
+    ],
+    hiddenimports=[
+        'flask',
+        'flask_cors',
+        'omegaconf',
+        'ultralytics',
+    ],
+    hookspath=[],
+    hooksconfig={},
+    runtime_hooks=[],
+    excludes=[],
+    noarchive=False,
+    optimize=0,
+)
+pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
+
+exe = EXE(
+    pyz,
+    a.scripts,
+    a.binaries,
+    a.zipfiles,
+    a.datas,
+    [],
+    name='app',
+    debug=False,
+    bootloader_ignore_signals=False,
+    strip=False,
+    upx=True,
+    upx_exclude=[],
+    runtime_tmpdir=None,
+    console=True,
+    disable_windowed_traceback=False,
+    argv_emulation=False,
+    target_arch=None,
+    codesign_identity=None,
+    entitlements_file=None,
+)```
+
+4. **Create the executable**
+
+```bash
+pyinstaller app.spec
+```
+
+5. **Move the Executable**
+
+After the build completes, move the file from `server/dist` to `client/resources/`.
+
+6. **Update `client/main.js`**
+
+Modify `client/main.js` to ensure Electron uses the executable:
+
+```javascript
+const { app, BrowserWindow } = require('electron');
+const path = require('path');
+const { execFile } = require('child_process');
+const url = require('url');
+
+let flaskProcess;
+
+function createWindow() {
+  // Create the browser window.
+  const win = new BrowserWindow({
+    width: 1200,
+    height: 600,
+    icon: path.join(__dirname, 'client/assets/brain-background.png'),
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: true,
+      preload: path.join(__dirname, 'public/preload.js'),
+    }
+  });
+
+  const appURL = app.isPackaged
+    ? url.format({
+        pathname: path.join(__dirname, 'public/index.html'),
+        protocol: 'file:',
+        slashes: true,
+      })
+    : 'http://localhost:3000';
+
+  win.loadURL(appURL);
+
+  // Open the DevTools if needed
+  // win.webContents.openDevTools();
+}
+
+function startFlaskApp() { 
+  const flaskPath = path.join(__dirname, 'resources', 'app');
+  flaskProcess = execFile(flaskPath, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`Error starting Flask app: ${error.message}`);
+      return;
+    }
+    console.log(`Flask app output: ${stdout}`);
+  });
+}
+
+app.whenReady().then(() => {
+  startFlaskApp();
+  createWindow();
+
+  app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+      createWindow();
+    }
+  });
+});
+
+// Quit when all windows are closed, except on macOS.
+app.on('window-all-closed', () => {
+  if (flaskProcess) {
+    flaskProcess.kill();
+  }
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
+});
+
+exec('taskkill /f /t /im app', (err, stdout, stderr) => {
+  if (err) {
+   console.log(err)
+  return;
+  }
+  console.log(`stdout: ${stdout}`);
+  console.log(`stderr: ${stderr}`);
+ });
+
+app.on('will-quit', () => {
+  if (flaskProcess) {
+    flaskProcess.kill();
+  }
+});
+```
+
+7. **Test the Application**
+
+Run the frontend to test the application. The backend executable will start automatically via Electron, so there is no need to run it separately.
+
+## Electron
+
+The application will be build to publish on Github. This is the easiest way to distribute the application:
+
+
+
+
 
 source: https://medium.com/red-buffer/integrating-python-flask-backend-with-electron-nodejs-frontend-8ac621d13f72
 
@@ -224,3 +413,4 @@ There are many options to go for with electron builder for different use cases. 
 
 
 source: https://blog.devgenius.io/how-to-build-and-publish-an-electron-app-with-react-tutorial-971e1d9d27ce?gi=6c8bed11dc4b
+
