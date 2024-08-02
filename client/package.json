@@ -64,7 +64,6 @@
   "devDependencies": {
     "electron": "^31.2.1",
     "electron-builder": "^24.13.3"
->>>>>>> d6b8d40 (Try to build and packe app. main.js does not seem to come with build)
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -94,13 +93,9 @@
     "electron": "electron .",
     "build": "react-scripts build",
     "test": "react-scripts test",
-<<<<<<< HEAD
-    "eject": "react-scripts eject"
-=======
     "eject": "react-scripts eject",
     "package": "electron-builder build --mac --win -c.extraMetadata.main=main.js --publish never",
     "publish": "electron-builder build --mac --win --publish always"
->>>>>>> d6b8d40 (Try to build and packe app. main.js does not seem to come with build)
   },
   "eslintConfig": {
     "extends": [
