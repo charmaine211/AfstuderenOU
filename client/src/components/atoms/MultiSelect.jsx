@@ -11,7 +11,7 @@ import {
 import SquareRoundedIcon from '@mui/icons-material/SquareRounded';
 import InfoButton from './InfoButton';
 
-function MultiSelect({ title, options, setSelected, hasInfo, info, ariaLabel }) {
+function MultiSelect({ title, options, setSelected, hasInfo, info="", ariaLabel }) {
   
   const handleSelect = (event) => {
     const value = event.target.name;
@@ -61,10 +61,6 @@ MultiSelect.propTypes = {
   hasInfo: PropTypes.bool.isRequired,
   info: PropTypes.string, 
   ariaLabel: PropTypes.string.isRequired,
-};
-
-MultiSelect.defaultProps = {
-  info: ""
 };
 
 export default MultiSelect;

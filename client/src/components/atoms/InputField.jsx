@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { TextField, Box, Stack } from '@mui/material';
 import InfoButton from './InfoButton';
 
-function InputField({ hasInfo, isRequired, info, onChange, value, defaultValue, label, type, ariaLabel }) {
-
+function InputField({ hasInfo, isRequired=false, info="", onChange, value, defaultValue="", label, type="text", ariaLabel }) {
     return (
         <Box
             component="form"
@@ -46,12 +45,5 @@ InputField.propTypes = {
     label: PropTypes.string.isRequired,
     ariaLabel: PropTypes.string.isRequired,
 }
-
-InputField.defaultProps = {
-    defaultValue: "",
-    info: "",
-    type: "text",
-    isRequired: false,
-};
 
 export default InputField;

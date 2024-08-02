@@ -9,7 +9,7 @@ import {
 
 import InfoButton from './InfoButton';
 
-function DropdownField({ title, onSelect, menuItems, helperText, id, hasInfo, info, ariaLabel }){
+function DropdownField({ title, onSelect, menuItems, helperText, id, hasInfo, info = "", ariaLabel }){
     return(
         <Stack direction="row" spacing={1} alignItems="center" style={{  }}>
             <TextField
@@ -43,8 +43,5 @@ DropdownField.propTypes = {
     ariaLabel: PropTypes.string.isRequired,
 }
 
-DropdownField.defaultProps = {
-    info: ""
-  };
   
 export default DropdownField;

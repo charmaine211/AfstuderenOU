@@ -4,7 +4,7 @@ import { TextField, Box, Stack, InputAdornment, IconButton } from '@mui/material
 import FolderRoundedIcon from '@mui/icons-material/FolderRounded';
 import InfoButton from './InfoButton';
 
-function DirectoryInputField({ hasInfo, isRequired, info, onChange, value, defaultValue, label, type, ariaLabel, setPath }) {
+function DirectoryInputField({ hasInfo, onChange, value, defaultValue="", label, ariaLabel, setPath, info = "", type = "text", isRequired = false, }) {
     const fileInputRef = useRef(null);
 
     const handleSelectDirectory = () => {
@@ -77,12 +77,5 @@ DirectoryInputField.propTypes = {
     label: PropTypes.string.isRequired,
     ariaLabel: PropTypes.string.isRequired,
 }
-
-DirectoryInputField.defaultProps = {
-    defaultValue: "",
-    info: "",
-    type: "text",
-    isRequired: false,
-};
 
 export default DirectoryInputField;
