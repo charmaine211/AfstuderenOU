@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "private": true,
   "proxy": "http://127.0.0.1:5000",
+  "homepage": ".",
   "main": "main.js",
   "build": {
     "appId": "com.charmaine211.automatic-driver-gaze-detection",  
@@ -15,7 +16,21 @@
         "repo": "AutomaticDriverGazeDetection",
         "private": true,
         "token": "" 
-      }
+      },
+      "extraResources": [
+        {
+          "from": "resources/",
+          "to": "resources/",
+          "filter": [
+            "**/*"
+           ]
+        },
+        {
+          "from": "./public/assets",
+          "to": "assets"
+        }
+        
+      ]
   },
   "win": {
     "icon": "public/brain-solid-icon.png",
@@ -83,7 +98,7 @@
     "eject": "react-scripts eject"
 =======
     "eject": "react-scripts eject",
-    "package": "electron-builder build --mac --win -c.extraMetadata.main=public/electron.js --publish never",
+    "package": "electron-builder build --mac --win -c.extraMetadata.main=main.js --publish never",
     "publish": "electron-builder build --mac --win --publish always"
 >>>>>>> d6b8d40 (Try to build and packe app. main.js does not seem to come with build)
   },
