@@ -80,7 +80,7 @@ exe = EXE(
     entitlements_file=None,
 )```
 
-4. **Create the executable**
+4. **Create the executable inside the virtual environment**
 
 ```bash
 pyinstaller app.spec
@@ -107,30 +107,38 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 1200,
     height: 600,
-    icon: path.join(__dirname, 'client/assets/brain-background.png'),
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: true,
-      preload: path.join(__dirname, 'public/preload.js'),
+      preload: app.isPackaged ? 
+      path.join(__dirname, './build/preload.js') : 
+      path.join(__dirname, './preload.js'),
     }
   });
 
   const appURL = app.isPackaged
     ? url.format({
-        pathname: path.join(__dirname, 'public/index.html'),
+        pathname: path.join(__dirname, './build/index.html'),
         protocol: 'file:',
         slashes: true,
       })
     : 'http://localhost:3000';
 
-  win.loadURL(appURL);
+  console.log(`Loading app: ${appURL}`);
+
+  setTimeout(() => {
+    win.loadURL(appURL).catch((err) => {
+      console.error('Failed to load app:', err);
+    });
+  
+  }, 2000);
 
   // Open the DevTools if needed
-  // win.webContents.openDevTools();
+  win.webContents.openDevTools();
 }
 
-function startFlaskApp() { 
-  const flaskPath = path.join(__dirname, 'resources', 'app');
+function startFlaskApp() {
+  const flaskPath = app.isPackaged ? path.join(__dirname, './build/resources/app') : path.join(__dirname, 'resources', 'app');
   flaskProcess = execFile(flaskPath, (error, stdout, stderr) => {
     if (error) {
       console.error(`Error starting Flask app: ${error.message}`);
@@ -141,8 +149,8 @@ function startFlaskApp() {
 }
 
 app.whenReady().then(() => {
-  startFlaskApp();
   createWindow();
+  startFlaskApp();
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
@@ -151,28 +159,24 @@ app.whenReady().then(() => {
   });
 });
 
+function killPython() {
+  const kill = require("tree-kill");
+  kill(flaskProcess.pid);
+}
+
 // Quit when all windows are closed, except on macOS.
 app.on('window-all-closed', () => {
   if (flaskProcess) {
-    flaskProcess.kill();
+    killPython()
   }
   if (process.platform !== 'darwin') {
     app.quit();
   }
 });
 
-exec('taskkill /f /t /im app', (err, stdout, stderr) => {
-  if (err) {
-   console.log(err)
-  return;
-  }
-  console.log(`stdout: ${stdout}`);
-  console.log(`stderr: ${stderr}`);
- });
-
 app.on('will-quit', () => {
   if (flaskProcess) {
-    flaskProcess.kill();
+    killPython();
   }
 });
 ```
@@ -302,3 +306,27 @@ There are many options to go for with electron builder for different use cases. 
 
 source: https://blog.devgenius.io/how-to-build-and-publish-an-electron-app-with-react-tutorial-971e1d9d27ce?gi=6c8bed11dc4b
 
+Problems:
+
+build/index.html
+
+```html
+<!doctype html><html lang="en">
+  <head>
+  <meta charset="utf-8"/>
+    <link rel="icon" href="/brain-solid.png"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="theme-color" content="#000000"/>
+    <meta name="description" content="Web site created using create-react-app"/>
+    <link rel="apple-touch-icon" href="/logo192.png"/>
+    <link rel="manifest" href="manifest.json"/>
+    <title>Driver Gaze Detection</title>
+    <script defer="defer" src="./static/js/main.4c729be7.js"></script>
+    <link href="./static/css/main.919af4af.css" rel="stylesheet">
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
+  </div>
+  </body>
+</html>```
