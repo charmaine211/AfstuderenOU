@@ -13,6 +13,8 @@ yarn.lock
 # production
 /build
 /resources
+/public/resources
+.app 
 
 # misc
 .DS_Store
