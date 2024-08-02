@@ -1,11 +1,8 @@
 import React from 'react';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear, faChartSimple, faUserTag } from '@fortawesome/free-solid-svg-icons';
-
-import { Grid, Link, Typography, Paper } from "@mui/material";
-
-import TitleTextBlock from "../components/molecules/TitleTextBlock"
+import { Grid, Link as UILink, Typography, Paper } from "@mui/material";
+import TitleTextBlock from "../components/molecules/TitleTextBlock";
 import PageWrapper from '../components/organisms/PageWrapper';
 
 function HomePage() {
@@ -54,9 +51,9 @@ function HomePage() {
     const text = "Our platform provides researchers and safety professionals with a solution for automatic annotating driver images and videos using AI.";
 
     const features = [
-        { icon: labelIcon, title: 'Label data', path: '/label' },
-        { icon: trainingIcon, title: 'Train', path: '/train' },
-        { icon: predictIcon, title: 'Predict', path: '/predict' },
+        { icon: labelIcon, title: 'Label data', path: '#/label' },
+        { icon: trainingIcon, title: 'Train', path: '#/train' },
+        { icon: predictIcon, title: 'Predict', path: '#/predict' },
     ];
 
     return (
@@ -65,7 +62,7 @@ function HomePage() {
             <Grid container spacing={10} style={containerStyle}>
                 {features.map((feature, index) => (
                     <Grid item key={index} style={itemStyle}>
-                        <Link href={feature.path} underline="none">
+                        <UILink href={feature.path} underline="none">
                             <Paper 
                                 style={paperStyle} 
                                 onMouseEnter={e => e.currentTarget.style.transform = paperHoverStyle.transform}
@@ -76,7 +73,7 @@ function HomePage() {
                                 </Typography>
                                 {feature.icon}
                             </Paper>
-                        </Link>
+                        </UILink>
                     </Grid>
                 ))}
             </Grid>

@@ -1,9 +1,11 @@
 import React from 'react';
-import {
-    BrowserRouter as Router, 
-    Routes as BrowserRouters, 
-    Route }
-from "react-router-dom";
+// import {
+//     // HashRouter as Router,
+//     BrowserRouter as Router, 
+//     Routes as BrowserRouters, 
+//     Route }
+// from "react-router-dom";
+import { HashRouter as Router, Route, Routes as Routess } from 'react-router-dom';
 
 import CollectDatasetPage from "../src/pages/CollectDatasetPage";
 import HomePage from "../src/pages/HomePage";
@@ -17,37 +19,32 @@ import LabelPage from "../src/pages/LabelPage";
 function Routes () {
 
     return (
-    <Router>
-        <BrowserRouters>
-            <Route 
-                path="/" 
-                exact 
-                element={<HomePage />}/>
-            
-            <Route 
-                path="/collect-dataset" 
-                element={ <CollectDatasetPage/>}/>
-            
-            <Route 
-                path="/test"
-                element={<TestPage/>}/>
-            
-            <Route 
-                path="/train"
-                element={<TrainPage/>}/>
-            <Route 
-                path="/label"
-                element={<LabelPage/>}/>
-            <Route 
-                path="/predict"
-                element={<PredictPage/>}/>
-
-            <Route 
-                path="*"
-                element={<NotFoundPage/>}/>
-            
-        </BrowserRouters>
-    </Router>    
+<Router>
+    <Routess>
+        <Route
+            path="/"
+            exact
+            element={<HomePage />} />
+        <Route
+            path="/collect-dataset"
+            element={<CollectDatasetPage />} />
+        <Route
+            path="/test"
+            element={<TestPage />} />
+        <Route
+            path="/train"
+            element={<TrainPage />} />
+        <Route
+            path="/label"
+            element={<LabelPage />} />
+        <Route
+            path="/predict"
+            element={<PredictPage />} />
+        <Route
+            path="*"
+            element={<HomePage />} /> 
+        </Routess>
+    </Router> 
     );
 }
 
