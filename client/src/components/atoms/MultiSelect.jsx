@@ -55,7 +55,6 @@ function MultiSelect({ title, options, setSelected, hasInfo, info="", ariaLabel 
 MultiSelect.propTypes = {
   title: PropTypes.string.isRequired,
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
-  selectedOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
   setSelected: PropTypes.func.isRequired,
   hasInfo: PropTypes.bool.isRequired,
   info: PropTypes.string, 
