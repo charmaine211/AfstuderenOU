@@ -1,8 +1,11 @@
-const { app, BrowserWindow } = require('electron')
-const path = require('path')
+const { app, BrowserWindow } = require('electron');
+const path = require('path');
+const { execFile } = require('child_process');
+const url = require('url');
 
-function createWindow () {
+let flaskProcess;
 
+function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
     width: 1200,
@@ -68,8 +71,11 @@ function killPython() {
 
 // Quit when all windows are closed, except on macOS.
 app.on('window-all-closed', () => {
+  if (flaskProcess) {
+    killPython()
+  }
   if (process.platform !== 'darwin') {
-    app.quit()
+    app.quit();
   }
 });
 

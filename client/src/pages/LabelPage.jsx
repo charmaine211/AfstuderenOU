@@ -112,13 +112,13 @@ const fileStructureIC =  (
     </ul>
     );
 
-    const containerStyle = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        textAlign: "center",
-        marginBottom: "5em",
-    };
+    // const containerStyle = {
+    //     display: "flex",
+    //     justifyContent: "center",
+    //     alignItems: "center",
+    //     textAlign: "center",
+    //     marginBottom: "5em",
+    // };
 
     const centerStyle = {
         display: "flex",
