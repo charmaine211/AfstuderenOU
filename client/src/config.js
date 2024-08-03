@@ -1,5 +1,9 @@
-export const TEST = {
+export const DEV = {
     url: "http://127.0.0.1:5000",
+}
+
+export const PROD = {
+    url: "http://localhost:5000"
 }
 
 export const MODEL_FORMATS = ["pt"];

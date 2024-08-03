@@ -1,7 +1,8 @@
-import { TEST } from "../../config";
+import { DEV, PROD } from "../../config";
 
 export async function labelDatasetOD(ds_dir, lbls_dir, imgs_dir) {
-    const url = `${TEST.url}/collect-data`;
+    const url = process.env.NODE_ENV === 'production' ? `${PROD.url}/collect-data` : `${DEV.url}/collect-data`;
+
     const data = {
         dataset_dir: ds_dir, 
         labels_dir: lbls_dir, 
