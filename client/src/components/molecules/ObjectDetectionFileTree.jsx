@@ -1,11 +1,11 @@
 import React from 'react';
-import fileTreeImage from "../../assets/ObjectDetectionFileTree.png";
+import fileTreeImage from './ObjectDetectionFileTree.png';
 
 function ObjectDetectionFileTree( ){
-
-    return (
-      <img src={fileTreeImage} style={{height: "35em"}} alt="File Tree Structure" />
-    );
+  console.log
+  return (
+    <img src={fileTreeImage}  style={{height: "35em"}} alt="File Tree Structure" />
+  );
 }
 
 export default ObjectDetectionFileTree;

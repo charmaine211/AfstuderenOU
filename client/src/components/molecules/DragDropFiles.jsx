@@ -12,7 +12,7 @@ import { faFire } from '@fortawesome/free-solid-svg-icons';
 import { formatFileFormats } from '../../common/utils/formatters';
 
 function DragDropFiles({
-  type,
+  type= "file(s)",
   formats,
   onUploaded,
   uploadMultiple,
@@ -117,9 +117,5 @@ DragDropFiles.propTypes = {
   type: PropTypes.string,
   uploadMultiple: PropTypes.bool.isRequired,
 }
-
-DragDropFiles.defaultProps = {
-  type: "file(s)"
-};
 
 export default DragDropFiles;

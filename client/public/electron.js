@@ -10,40 +10,34 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 1200,
     height: 600,
+    icon: path.join(__dirname, 'client/assets/brain-background.png'),
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: true,
-      preload: app.isPackaged ? path.join(__dirname, './build/preload.js') : path.join(__dirname, './public/preload.js'),
+      preload: path.join(__dirname, 'public/preload.js'),
     }
   });
 
-  // const ASSETS_PATH = app.isPackaged ?
-  //   path.join(process.resourcesPath, 'assets') : "../../assets";
-
   const appURL = app.isPackaged
     ? url.format({
-        pathname: path.join(__dirname, './build/index.html'),
+        pathname: path.join(__dirname, 'public/index.html'),
         protocol: 'file:',
         slashes: true,
       })
     : 'http://localhost:3000';
 
-  console.log(`Loading app: ${appURL}`);
+  console.log(`Loading app: ${appUrl}`);
 
-  setTimeout(() => {
-    win.loadURL(appURL).catch((err) => {
-      console.error('Failed to load app:', err);
-    });
-  
-  }, 2000);
+  win.loadURL(appURL).catch((err) => {
+    console.error('Failed to load app:', err);
+  });
 
   // Open the DevTools if needed
   win.webContents.openDevTools();
 }
 
 function startFlaskApp() {
-  // const flaskPath = app.isPackaged ? path.join(__dirname, './build/resources/app') : path.join(__dirname, 'resources', 'app');
-  const flaskPath = path.join(__dirname, './resources/app');
+  const flaskPath = path.join(__dirname, 'resources', 'app');
   flaskProcess = execFile(flaskPath, (error, stdout, stderr) => {
     if (error) {
       console.error(`Error starting Flask app: ${error.message}`);
@@ -54,8 +48,8 @@ function startFlaskApp() {
 }
 
 app.whenReady().then(() => {
-  createWindow();
   startFlaskApp();
+  createWindow();
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
@@ -84,5 +78,3 @@ app.on('will-quit', () => {
     killPython();
   }
 });
-
-// export default ASSETS_PATH;

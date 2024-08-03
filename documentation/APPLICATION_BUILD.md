@@ -1,114 +1,195 @@
-# Electron
+# Build App
 
-source: https://medium.com/red-buffer/integrating-python-flask-backend-with-electron-nodejs-frontend-8ac621d13f72
+These instructions are for building the app on a macOS environment. Different operating systems may require different steps. Unfortunately, I am unable to test other environments.
 
-Creating a Basic Electron App
-For creating a basic Electron quick-start app, you can go to electron JS doc for guidance.
-For now, let’s focus on the main.js code given in the docs that creates the app browser window. Here’s the piece of code from the link above that we are going to refer to for our article:
-const { app, BrowserWindow } = require(‘electron’)
-function createWindow () {
- const win = new BrowserWindow({
- width: 800,
- height: 600,
- webPreferences: {
- nodeIntegration: true
- }
- })
-win.loadFile(‘index.html’)
-}
-app.whenReady().then(createWindow)
-app.on(‘window-all-closed’, () => {
- if (process.platform !== ‘darwin’) {
- app.quit()
- }
-})
-app.on(‘activate’, () => {
- if (BrowserWindow.getAllWindows().length === 0) {
- createWindow()
- }
-})
-The code creates an application window for our Electron app. This is where we are to integrate our Flask application with Electron.
-Creating a Basic Flask App
-Here is a simple Flask app code we are going to use for the backend application.
-from flask import Flask
-app = Flask(__name__)
+## Flask
 
+To build our Flask backend for Electron purposes we need to create an executable file in our virtual environment:
 
-@app.route('/test')
-def hello():
-    return "Hello World!"
+1. **Install PyInstaller**  
 
-if __name__ == '__main__':
-    app.run()
-The default port would be 127.0.0.1:80, but you can change the port by modifying the last line as:
-app.run(host=’127.0.0.1', port=5000)
-Now for our problem, we are going to use the Child process. For those who already know about the Child process, skip the definition below.
-Child Process
-A Child process is the creation of a Parent process, which can be defined as the main process that creates a Child or subprocesses to perform certain operations. Each process can have many Child processes but only one Parent. A child process inherits most of its Parent’s attributes.
-There are multiple ways to create a Child process but for our case, we are going to stick with the following two methods:
-spawn
-execFile
-spawn: Running Flask App As a Source Code (app.py)
-In case the developer wants to test the electron/Flask app without creating the Flask executable, they can use the spawn method. This can be done by writing the following code inside the create window function:
-var python = require('child_process').spawn('py', ['./backend/app.py']);
-  python.stdout.on('data', function (data) {
-    console.log("data: ", data.toString('utf8'));
-  });
-  python.stderr.on('data', (data) => {
-    console.log(`stderr: ${data}`); // when error
-  });
-This is only for temporary use until the backend app is finalized. When the backend code is ready in accordance with the requirements, you need to make an executable file for the Flask app which the Electron application starts in its main process every time the Electron app is started.
-execFile: Running Flask App Executable in Electron (app.exe)
-To create the Flask app executable, you need pyinstaller. This can simply be installed by pip install pyinstaller. After installing pyinstaller, you need to go to the command line and type pyinstaller -F app.py.
-Note the -F is used here to build the app in only one file. You can choose not to do this. The executable app will be in the ‘dist’ folder in the backend code root directory.
-let backend;
-backend = path.join(process.cwd(), 'resources/backend/dist/app.exe')
-var execfile = require(‘child_process’).execFile;
-execfile(
- backend,
- {
-  windowsHide: true,
- },
- (err, stdout, stderr) => {
-  if (err) {
-  console.log(err);
-  }
-  if (stdout) {
-  console.log(stdout);
-  }
-  if (stderr) {
-  console.log(stderr);
-  }
- }
+Install PyInstaller using pip (or pip3, depending on your system) if it is not already installed:
+
+```bash
+pip install pyinstaller
+```
+
+2. **Create Required Directories**
+Set up the necessary directories:
+
+`server/ultralytics`: Install the Ultralytics library here to avoid potential issues.
+`client/resources`: Place the executable file here for use with Electron.
+
+3. **Create the `server/app.spec` file**
+
+Add the following content to `server/app.spec`:
+
+```python
+# -*- mode: python ; coding: utf-8 -*-
+
+block_cipher = None
+
+a = Analysis(
+    ['app.py'],
+    binaries=[],
+    datas=[
+        ('common', 'common'),
+        ('collectDataset', 'collectDataset'),
+        ('models', 'models'),
+        ('predict', 'predict'),
+        ('tests', 'tests'),
+        ('train', 'train'),
+        ('venv', 'venv'),
+        ('ultralytics', 'ultralytics'),
+        ('globals.py', '.'),
+    ],
+    hiddenimports=[
+        'flask',
+        'flask_cors',
+        'omegaconf',
+        'ultralytics',
+    ],
+    hookspath=[],
+    hooksconfig={},
+    runtime_hooks=[],
+    excludes=[],
+    noarchive=False,
+    optimize=0,
 )
-Killing app.exe When Electron App Quits
-You have successfully integrated the Flask app with Electron, you start the application, run your task and close the application, but oh wait… the Flask app is still running in the background. It never closed. This problem occurred when I had thought everything was now working well. There is not much specific information available for this purpose. I tried npm’s tree-kill for killing the Child process, but it didn’t work for me. The best solution I found was to create another Child process that is given the command to kill the running app. Following is the piece of code you need to put inside the app.on(‘window-all-closed’) function before the app.quit() line:
-const { exec } = require(‘child_process’);
-exec(‘taskkill /f /t /im app.exe’, (err, stdout, stderr) => {
- if (err) {
-  console.log(err)
- return;
- }
- console.log(`stdout: ${stdout}`);
- console.log(`stderr: ${stderr}`);
-});
-The code above worked well for me since it killed all the background processes when I quit my app.
-Communicating Between Backend and Frontend
-The best way to communicate between frontend and backend is to send requests to the Flask server endpoint from your UI with the click of a button or a user input. For this, you can use one of the more frequently used http methods. I usually prefer Axios for this. You need to use the following code in your Renderer.js while sending requests to the Flask server.
-test = 'Hello'
-async function makePostRequest(test) {
- axios.post(‘http://127.0.0.1:5000/test', test)
- .then(function (response) {
-  console.log(“It says: “, response.data);
- })
- .catch(function (error) {
-  console.log(error);
- });
+pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
+
+exe = EXE(
+    pyz,
+    a.scripts,
+    a.binaries,
+    a.zipfiles,
+    a.datas,
+    [],
+    name='app',
+    debug=False,
+    bootloader_ignore_signals=False,
+    strip=False,
+    upx=True,
+    upx_exclude=[],
+    runtime_tmpdir=None,
+    console=True,
+    disable_windowed_traceback=False,
+    argv_emulation=False,
+    target_arch=None,
+    codesign_identity=None,
+    entitlements_file=None,
+)```
+
+4. **Create the executable inside the virtual environment**
+
+```bash
+pyinstaller app.spec
+```
+
+5. **Move the Executable**
+
+After the build completes, move the file from `server/dist` to `client/resources/`.
+
+6. **Update `client/main.js`**
+
+Modify `client/main.js` to ensure Electron uses the executable:
+
+```javascript
+const { app, BrowserWindow } = require('electron');
+const path = require('path');
+const { execFile } = require('child_process');
+const url = require('url');
+
+let flaskProcess;
+
+function createWindow() {
+  // Create the browser window.
+  const win = new BrowserWindow({
+    width: 1200,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: true,
+      preload: app.isPackaged ? 
+      path.join(__dirname, './build/preload.js') : 
+      path.join(__dirname, './preload.js'),
+    }
+  });
+
+  const appURL = app.isPackaged
+    ? url.format({
+        pathname: path.join(__dirname, './build/index.html'),
+        protocol: 'file:',
+        slashes: true,
+      })
+    : 'http://localhost:3000';
+
+  console.log(`Loading app: ${appURL}`);
+
+  setTimeout(() => {
+    win.loadURL(appURL).catch((err) => {
+      console.error('Failed to load app:', err);
+    });
+  
+  }, 2000);
+
+  // Open the DevTools if needed
+  win.webContents.openDevTools();
 }
-You will find the response from the Flask server in your app log. You can perform further operations inside the .then() code.
-When the frontend is ready, you can build the installable electron application efficiently by using an electron-builder. Go to the docs in the given link, make the necessary changes in your package.json file and run the build command in your terminal to build your application.
-Avoid Route Directory Mistake
-Note that since the Flask app executable is going to be opened in the Electron app environment, the paths inside the flask app code need to be referenced in accordance with the Electron app root directory. The mistake of mentioning file paths relative to the Flask environment, which will be alien to the Electron environment, can be made. So if your Flask app loads a file, you need to specify the path according to Electron and not according to your Flask environment.
+
+function startFlaskApp() {
+  const flaskPath = app.isPackaged ? path.join(__dirname, './build/resources/app') : path.join(__dirname, 'resources', 'app');
+  flaskProcess = execFile(flaskPath, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`Error starting Flask app: ${error.message}`);
+      return;
+    }
+    console.log(`Flask app output: ${stdout}`);
+  });
+}
+
+app.whenReady().then(() => {
+  createWindow();
+  startFlaskApp();
+
+  app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+      createWindow();
+    }
+  });
+});
+
+function killPython() {
+  const kill = require("tree-kill");
+  kill(flaskProcess.pid);
+}
+
+// Quit when all windows are closed, except on macOS.
+app.on('window-all-closed', () => {
+  if (flaskProcess) {
+    killPython()
+  }
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
+});
+
+app.on('will-quit', () => {
+  if (flaskProcess) {
+    killPython();
+  }
+});
+```
+
+7. **Test the Application**
+
+Run the frontend to test the application. The backend executable will start automatically via Electron, so there is no need to run it separately.
+
+## Electron
+
+The application will be build to publish on Github. This is the easiest way to distribute the application:
+
+
 
 
 source: https://medium.com/@yagoubi.aek.2/build-you-app-using-electron-js-python-electron-builder-dcdd9c2d9ba0
@@ -224,3 +305,28 @@ There are many options to go for with electron builder for different use cases. 
 
 
 source: https://blog.devgenius.io/how-to-build-and-publish-an-electron-app-with-react-tutorial-971e1d9d27ce?gi=6c8bed11dc4b
+
+Problems:
+
+build/index.html
+
+```html
+<!doctype html><html lang="en">
+  <head>
+  <meta charset="utf-8"/>
+    <link rel="icon" href="/brain-solid.png"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="theme-color" content="#000000"/>
+    <meta name="description" content="Web site created using create-react-app"/>
+    <link rel="apple-touch-icon" href="/logo192.png"/>
+    <link rel="manifest" href="manifest.json"/>
+    <title>Driver Gaze Detection</title>
+    <script defer="defer" src="./static/js/main.4c729be7.js"></script>
+    <link href="./static/css/main.919af4af.css" rel="stylesheet">
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
+  </div>
+  </body>
+</html>```

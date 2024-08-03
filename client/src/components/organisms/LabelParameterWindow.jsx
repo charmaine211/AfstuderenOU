@@ -53,10 +53,15 @@ function LabelParameterWindow() {
 
             } else {
                 setLabelling(true);
-                const result = await labelDatasetOD(dataDirectory, labelsDirectory, imagesDirectory);
-                setError("");
-                console.log(result);
-                setLabelling(false);
+                try {
+                    setError("");
+                    const result = await labelDatasetOD(dataDirectory, labelsDirectory, imagesDirectory);
+                    console.log(result);
+                } catch (error) {
+                    setError(`Something went wrong on the server: ${error}`);
+                } finally{
+                    setLabelling(false);
+                }
             }
         } else {
             setError("Please fill in all directories");
@@ -73,38 +78,37 @@ function LabelParameterWindow() {
                     {error}
                 </Typography>
             )}
-            < DirectoryInputField 
+            {!labelling && (<><DirectoryInputField
                 onChange={handleDataDirectoryChange}
                 setPath={setDataDirectory}
-                value={dataDirectory} 
-                label="Data path" 
-                hasInfo 
+                value={dataDirectory}
+                label="Data path"
+                hasInfo
                 info="Path to the root directory of the original dataset."
-                ariaLabel="Data path" 
-                isRequired
-            />
-            < DirectoryInputField 
-                onChange={handleLabelsDirectoryChange} 
-                setPath={setLabelsDirectory}
-                value={labelsDirectory} 
-                label="Labels path"
-                ariaLabel="Labels path"
-                hasInfo 
-                info="Directory to save label result text files."
-                isRequired
-            />
-            < DirectoryInputField 
-                onChange={handleImagesDirectoryChange} 
-                setPath={setImagesDirectory}
-                value={imagesDirectory}
-                label="Images path" 
-                ariaLabel="Images path"
-                hasInfo 
-                info="Directory to save the copied images."
-                isRequired
-            />
+                ariaLabel="Data path"
+                isRequired /><DirectoryInputField
+                    onChange={handleLabelsDirectoryChange}
+                    setPath={setLabelsDirectory}
+                    value={labelsDirectory}
+                    label="Labels path"
+                    ariaLabel="Labels path"
+                    hasInfo
+                    info="Directory to save label result text files."
+                    isRequired /><DirectoryInputField
+                    onChange={handleImagesDirectoryChange}
+                    setPath={setImagesDirectory}
+                    value={imagesDirectory}
+                    label="Images path"
+                    ariaLabel="Images path"
+                    hasInfo
+                    info="Directory to save the copied images."
+                    isRequired /></>)}
             {labelling ? 
-                <Stack>
+                <Stack style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    
+                }}>
                     <Typography>Labelling images. This may take a while. Please don't close the window...</Typography>
                     <CircularProgress />
                 </Stack> : 

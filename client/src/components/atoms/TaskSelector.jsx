@@ -30,7 +30,7 @@ function TaskSelector ({ setIsImageClassification, setIsObjectDetection }) {
                 justifyContent: "center",
                 alignItems: "center",
                 textAlign: "center",}}>
-            <Typography>Object detection</Typography> <Switch style={styleSwitch} defaultChecked onChange={handleChangeTask} color={"default"}/> <Typography>Image classification</Typography>
+            <Typography variant="h6">Object detection</Typography> <Switch style={styleSwitch} defaultChecked onChange={handleChangeTask} color={"default"}/> <Typography variant="h6">Image classification</Typography>
         </Stack>
     );
 }

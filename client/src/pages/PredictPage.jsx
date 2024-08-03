@@ -82,6 +82,10 @@ function PredictPage () {
             setPredicting(false);
         } catch (error){
             setError(`Couldn't connect to server: ${error}`);
+            setAvIsUploaded(false);
+            setModelIsUploaded(false);
+            setPredicting(false);
+            
         }
     }
 
@@ -117,22 +121,22 @@ function PredictPage () {
             <Typography>
                 {error && `Oops, it appears that something went wrong. Please try again: ${error}`  }
             </Typography>
-            <Grid container style={ containerStyle } spacing={10}>
-                <Grid item>
-                    {modelIsUploaded ? 
-                        <UploadedFiles files={[modelFile]} removeFiles={handleRemoveModel} /> 
-                    : 
-                    <InputModel onUploaded={ handleModelUpload} />}
-                </Grid>
-                <Grid item>
-                    { avIsUploaded ? 
-                        <UploadedFiles files={avFiles} removeFiles={handleRemoveFile} />
+                <Grid container style={ containerStyle } spacing={10}>
+                    <Grid item>
+                        {modelIsUploaded ? 
+                            <UploadedFiles files={[modelFile]} removeFiles={handleRemoveModel} /> 
                         : 
+                        <InputModel onUploaded={ handleModelUpload} />}
+                    </Grid>
+                    <Grid item>
+                        { avIsUploaded ? 
+                            <UploadedFiles files={avFiles} removeFiles={handleRemoveFile} />
+                            : 
 
-                            <InputAV onUploaded={ handleAvUpload } />}
+                                <InputAV onUploaded={ handleAvUpload } />}
+                    </Grid>
+
                 </Grid>
-
-            </Grid>
             </Stack>}
         </PageWrapper>
     

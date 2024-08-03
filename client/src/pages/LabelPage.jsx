@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import { Grid, Stack, Typography, Button } from "@mui/material";
+import { Grid, Stack, Typography, Button, Box } from "@mui/material";
 
 import TitleTextBlock from '../components/molecules/TitleTextBlock';
 import PageWrapper from '../components/organisms/PageWrapper';
@@ -83,15 +83,27 @@ const fileStructureIC =  (
                     <ul>
                         <li>
                             <span style={{color:"#EE577E"}}>train</span>: This folder contains subdirectories for each class in your training dataset. The name "train" is mandatory for training purposes.
+                            <ul>
+                                <li>
+                                    <span style={{fontWeight: 900}}>class_...</span>: Each subdirectory corresponds to a specific class (e.g., class_1, class_2, etc.), containing the related dataset purposes.
+                                </li>
+                            </ul>                            
                         </li>
                         <li>
                             <span style={{color:"#EE577E"}}>val</span>: Similar to the train directory, this folder houses validation dataset subdirectories. The name "val" is required for validation.
+                            <ul>
+                                <li>
+                                    <span style={{fontWeight: 900}}>class_...</span>: Each subdirectory corresponds to a specific class (e.g., class_1, class_2, etc.), containing the related dataset purposes.
+                                </li>
+                            </ul>                            
                         </li>
                         <li>
                             <span style={{color:"#EE577E"}}>test</span>: This directory is added to document the final model results. It follows the same structure as the training and validation sets.
-                        </li>
-                        <li>
-                            <span>class_...</span>: Each subdirectory corresponds to a specific class (e.g., class_1, class_2, etc.), containing the related dataset purposes.
+                            <ul>
+                                <li>
+                                    <span style={{fontWeight: 900}}>class_...</span>: Each subdirectory corresponds to a specific class (e.g., class_1, class_2, etc.), containing the related dataset purposes.
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </li>
@@ -100,13 +112,13 @@ const fileStructureIC =  (
     </ul>
     );
 
-    const containerStyle = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        textAlign: "center",
-        marginBottom: "5em",
-    };
+    // const containerStyle = {
+    //     display: "flex",
+    //     justifyContent: "center",
+    //     alignItems: "center",
+    //     textAlign: "center",
+    //     marginBottom: "5em",
+    // };
 
     const centerStyle = {
         display: "flex",
@@ -124,7 +136,7 @@ const fileStructureIC =  (
     return (
     <PageWrapper>
         
-        <TitleTextBlock title="Label dataset" text="For Ultralytics YOLO tasks, the dataset must be organized in a specific split-directory structure under the root directory to facilitate proper training, testing, and optional validation processes. This structure includes separate directories for training (train) and testing (test) phases, with an optional directory for validation (val)." /> 
+        <TitleTextBlock title="Label dataset" text="For Ultralytics YOLO tasks, the dataset must be organized in a specific split-directory structure under the root directory to facilitate proper training, testing, and optional validation processes." /> 
         
         <Stack 
             style={{        
@@ -139,7 +151,8 @@ const fileStructureIC =  (
                     style={       
                         {...centerStyle,
                             padding: "0em 15em 10em 20em",
-                        }}>
+                        }}
+                        spacing={2}>
                 <Grid item xs={12} style={{...centerStyle}}>
                     <Typography 
                         variant="p"
@@ -151,10 +164,10 @@ const fileStructureIC =  (
 
                 {isImageClassification &&
                     <>
-                        <Grid item xs={6} style={{textAlign: "left", alignItems: "start"}}>
+                        <Grid item xs={12} md={6} style={{textAlign: "left", alignItems: "start"}}>
                             {fileStructureIC}
                         </Grid>
-                        <Grid item xs={6} >
+                        <Grid item xs={12} md={6}>
                             <ImageClassificationFileTree/> 
                         </Grid>
                     </>
@@ -162,28 +175,43 @@ const fileStructureIC =  (
                 {isObjectDetection && 
                 (showLabelWindow ? 
                     <>
-                        <Grid item xs={12} style={{paddingBottom: "3em"}}>
-                            <Button variant="text" onClick={handleStartLabelling}>Stop automatic labelling</Button>
-                        </Grid>
-                        <Grid item xs={6} style={{ alignItems: "start" }}>
+                        <Grid item xs={12} md={6} style={{ display: "flex", alignItems: "start" }}>
                             <LabelParameterWindow/>
                         </Grid>
-                        <Grid xs={6} style={{ textAlign: "left", alignItems: "start" }}>
+                        <Grid item xs={12} md={6} style={{ textAlign: "left", alignItems: "start" }}>
                             <Typography style={{ display: "flex", textAlign: "left", alignItems: "start" }}>
-                                To automatically label your dataset, make sure that the dataset is in the Image Classification dataset structure. Also prepare your directories by creating all the necessary folders according to the Object Detection dataset structure. The images and labels folders first need to be created. Bot containing the train, test and val folders. 
+                                To automatically label your dataset, ensure that it is in the Image Classification dataset structure: Images are organised into labeled directories corresponding to their categories.
                             </Typography>
+                            <Box sx={{ m: '2rem' }}/>
+                            <Typography style={{ display: "flex", textAlign: "left", alignItems: "start" }}>
+                                Additionally, prepare your destination directories by structuring them according to the Object Detection dataset requirements. Start by creating a dataset directory containing the 'images' and 'labels' folders. Within each of these folders, create 'train', 'test', and 'val' subdirectories to properly organise your data.
+                            </Typography>
+                            <Box sx={{ m: '2rem' }}/>
+                            <Typography style={{ display: "flex", textAlign: "left", alignItems: "start" }}>
+                                Automatic labelling will place a copy of your image files into the corresponding 'train', 'test', and 'val' subfolders of the 'images' directory. Please make sure that each image has a unique name. 
+                            </Typography>
+                            <Typography style={{ display: "flex", textAlign: "left", alignItems: "start" }}>
+                                In the 'labels' directory, the label files will be stored in the corresponding 'train', 'test', and 'val' subfolders. These labelled files will match the images and contain the necessary bounding box data required for object detection.
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12} style={{paddingTop: "3em"}}>
+                            <Button variant="text" onClick={handleStartLabelling}>Return</Button>
                         </Grid>
                     </>
                     : 
                 <>
-                    <Grid item xs={12} style={{paddingBottom: "3em"}}>
-                        <Button variant="text" onClick={handleStartLabelling}>Start automatic labelling</Button>
-                    </Grid>
-                    <Grid item xs={3} style={{alignItems: "start"}}>
+                    <Grid item md={3} xs={12} style={{display: "flex", alignItems: "start"}}>
                         <ObjectDetectionFileTree/>
                     </Grid>
-                    <Grid item xs={9} style={{textAlign: "left", alignItems: "start"}}>
-                        {fileStructureOD}
+                    <Grid item md={9} xs={12} style={{display: "flex", textAlign: "left", alignItems: "start"}}>
+                        <Stack>
+                            {fileStructureOD}
+                            {/**TODO */}
+                            {false && <Button variant="text" onClick={handleStartLabelling}>Start automatic relabelling image classification to object detection</Button>}
+                        </Stack>
+                    </Grid>
+                    <Grid item xs={12} style={{paddingBottom: "3em"}}>
+                        
                     </Grid>
                 </>)}
             </Grid>

@@ -43,8 +43,8 @@ def __label_frame(image_path, label_id, label_result_dir, images_result_dir):
             first_line = file.readline().strip().split()
             first_line[0] = str(label_id)
             file.seek(0)
-            file.write(" ".join(first_line))
             file.truncate()
+            file.write(" ".join(first_line))
     else:
         print("Skip file")
 
