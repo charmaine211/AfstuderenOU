@@ -63,7 +63,8 @@
   "author": "Charmaine Noten",
   "devDependencies": {
     "electron": "^31.2.1",
-    "electron-builder": "^24.13.3"
+    "electron-builder": "^24.13.3",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
