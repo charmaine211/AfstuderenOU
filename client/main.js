@@ -2,7 +2,7 @@ const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const { execFile } = require('child_process');
 const url = require('url');
-
+const kill = require('tree-kill');
 let flaskProcess;
 
 function createWindow() {
@@ -42,14 +42,25 @@ function createWindow() {
 }
 
 function startFlaskApp() {
-  // const flaskPath = app.isPackaged ? path.join(__dirname, './build/resources/app') : path.join(__dirname, 'resources', 'app');
   const flaskPath = path.join(__dirname, './resources/app');
+  console.log(`Starting Flask app from: ${flaskPath}`);
   flaskProcess = execFile(flaskPath, (error, stdout, stderr) => {
     if (error) {
       console.error(`Error starting Flask app: ${error.message}`);
       return;
     }
     console.log(`Flask app output: ${stdout}`);
+    if (stderr) {
+      console.error(`Flask app error output: ${stderr}`);
+    }
+  });
+
+  flaskProcess.on('exit', (code) => {
+    console.log(`Flask app exited with code ${code}`);
+  });
+
+  flaskProcess.on('error', (err) => {
+    console.error(`Flask app error: ${err}`);
   });
 }
 
@@ -65,8 +76,15 @@ app.whenReady().then(() => {
 });
 
 function killPython() {
-  const kill = require("tree-kill");
-  kill(flaskProcess.pid);
+  if (flaskProcess) {
+    kill(flaskProcess.pid, 'SIGTERM', (err) => {
+      if (err) {
+        console.error(`Failed to kill Flask app: ${err}`);
+      } else {
+        console.log('Flask app terminated successfully');
+      }
+    });
+  }
 }
 
 // Quit when all windows are closed, except on macOS.

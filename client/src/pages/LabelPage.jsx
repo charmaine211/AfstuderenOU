@@ -206,8 +206,7 @@ const fileStructureIC =  (
                     <Grid item md={9} xs={12} style={{display: "flex", textAlign: "left", alignItems: "start"}}>
                         <Stack>
                             {fileStructureOD}
-                            {/**TODO */}
-                            {false && <Button variant="text" onClick={handleStartLabelling}>Start automatic relabelling image classification to object detection</Button>}
+                            <Button variant="text" onClick={handleStartLabelling}>Start automatic relabelling image classification to object detection</Button>
                         </Stack>
                     </Grid>
                     <Grid item xs={12} style={{paddingBottom: "3em"}}>

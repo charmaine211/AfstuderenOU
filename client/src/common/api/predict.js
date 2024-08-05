@@ -1,8 +1,8 @@
 import { DEV, PROD } from "../../config";
 
 export async function predictAnalysis(modelPath, avFilesPath) {
-    const url = process.env.NODE_ENV === 'production' ? `${PROD.url}/predict` : `${DEV.url}/predict`;
-    // const url = `${PROD.url}/predict`;
+    // const url = process.env.NODE_ENV === 'production' ? `${PROD.url}/predict` : `${DEV.url}/predict`;
+    const url = `${PROD.url}/predict`;
     const data = {
         model: modelPath, 
         av_files: avFilesPath, 

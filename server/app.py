@@ -7,7 +7,7 @@ from predict import routes as predict_routes
 
 app = Flask(__name__)
 
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 app.register_blueprint(collect_routes.bp, name="collect-data")
 app.register_blueprint(train_routes.bp, name="train")
