@@ -13,9 +13,16 @@ import InfoButton from './InfoButton';
 
 function MultiSelect({ title, options, setSelected, hasInfo, info="", ariaLabel }) {
   
-  const handleSelect = (event) => {
-    const value = event.target.name;
+  const convertToString = (value) => {
+    if(value === -1){
+      return "auto";
+    }
+    return value.toString();
+  }
 
+  const handleSelect = (event) => {
+    const value = parseInt(event.target.name);
+    alert(typeof value);
     setSelected((prevSelected) => {
       if (prevSelected.includes(value)) {
         return prevSelected.filter((item) => item !== value);
@@ -43,7 +50,7 @@ function MultiSelect({ title, options, setSelected, hasInfo, info="", ariaLabel 
                     checkedIcon= {<SquareRoundedIcon />}
                   />
                 }
-                label={option}
+                label={convertToString(option)}
               />
             </Grid>
           ))}

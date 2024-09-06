@@ -12,8 +12,8 @@ import DropdownField from '../atoms/DropdownField';
 
 function TrainParameterWindow({ isImageClassification, isObjectDetection }) {
     // CONSTANTS
-    const epochs = ["25", "50", "100", "125", "150"];
-    const batchSizes = ["auto", "120", "180", "240", "300", "360"];
+    const epochs = [25, 50, 100, 125, 150];
+    const batchSizes = [-1, 120, 180, 240, 300, 360];
     const dataSize = "640";
     const yolo_v9 = "yolov9c.pt";
     const yolo_v8 = "yolov8n.pt";
@@ -34,8 +34,8 @@ function TrainParameterWindow({ isImageClassification, isObjectDetection }) {
     const [projectICTitle, setICProjectTitle] = useState("image_classicification-epochs_{epochs}-batchsize_{batch_size}");
     const [projectODTitle, setODProjectTitle] = useState("object_detection-epochs_{epochs}-batchsize_{batch_size}");
     const [selectedDataSize, setSelectedDataSize] = useState(dataSize);
-    const [selectedEpochs, setSelectedEpochs] = useState(["25"]);
-    const [selectedBatchSizes, setSelectedBatchSizes] = useState(["auto"]);
+    const [selectedEpochs, setSelectedEpochs] = useState([25]);
+    const [selectedBatchSizes, setSelectedBatchSizes] = useState([-1]);
     const [selectedProjectTitle, setSelectedProjectTitle] = useState(isImageClassification ? projectICTitle : projectODTitle);
     const [icCode, setIcCode] = useState("");
     const [odCode, setOdCode] = useState("");
@@ -60,26 +60,26 @@ from ultralytics import YOLO
 for batch_size in BATCH_SIZES:
     for epochs in EPOCHS_LIST:
 
-    # Name project
-    project = f"${selectedProjectTitle}"
+        # Name project
+        project = f"${selectedProjectTitle}"
 
-    # Load a model
-    model = YOLO('yolov8n-cls.pt')
+        # Load a model
+        model = YOLO('yolov8n-cls.pt')
 
-    # Train model
-    results = model.train(
-        data=DATA_DIR,
-        epochs=epochs,
-        imgsz=DATA_SIZE,
-        batch=batch_size,
-        project=project,
-        )`);
+        # Train model
+        results = model.train(
+            data=DATA_DIR,
+            epochs=epochs,
+            imgsz=DATA_SIZE,
+            batch=batch_size,
+            project=project,
+            )`);
     }, [dataDirectory, selectedEpochs, selectedBatchSizes, projectICTitle, selectedDataSize, selectedProjectTitle]);
 
     useEffect(() => {
         setOdCode(
 `# CONSTANTS
-DATASET = '${dataDirectory}'
+DATASET = '${yamlDirectory}'
 EPOCHS_LIST = ${JSON.stringify(selectedEpochs)}
 BATCH_SIZES = ${JSON.stringify(selectedBatchSizes)}
 DATA_SIZE= ${selectedDataSize}
@@ -103,7 +103,7 @@ for batch_size in BATCH_SIZES:
             imgsz=DATA_SIZE,
             project=project)    
         `);
-                }, [dataDirectory, selectedEpochs, selectedBatchSizes, projectODTitle, selectedDataSize, selectedOdModel, selectedProjectTitle]);    
+                }, [yamlDirectory, selectedEpochs, selectedBatchSizes, projectODTitle, selectedDataSize, selectedOdModel, selectedProjectTitle]);    
 
     useEffect(() => {
         setYamlContent(
@@ -180,10 +180,10 @@ names:
                     onChange={ handleYamlDirectoryChange}
                     defaultValue={`/content/drive/MyDrive`}
                     value={yamlDirectory} 
-                    label="Yaml file Directory" 
+                    label="Yaml File Path" 
                     hasInfo 
-                    info= "Specifies the directory where your yaml file is located."
-                    ariaLabel="Data Directory" 
+                    info= "Specifies where your yaml file is located."
+                    ariaLabel="Yaml file path" 
                 />}
                 <InputField 
                     onChange={handleProjectTitleChange} 
