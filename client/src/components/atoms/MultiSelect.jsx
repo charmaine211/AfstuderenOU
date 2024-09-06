@@ -22,7 +22,6 @@ function MultiSelect({ title, options, setSelected, hasInfo, info="", ariaLabel 
 
   const handleSelect = (event) => {
     const value = parseInt(event.target.name);
-    alert(typeof value);
     setSelected((prevSelected) => {
       if (prevSelected.includes(value)) {
         return prevSelected.filter((item) => item !== value);
