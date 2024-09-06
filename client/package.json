@@ -92,6 +92,7 @@
   },
   "scripts": {
     "start": "export BROWSER=none && react-scripts start",
+    "start-win": "set BROWSER=none && react-scripts start",
     "electron": "electron .",
     "start-electron": "export ELECTRON_START_URL=http://localhost:3000 && electron .",
     "start-electron-win": "set ELECTRON_START_URL=http://localhost:3000 && electron .",
