@@ -15,7 +15,7 @@ function TrainParameterWindow({ isImageClassification, isObjectDetection }) {
     const epochs = [25, 50, 100, 125, 150];
     const batchSizes = [-1, 120, 180, 240, 300, 360];
     const dataSize = "640";
-    const yolo_v9 = "yolov9c.pt";
+    const yolo_v9 = "yolov9t.pt";
     const yolo_v8 = "yolov8n.pt";
 
     const modelMenuItems = [{
