@@ -26,6 +26,22 @@
   - Create a video tutorial explaining where to place the generated files in the Lightning AI environment.
   - Ensure the tutorial includes clear, step-by-step instructions for users to load and train the model correctly in Lightning AI.
 
+## 5. Label Data: Fix Path Issues on Windows
+- [ ] **Resolve issues with paths on Windows**: 
+  - Currently, the labeling process is not working correctly on Windows due to differences in how paths are handled compared to macOS and Linux.
+  - Ensure the tool handles file paths correctly across all platforms (Windows, macOS, Linux).
+  - Implement platform-specific path handling to ensure compatibility, using libraries like `os.path.join()` for cross-platform path construction and avoiding issues with backslashes (`\`) on Windows.
+
+## 6. Release: Publish Version 1.1.0 for Windows on GitHub
+- [ ] **Prepare for release**: 
+  - Ensure all issues (including those related to Windows path handling) are resolved.
+  - Test the app thoroughly on Windows to confirm it works as expected.
+  
+- [ ] **Create a release on GitHub**: 
+  - Create a new GitHub release tagged as version `1.1.0` for Windows.
+  - Include release notes summarizing the changes and fixes (including the improvements to the Label UI, path issues on Windows, etc.).
+  - Upload the release binaries and any necessary files for easy installation on Windows.
+     
 ## Run application
 
 To run both the backend and frontend of your application simultaneously, open two separate terminal windows or tabs. In one terminal, start the backend server, and in the other, launch the frontend interface. This ensures that both components can operate concurrently.
