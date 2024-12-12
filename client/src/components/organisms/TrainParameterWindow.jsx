@@ -90,7 +90,7 @@ DATA_SIZE= ${selectedDataSize}
 from ultralytics import YOLO
 
 # LOAD MODEL
-model = YOLO(${selectedOdModel})
+model = YOLO('${selectedOdModel}')
 
 # TRAIN MODEL
 for batch_size in BATCH_SIZES:
@@ -114,18 +114,18 @@ test: images/test # test images (optional)
 
 # Classes
 names:
-0: shoulder_right
-1: shoulder_left
-2: right
-3: mirror_right
-4: mirror_left
-5: mirror_interior
-6: left
-7: forward_right
-8: forward_left
-9: forward
-10: dashboard_straight_down
-11: dashboard_down_right`
+    0: shoulder_right
+    1: shoulder_left
+    2: right
+    3: mirror_right
+    4: mirror_left
+    5: mirror_interior
+    6: left
+    7: forward_right
+    8: forward_left
+    9: forward
+    10: dashboard_straight_down
+    11: dashboard_down_right`
         );
                 }, [dataDirectory]); 
 

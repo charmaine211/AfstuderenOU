@@ -18,11 +18,11 @@ function LabelParameterWindow() {
 
     // FUNCTIONS
     const validateLabelDirectory = (labelDir) => {
-        return labelDir.endsWith('/labels');
+        return labelDir.endsWith('labels');
     }
 
     const validateImagesDirectory = (imageDir) => {
-        return imageDir.endsWith('/images');
+        return imageDir.endsWith('images');
     }
 
     const validateODDirectory = (imageDir, labelDir) => {

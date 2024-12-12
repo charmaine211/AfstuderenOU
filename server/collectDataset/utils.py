@@ -8,9 +8,13 @@ from globals import CLASSES, YOLO_IMAGE_EXTENTIONS, YOLO_VIDEO_EXTENTIONS
 
 FACE_MODEL_PATH = "../server/models/yolov8n-face.pt"
 
+
 def valid_ultralytics_image_type(av_path):
     ext = os.path.splitext(av_path)[1]
-    return YOLO_IMAGE_EXTENTIONS().count(ext) > 0 or YOLO_VIDEO_EXTENTIONS().count(ext) > 0
+    return (
+        YOLO_IMAGE_EXTENTIONS().count(ext) > 0 or YOLO_VIDEO_EXTENTIONS().count(ext) > 0
+    )
+
 
 def __label_frame(image_path, label_id, label_result_dir, images_result_dir):
     """
@@ -61,12 +65,12 @@ def label_dataset(dataset_dir, labels_dir, images_dir):
     Returns:
     bool: Succes if the dataset was successfully processed and labeled, False otherwise.
     """
-    for type_dir in glob.glob(f"{dataset_dir}/*"):
+    for type_dir in glob.glob(os.path.join(dataset_dir, "*")):
         success = "Failed"
         print(f"Type: {type_dir}")
         type = os.path.basename(type_dir)
-        labels_result_dir = f"{labels_dir}/{type}"
-        images_result_dir = f"{images_dir}/{type}"
+        labels_result_dir = os.path.join(labels_dir, type)
+        images_result_dir = os.path.join(images_dir, type)
 
         if os.path.isdir(images_result_dir) and os.path.exists(labels_result_dir):
 
@@ -85,4 +89,4 @@ def label_dataset(dataset_dir, labels_dir, images_dir):
                         )
             success = "Success"
 
-        return success 
+        return success
