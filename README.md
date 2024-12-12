@@ -1,5 +1,31 @@
 # Driver Gaze Detection
 
+## Future updates and features
+
+## 1. Label Data: Improve Label UI for Better Usability
+- [ ] **Make the Label UI more intuitive**: 
+  - Enhance the user interface for labeling to ensure it is more user-friendly and easier to navigate.
+  - Provide clear instructions and feedback to users during the labeling process.
+
+## 2. Label Data: Simplify Directory Structure Setup
+- [ ] **Create new `images` and `labels` directories automatically**: 
+  - The tool should automatically create the required `images` and `labels` directories for the dataset.
+  - Do not require users to manually create these directories.
+  
+- [ ] **Prompt user for root directory and output location**: 
+  - Ask users to provide the root directory of their dataset in the image classification format.
+  - Prompt the user to select the destination directory where the newly generated dataset in the object detection format will be saved.
+
+## 3. Label Dataset: Asynchronous Relabeling for Improved Workflow
+- [ ] **Implement asynchronous relabeling**: 
+  - Allow users to continue working on other tasks while relabeling happens in the background.
+  - Provide a progress indicator to show how much of the relabeling task has been completed.
+
+## 4. Train: Add Video Instructions for Lightning AI Integration
+- [ ] **Provide video instructions for file placement in Lightning AI**: 
+  - Create a video tutorial explaining where to place the generated files in the Lightning AI environment.
+  - Ensure the tutorial includes clear, step-by-step instructions for users to load and train the model correctly in Lightning AI.
+
 ## Run application
 
 To run both the backend and frontend of your application simultaneously, open two separate terminal windows or tabs. In one terminal, start the backend server, and in the other, launch the frontend interface. This ensures that both components can operate concurrently.
