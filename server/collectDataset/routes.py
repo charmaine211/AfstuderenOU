@@ -28,10 +28,10 @@ def collect_data():
     labels_dir = data.get("labels_dir")
     images_dir = data.get("images_dir")
 
-    result = label_dataset(dataset_dir, labels_dir, images_dir)
+    success = label_dataset(dataset_dir, labels_dir, images_dir)
 
-    if result:
-        return jsonify(result), 200
+    if success:
+        return jsonify(success), 200
 
     return (
         jsonify(

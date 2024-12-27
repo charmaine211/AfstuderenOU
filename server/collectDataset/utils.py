@@ -66,7 +66,7 @@ def label_dataset(dataset_dir, labels_dir, images_dir):
     bool: Succes if the dataset was successfully processed and labeled, False otherwise.
     """
     for type_dir in glob.glob(os.path.join(dataset_dir, "*")):
-        success = "Failed"
+        success = False
         print(f"Type: {type_dir}")
         type = os.path.basename(type_dir)
         labels_result_dir = os.path.join(labels_dir, type)
@@ -87,6 +87,6 @@ def label_dataset(dataset_dir, labels_dir, images_dir):
                         __label_frame(
                             image_path, label_id, labels_result_dir, images_result_dir
                         )
-            success = "Success"
+            success = True
 
         return success
