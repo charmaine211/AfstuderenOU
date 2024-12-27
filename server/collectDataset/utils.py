@@ -6,7 +6,7 @@ import glob
 from ultralytics import YOLO
 from globals import CLASSES, YOLO_IMAGE_EXTENTIONS, YOLO_VIDEO_EXTENTIONS
 
-FACE_MODEL_PATH = "../server/models/yolov8n-face.pt"
+FACE_MODEL_PATH = "../../models/yolov8n-face.pt"
 
 
 def valid_ultralytics_image_type(av_path):
