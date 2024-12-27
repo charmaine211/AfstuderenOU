@@ -3,18 +3,25 @@ from flask import Blueprint, request, jsonify
 from .utils import label_dataset
 
 bp = Blueprint("collect-data", __name__)
- 
+
+
 @bp.after_request
 def add_headers(response):
-    response.headers.add('Content-Type', 'application/json')
-    response.headers.add('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS')
-    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-    response.headers.add('Access-Control-Expose-Headers', 'Content-Type,Content-Length,Authorization,X-Pagination')
+    response.headers.add("Content-Type", "application/json")
+    response.headers.add(
+        "Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS"
+    )
+    response.headers.add("Access-Control-Allow-Headers", "Content-Type,Authorization")
+    response.headers.add(
+        "Access-Control-Expose-Headers",
+        "Content-Type,Content-Length,Authorization,X-Pagination",
+    )
     return response
 
-@bp.route("/collect-data", methods=['GET', 'POST'])
+
+@bp.route("/collect-data", methods=["GET", "POST"])
 def collect_data():
-     
+
     print("Received data to collect")
     data = request.get_json()
     dataset_dir = data.get("dataset_dir")
@@ -25,5 +32,12 @@ def collect_data():
 
     if result:
         return jsonify(result), 200
-    
-    return jsonify({"error": "No results generated"}), 400
+
+    return (
+        jsonify(
+            {
+                "error": "Invalid input: 'dataset_dir', 'labels_dir', or 'images_dir' is missing or incorrect."
+            }
+        ),
+        400,
+    )
