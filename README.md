@@ -32,13 +32,20 @@
   - Ensure the tool handles file paths correctly across all platforms (Windows, macOS, Linux).
   - Implement platform-specific path handling to ensure compatibility, using libraries like `os.path.join()` for cross-platform path construction and avoiding issues with backslashes (`\`) on Windows.
 
-## 6. Adhere to Atomic Design in frontend
-- [] **Add `Templates` folder to the React app and move all templates to this folder**
+## 6. Apply Atomic Design in the Frontend
+- [ ] **To fully implement the Atomic Design methodology**:
+  - Add a `Templates` folder:  
+    Create a new folder called `Templates` in the appropriate directory within the React app (e.g., `src/components/Templates`).  
+  - Move all template components:  
+    Identify and relocate all components that define the structure of page layouts (e.g., header, footer, content arrangement) into this `Templates` folder.  
+  - Update import:  
+    Check all existing files where the moved components are imported and update the file paths to reflect the new `Templates` folder.  
+
 
 ## 7. Testing
-- [] **Write tests for frontend with Jest**
-- [] **Write tests for backend with Pytest**
-- [] **Resolve all failed tests**
+- [ ] **Write tests for frontend with Jest**
+- [ ] **Write tests for backend with Pytest**
+- [ ] **Resolve all failed tests**
 
 ## 8. Release: Publish Version 1.1.0 for Windows on GitHub
 - [ ] **Prepare for release**: 
