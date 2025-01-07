@@ -32,19 +32,55 @@
   - Ensure the tool handles file paths correctly across all platforms (Windows, macOS, Linux).
   - Implement platform-specific path handling to ensure compatibility, using libraries like `os.path.join()` for cross-platform path construction and avoiding issues with backslashes (`\`) on Windows.
 
-## 6. Release: Publish Version 1.1.0 for Windows on GitHub
+## 6. Adhere to Atomic Design in frontend
+- [] **Add `Templates` folder to the React app and move all templates to this folder**
+
+## 7. Testing
+- [] **Write tests for frontend with Jest**
+- [] **Write tests for backend with Pytest**
+- [] **Resolve all failed tests**
+
+## 8. Release: Publish Version 1.1.0 for Windows on GitHub
 - [ ] **Prepare for release**: 
   - Ensure all issues (including those related to Windows path handling) are resolved.
-  - Test the app thoroughly on Windows to confirm it works as expected.
+  - Test the app thoroughly on Windows, Apple, and Linux to confirm that it works as expected.
   
 - [ ] **Create a release on GitHub**: 
-  - Create a new GitHub release tagged as version `1.1.0` for Windows.
+  - Create a new GitHub release tagged as version `1.1.0` for Windows, Apple and Linux.
   - Include release notes summarizing the changes and fixes (including the improvements to the Label UI, path issues on Windows, etc.).
-  - Upload the release binaries and any necessary files for easy installation on Windows.
+  - Upload the release binaries and any necessary files for easy installation.
      
+## Application File Structure
+
+The application is divided into two main parts: the **frontend** and the **backend**.
+
+### Frontend
+
+The React frontend can be found in the `client` folder and follows the **Atomic Design** methodology. This structure organizes components into the following levels:
+
+- **Atoms**: Small, reusable components (e.g., buttons, inputs).
+- **Molecules**: Groups of atoms that form slightly more complex UI elements.
+- **Organisms**: Combinations of molecules that make up distinct sections of the UI.
+- **Templates**: Page layouts with predefined structures.
+- **Pages**: Complete views that users interact with.
+
+### Backend
+
+The backend resides in the `server` folder and is organized by functionality. Each feature or functionality has its own folder with the following files:
+
+- **`_init_.js`**: Handles initialization and configuration.
+- **`models.js`**: Defines database models for the feature.
+- **`routes.js`**: Contains the API routes related to the feature.
+- **`utils.js`**: Utility functions specific to the feature.
+
+Additionally, shared code that is reused across multiple functionalities is placed in the `common` folder.
+
+This modular structure ensures clarity, reusability, and maintainability across the application.
+
 ## Run application
 
-To run both the backend and frontend of your application simultaneously, open two separate terminal windows or tabs. In one terminal, start the backend server, and in the other, launch the frontend interface. This ensures that both components can operate concurrently.
+To run both the backend and frontend of your application simultaneously, open two separate terminal windows or tabs. Start the backend server in one terminal, and launch the frontend interface in the other. This ensures that both components can operate concurrently.
+
 
 ### Run Python backend
 
@@ -56,7 +92,7 @@ To run both the backend and frontend of your application simultaneously, open tw
 cd AfstuderenOU/server/
 ```
 
-2. Create a virtual environment. Use either python or python3, depending on your system:
+2. Create a virtual environment. Use either `python` or `python3`, depending on your system:
 
 ```
 python -m venv venv
@@ -76,7 +112,7 @@ _macOS and Linux:_
 source venv/bin/activate
 ```
 
-4. Install the required dependencies into the virtual environment. Use pip or pip3 depending on your system:
+4. Install the required dependencies into the virtual environment. Use `pip` or `pip3` depending on your system:
 
 ```
 pip install -r requirements.txt
