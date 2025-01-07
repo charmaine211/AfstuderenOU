@@ -2,12 +2,12 @@
 
 ## Future updates and features
 
-## 1. Label Data: Improve Label UI for Better Usability
+1. Label Data: Improve Label UI for Better Usability
 - [ ] **Make the Label UI more intuitive**: 
   - Enhance the user interface for labeling to ensure it is more user-friendly and easier to navigate.
   - Provide clear instructions and feedback to users during the labeling process.
 
-## 2. Label Data: Simplify Directory Structure Setup
+2. Label Data: Simplify Directory Structure Setup
 - [ ] **Create new `images` and `labels` directories automatically**: 
   - The tool should automatically create the required `images` and `labels` directories for the dataset.
   - Do not require users to manually create these directories.
@@ -16,23 +16,23 @@
   - Ask users to provide the root directory of their dataset in the image classification format.
   - Prompt the user to select the destination directory where the newly generated dataset in the object detection format will be saved.
 
-## 3. Label Dataset: Asynchronous Relabeling for Improved Workflow
+3. Label Dataset: Asynchronous Relabeling for Improved Workflow
 - [ ] **Implement asynchronous relabeling**: 
   - Allow users to continue working on other tasks while relabeling happens in the background.
   - Provide a progress indicator to show how much of the relabeling task has been completed.
 
-## 4. Train: Add Video Instructions for Lightning AI Integration
+4. Train: Add Video Instructions for Lightning AI Integration
 - [ ] **Provide video instructions for file placement in Lightning AI**: 
   - Create a video tutorial explaining where to place the generated files in the Lightning AI environment.
   - Ensure the tutorial includes clear, step-by-step instructions for users to load and train the model correctly in Lightning AI.
 
-## 5. Label Data: Fix Path Issues on Windows
+5. Label Data: Fix Path Issues on Windows
 - [ ] **Resolve issues with paths on Windows**: 
   - Currently, the labeling process is not working correctly on Windows due to differences in how paths are handled compared to macOS and Linux.
   - Ensure the tool handles file paths correctly across all platforms (Windows, macOS, Linux).
   - Implement platform-specific path handling to ensure compatibility, using libraries like `os.path.join()` for cross-platform path construction and avoiding issues with backslashes (`\`) on Windows.
 
-## 6. Apply Atomic Design in the Frontend
+6. Apply Atomic Design in the Frontend
 - [ ] **To fully implement the Atomic Design methodology**:
   - Add a `Templates` folder:  
     Create a new folder called `Templates` in the appropriate directory within the React app (e.g., `src/components/Templates`).  
@@ -42,12 +42,12 @@
     Check all existing files where the moved components are imported and update the file paths to reflect the new `Templates` folder.  
 
 
-## 7. Testing
+7. Testing
 - [ ] **Write tests for frontend with Jest**
 - [ ] **Write tests for backend with Pytest**
 - [ ] **Resolve all failed tests**
 
-## 8. Release: Publish Version 1.1.0 on GitHub
+8. Release: Publish Version 1.1.0 on GitHub
 - [ ] **Prepare for release**: 
   - Ensure all issues (including those related to Windows path handling) are resolved.
   - Test the app thoroughly on Windows, Apple, and Linux to confirm that it works as expected.
