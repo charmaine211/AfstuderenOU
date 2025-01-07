@@ -47,7 +47,7 @@
 - [ ] **Write tests for backend with Pytest**
 - [ ] **Resolve all failed tests**
 
-## 8. Release: Publish Version 1.1.0 for Windows on GitHub
+## 8. Release: Publish Version 1.1.0 on GitHub
 - [ ] **Prepare for release**: 
   - Ensure all issues (including those related to Windows path handling) are resolved.
   - Test the app thoroughly on Windows, Apple, and Linux to confirm that it works as expected.
