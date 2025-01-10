@@ -22,7 +22,7 @@
   - Provide a progress indicator to show how much of the relabeling task has been completed.
 
 4. Train: Add Video Instructions for Lightning AI Integration
-- [ ] **Provide video instructions for file placement in Lightning AI**: 
+- [x] **Provide video instructions for file placement in Lightning AI**: 
   - Create a video tutorial explaining where to place the generated files in the Lightning AI environment.
   - Ensure the tutorial includes clear, step-by-step instructions for users to load and train the model correctly in Lightning AI.
 
