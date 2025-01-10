@@ -171,6 +171,16 @@ When encountering CORS errors, please check the backend url in [config.js](clien
 
 ## Instructions
 
+Video's:
+
+- [Instruction - Training An Object Detection Model](https://youtu.be/ZujOy_GrcRU)
+- [Instruction - Labelling Dataset For Image Classification](https://youtu.be/HW69zI7CNKQ)
+- [Instruction - Labelling Dataset For Object Detection](https://youtu.be/pwOoCZuG5D0)
+- [Instruction - Making Predictions With A Trained Model](https://youtu.be/KpvPJ98CwWg)
+- [Instruction - Training An Image Classification Model](https://youtu.be/NMM9BDRcjWU)
+
+Documents:
+
 - [Collect dataset](./documentation/COLLECTDATASET.md)
 - [Train with YOLOv8](./documentation/TRAIN.md)
 - [Predict with trained model](./documentation/PREDICT.md)
