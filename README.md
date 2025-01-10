@@ -4,8 +4,8 @@
 
 1. Label Data: Improve Label UI for Better Usability
 - [ ] **Make the Label UI more intuitive**: 
-  - Enhance the user interface for labeling to ensure it is more user-friendly and easier to navigate.
-  - Provide clear instructions and feedback to users during the labeling process.
+  - Enhance the user interface for labelling to ensure it is more user-friendly and easier to navigate.
+  - Provide clear instructions and feedback to users during the labelling process.
 
 2. Label Data: Simplify Directory Structure Setup
 - [ ] **Create new `images` and `labels` directories automatically**: 
@@ -28,7 +28,7 @@
 
 5. Label Data: Fix Path Issues on Windows
 - [ ] **Resolve issues with paths on Windows**: 
-  - Currently, the labeling process is not working correctly on Windows due to differences in how paths are handled compared to macOS and Linux.
+  - Currently, the labelling process is not working correctly on Windows due to differences in how paths are handled compared to macOS and Linux.
   - Ensure the tool handles file paths correctly across all platforms (Windows, macOS, Linux).
   - Implement platform-specific path handling to ensure compatibility, using libraries like `os.path.join()` for cross-platform path construction and avoiding issues with backslashes (`\`) on Windows.
 
@@ -40,7 +40,6 @@
     Identify and relocate all components that define the structure of page layouts (e.g., header, footer, content arrangement) into this `Templates` folder.  
   - Update import:  
     Check all existing files where the moved components are imported and update the file paths to reflect the new `Templates` folder.  
-
 
 7. Testing
 - [ ] **Write tests for frontend with Jest**
