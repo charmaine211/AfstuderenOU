@@ -81,8 +81,6 @@ The backend resides in the `server` folder and is organized by functionality. Ea
 
 Additionally, shared code that is reused across multiple functionalities is placed in the `common` folder.
 
-This modular structure ensures clarity, reusability, and maintainability across the application.
-
 ## Run application
 
 To run both the backend and frontend of your application simultaneously, open two separate terminal windows or tabs. Start the backend server in one terminal, and launch the frontend interface in the other. This ensures that both components can operate concurrently.
